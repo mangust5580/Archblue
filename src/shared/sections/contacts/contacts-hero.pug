@@ -1,0 +1,77 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin contactsHero(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const titleLines = Array.isArray(p.titleLines) ? p.titleLines : []
+    const text = p.text || null
+    const breadcrumbs = Array.isArray(p.breadcrumbs) ? p.breadcrumbs : []
+    const contacts = Array.isArray(p.contacts) ? p.contacts : []
+    const actions = Array.isArray(p.actions) ? p.actions : []
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const className = p.className || ''
+    const rootClasses = ['contacts-hero', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'contacts-hero__inner'
+  })
+    .contacts-hero__content
+      if breadcrumbs.length
+        +breadcrumbs({ items: breadcrumbs })
+
+      .contacts-hero__body
+        h1.contacts-hero__title
+          if titleLines.length
+            each line, index in titleLines
+              - const titleLineText = line + (index === titleLines.length - 1 ? '' : ' ')
+              span.contacts-hero__title-line= titleLineText
+          else
+            = title
+        if text
+          p.contacts-hero__text= text
+        if contacts.length
+          ul.contacts-hero__contacts(role='list')
+            each contact in contacts
+              li.contacts-hero__contact-item
+                a.contacts-hero__contact(href=contact.href)
+                  if contact.icon
+                    span.contacts-hero__contact-icon
+                      +icon({ name: contact.icon, size: 'md', decorative: true })
+                  span.contacts-hero__contact-text= contact.text
+        if actions.length
+          .contacts-hero__actions
+            each action in actions
+              +button({
+                text: action.text || action.label,
+                variant: action.variant || 'primary',
+                size: action.size || 'md',
+                href: action.modalTarget ? null : (action.href || null),
+                type: action.type || 'button',
+                icon: !!action.icon,
+                dataAttrs: action.modalTarget ? { 'data-js-modal-trigger': action.modalTarget } : (action.dataAttrs || {})
+              })
+
+    if image
+      .contacts-hero__media
+        +picture({
+          base: imageBase,
+          alt: imageAlt,
+          width: imageWidth || false,
+          height: imageHeight || false,
+          className: 'contacts-hero__image',
+          pictureClassName: 'contacts-hero__picture',
+          loading: 'eager',
+          decoding: 'async',
+          fetchpriority: 'high'
+        })

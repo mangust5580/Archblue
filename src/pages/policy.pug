@@ -1,0 +1,46 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var pageTitle = 'Политика конфиденциальности'
+  - var pageDescription = 'Политика конфиденциальности демонстрационного сайта Archblue.'
+  - var pageUrl = 'policy.html'
+
+include /shared/sections/policy/policy-hero
+include /shared/sections/policy/policy-content
+include /shared/sections/policy/policy-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +policyHero({
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Политика конфиденциальности' }
+    ],
+    title: 'Политика конфиденциальности',
+    text: 'Настоящий документ описывает, как мы собираем, используем, храним и защищаем ваши персональные данные на сайте Archblue и в процессе взаимодействия с нами.',
+    updateDate: 'Последнее обновление: 15 мая 2024',
+    image: 'images/services/architecture/hero.jpg',
+    imageAlt: 'Современное архитектурное здание с панорамным остеклением',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +policyContent()
+
+  +policyCta({
+    title: 'Остались вопросы по обработке данных?',
+    text: 'Мы ценим вашу приватность и готовы ответить на любые вопросы, связанные с защитой персональных данных.',
+    action: {
+      text: 'Связаться с нами',
+      href: 'contacts.html',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современное архитектурное пространство',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

@@ -1,0 +1,98 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'articles'
+  - var pageTitle = 'Статьи'
+  - var pageDescription = 'Статьи Archblue об архитектуре, планировании, материалах, устойчивых решениях и проектировании.'
+  - var pageUrl = 'articles.html'
+
+include /shared/sections/articles/articles-hero
+include /shared/sections/articles/articles-featured
+include /shared/sections/articles/articles-all
+include /shared/sections/articles/articles-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +articlesHero({
+    titleLines: [
+      'Идеи, тренды',
+      'и практический опыт',
+      'в архитектуре'
+    ],
+    text: 'Статьи об архитектуре, интерьерах и материалах. Актуальные тренды, практические советы и опыт нашей команды в реальных проектах.',
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Статьи' }
+    ],
+    image: 'images/articles/trends-2024/cover.jpg',
+    imageAlt: 'Современный дом с лаконичным фасадом и теплым интерьерным светом',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +articlesFeatured({
+    large: {
+      label: 'Рекомендуем',
+      title: 'Тренды в архитектуре 2024: что действительно важно',
+      text: 'Рассматриваем ключевые направления, которые определяют архитектуру сегодня: устойчивость, функциональность, работа с контекстом и новые материалы.',
+      meta: '15 мая 2024 · 6 мин чтения',
+      href: 'article-single.html',
+      linkText: 'Читать статью',
+      image: 'images/articles/trends-2024/cover.jpg',
+      imageAlt: 'Современный дом с лаконичным фасадом и теплым интерьерным светом',
+      imageWidth: 1448,
+      imageHeight: 1086
+    },
+    items: [
+      {
+        title: 'Интерьер для жизни: как создать пространство, в котором хочется остаться',
+        date: '2 мая 2024 · 5 мин чтения',
+        href: 'article-single.html',
+        image: 'images/articles/private-house-architecture/cover.jpg',
+        imageAlt: 'Минималистичный интерьер с мягким дневным светом',
+        imageWidth: 724,
+        imageHeight: 543
+      },
+      {
+        title: 'Фасады будущего: технологии и материалы, меняющие облик городов',
+        date: '28 апреля 2024 · 4 мин чтения',
+        href: 'article-single.html',
+        image: 'images/articles/minimalism-interior/cover.jpg',
+        imageAlt: 'Современный фасад здания с выразительной геометрией',
+        imageWidth: 724,
+        imageHeight: 543
+      }
+    ]
+  })
+
+  +articlesAll({
+    title: 'Все статьи',
+    search: {
+      label: 'Поиск по статьям',
+      placeholder: 'Поиск по статьям',
+      buttonLabel: 'Искать статьи'
+    },
+    categories: articleCategories || [],
+    items: articles || [],
+    loadMore: {
+      text: 'Загрузить ещё статьи'
+    }
+  })
+
+  +articlesCta({
+    title: 'Хотите обсудить будущий проект?',
+    text: 'Расскажите нам о задаче — поможем сформировать идею, подобрать подход и определить следующий шаг.',
+    action: {
+      text: 'Обсудить проект',
+      modalTarget: 'project-modal',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современное архитектурное пространство для обсуждения будущего проекта',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

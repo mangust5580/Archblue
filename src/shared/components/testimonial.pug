@@ -1,0 +1,48 @@
+mixin testimonial(params)
+  -
+    const p = params || {}
+    const text = p.text || ''
+    const author = p.author || ''
+    const role = p.role || null
+    const avatar = p.avatar || null
+    const avatarAlt = p.avatarAlt != null ? p.avatarAlt : ''
+    const avatarBase = p.avatarBase || (avatar && !/\.svg$/i.test(avatar) ? avatar.replace(/\.[^.]+$/, '') : null)
+    const avatarExt = p.avatarExt || 'jpg'
+    const avatarWidth = p.avatarWidth || false
+    const avatarHeight = p.avatarHeight || false
+    const className = p.className || ''
+    const cls = ['testimonial', className].filter(Boolean).join(' ')
+
+  figure(class=cls)
+    div.testimonial__quote
+      +icon({ name: 'ui-quote', size: 'lg', decorative: true })
+    blockquote.testimonial__text= text
+    figcaption.testimonial__author
+      div.testimonial__avatar
+        if avatarBase
+          +picture({
+            base: avatarBase,
+            ext: avatarExt,
+            alt: avatarAlt || '',
+            width: avatarWidth,
+            height: avatarHeight,
+            className: 'testimonial__avatar-image',
+            pictureClassName: 'testimonial__avatar-picture',
+            loading: 'lazy',
+            decoding: 'async'
+          })
+        else
+          +picture({
+            src: avatar || 'images/portrait-placeholder.svg',
+            alt: avatar ? avatarAlt : '',
+            width: avatarWidth,
+            height: avatarHeight,
+            className: 'testimonial__avatar-image',
+            pictureClassName: 'testimonial__avatar-picture',
+            loading: 'lazy',
+            decoding: 'async'
+          })
+      div.testimonial__author-info
+        p.testimonial__author-name= author
+        if role
+          p.testimonial__author-role= role

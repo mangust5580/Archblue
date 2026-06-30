@@ -1,0 +1,60 @@
+@use '../helpers' as *;
+
+.section-shell {
+  &--default {
+    background-color: var(--role-surface-page);
+  }
+
+  &--muted {
+    background-color: var(--role-surface-soft);
+  }
+
+  &--dark {
+    background-color: var(--role-surface-dark);
+    color: var(--role-text-inverse);
+  }
+
+  &--image {
+    position: relative;
+  }
+
+  &--none {
+    background-color: transparent;
+  }
+
+  &--spacing-none {
+    padding-block: 0;
+  }
+
+  &--spacing-sm {
+    padding-block: var(--section-shell-spacing-mobile-sm);
+
+    @include media-up('lg') {
+      padding-block: var(--section-shell-spacing-sm);
+    }
+  }
+
+  &--spacing-md {
+    padding-block: var(--section-shell-spacing-mobile-md);
+
+    @include media-up('lg') {
+      padding-block: var(--section-shell-spacing-md);
+    }
+  }
+
+  &--spacing-lg {
+    padding-block: var(--section-shell-spacing-mobile-lg);
+
+    @include media-up('lg') {
+      padding-block: var(--section-shell-spacing-lg);
+    }
+  }
+
+  &--spacing-xl {
+    padding-block: var(--section-shell-spacing-mobile-xl);
+
+    @include media-up('lg') {
+      padding-block: var(--section-shell-spacing-xl);
+    }
+  }
+}

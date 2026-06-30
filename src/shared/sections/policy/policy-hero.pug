@@ -1,0 +1,50 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin policyHero(params)
+  -
+    const p = params || {}
+    const breadcrumbs = Array.isArray(p.breadcrumbs) ? p.breadcrumbs : []
+    const title = p.title || ''
+    const text = p.text || null
+    const updateDate = p.updateDate || null
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const className = p.className || ''
+    const rootClasses = ['policy-hero', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'policy-hero__inner'
+  })
+    .policy-hero__content
+      if breadcrumbs.length
+        +breadcrumbs({ items: breadcrumbs })
+
+      .policy-hero__body
+        h1.policy-hero__title= title
+        if text
+          p.policy-hero__text= text
+        if updateDate
+          p.policy-hero__update= updateDate
+
+    if image
+      .policy-hero__media
+        +picture({
+          base: imageBase,
+          alt: imageAlt,
+          width: imageWidth || false,
+          height: imageHeight || false,
+          className: 'policy-hero__image',
+          pictureClassName: 'policy-hero__picture',
+          loading: 'eager',
+          decoding: 'async',
+          fetchpriority: 'high'
+        })

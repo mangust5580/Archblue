@@ -1,0 +1,239 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'services'
+  - var pageTitle = 'Услуги'
+  - var pageDescription = 'Услуги Archblue: архитектурное проектирование, интерьерные решения, сопровождение и консультации.'
+  - var pageUrl = 'services.html'
+
+include /shared/sections/common/page-hero
+include /shared/sections/services/services-overview
+include /shared/sections/services/services-catalog
+include /shared/sections/services/services-details
+include /shared/sections/services/services-process
+include /shared/sections/services/services-benefits
+include /shared/sections/services/services-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +pageHero({
+    title: 'Архитектурные и интерьерные услуги полного цикла',
+    text: 'Проектируем функциональные, эстетичные и контекстные пространства для частных и коммерческих клиентов. От идеи до реализации — с вниманием к каждой детали.',
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Услуги' }
+    ],
+    actions: [
+      { text: 'Обсудить проект', variant: 'primary', modalTarget: 'project-modal' },
+      { text: 'Смотреть проекты', variant: 'outline', href: 'projects.html' }
+    ],
+    image: 'images/projects/lake-house/cover.jpg',
+    imageAlt: 'Современный дом как пример архитектурного проекта',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +servicesOverview({
+    title: 'Архитектура, основанная на опыте, экспертизе и внимании к деталям',
+    text: 'Мы соединяем архитектурную мысль, инженерную точность и дизайн, чтобы создавать пространства, которые работают на людей и бизнес.',
+    stats: [
+      { value: '12+', label: 'лет практики' },
+      { value: '48', label: 'реализованных объектов' },
+      { value: '6', label: 'направлений проектирования' }
+    ]
+  })
+
+  +servicesCatalog({
+    eyebrow: 'НАШИ УСЛУГИ',
+    title: 'Услуги для частных и коммерческих пространств',
+    text: 'Подбираем формат работы под задачу: от концепции и проектирования до сопровождения реализации.',
+    items: [
+      {
+        title: 'Архитектурное проектирование',
+        text: 'Разрабатываем архитектурные концепции, планы и рабочую документацию для строительства.',
+        href: 'service-single.html',
+        image: 'images/services/architecture/cover.jpg',
+        imageAlt: 'Современный архитектурный проект частного дома',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'services-architecture'
+      },
+      {
+        title: 'Дизайн интерьеров',
+        text: 'Создаём продуманные интерьеры с вниманием к стилю, материалам и сценариям жизни.',
+        href: 'service-single.html',
+        image: 'images/services/interior/cover.jpg',
+        imageAlt: 'Интерьер с продуманными материалами и освещением',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'services-interior'
+      },
+      {
+        title: 'Жилые пространства',
+        text: 'Проектируем частные дома, квартиры и загородные резиденции для комфортной жизни.',
+        href: 'service-single.html',
+        image: 'images/projects/lake-house/cover.jpg',
+        imageAlt: 'Жилое пространство с архитектурным окружением',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'services-residential'
+      },
+      {
+        title: 'Коммерческие объекты',
+        text: 'Создаём офисы, ритейл и общественные пространства, ориентированные на результат.',
+        href: 'service-single.html',
+        image: 'images/projects/talan-office/cover.jpg',
+        imageAlt: 'Коммерческое пространство с современной архитектурой',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'services-commercial'
+      },
+      {
+        title: 'Авторский надзор',
+        text: 'Контролируем реализацию проекта на всех этапах и следим за качеством исполнения.',
+        href: 'service-single.html',
+        image: 'images/services/commercial/cover.jpg',
+        imageAlt: 'Архитектурная реализация под авторским надзором',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'security-shield-check'
+      },
+      {
+        title: 'Реконструкция и редевелопмент',
+        text: 'Обновляем и переосмысляем существующие объекты, повышая их ценность и эффективность.',
+        href: 'service-single.html',
+        image: 'images/articles/trends-2024/cover.jpg',
+        imageAlt: 'Реконструируемое архитектурное пространство',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'common-layers'
+      }
+    ]
+  })
+
+  +servicesDetails({
+    eyebrow: 'ПОДРОБНЕЕ ОБ УСЛУГАХ',
+    title: 'Ключевые направления работы',
+    text: 'Раскрываем основные услуги подробнее: что входит в каждый формат работы и какие задачи он помогает решить.',
+    items: [
+      {
+        category: 'Архитектура',
+        title: 'Архитектурное проектирование',
+        text: 'Создаём архитектурные концепции, планы и рабочую документацию с вниманием к контексту, участку и задачам клиента.',
+        image: 'images/services/architecture/cover.jpg',
+        imageAlt: 'Архитектурный макет и чертежи будущего проекта',
+        imageWidth: 1448,
+        imageHeight: 1086,
+        features: [
+          { icon: 'common-lightning', title: 'Концепция', text: 'Идея, образ и будущий характер объекта.' },
+          { icon: 'common-layers', title: 'Планировочные решения', text: 'Эффективная логика пространства и маршрутов.' },
+          { icon: 'common-monitor', title: '3D-визуализация', text: 'Наглядное представление архитектурных решений.' },
+          { icon: 'analytics-report', title: 'Рабочая документация', text: 'Чертежи и материалы для реализации проекта.' }
+        ]
+      },
+      {
+        category: 'Интерьеры',
+        title: 'Дизайн интерьеров',
+        text: 'Проектируем интерьеры, которые соединяют эстетику, удобство и сценарии повседневной жизни.',
+        image: 'images/services/interior/cover.jpg',
+        imageAlt: 'Современный интерьер с продуманными материалами и освещением',
+        imageWidth: 1448,
+        imageHeight: 1086,
+        features: [
+          { icon: 'analytics-users', title: 'Сценарии жизни', text: 'Анализ привычек, маршрутов и ежедневных действий.' },
+          { icon: 'services-interior', title: 'Подбор материалов', text: 'Фактуры, покрытия и цветовые решения.' },
+          { icon: 'common-lightning', title: 'Мебель и свет', text: 'Продуманное освещение и предметное наполнение.' },
+          { icon: 'ui-check', title: 'Комплектация', text: 'Помощь с подбором и согласованием элементов.' }
+        ]
+      },
+      {
+        category: 'Коммерция',
+        title: 'Коммерческие пространства',
+        text: 'Проектируем пространства для работы, сервиса и продаж, где архитектура помогает бизнесу быть понятнее и эффективнее.',
+        image: 'images/projects/talan-office/cover.jpg',
+        imageAlt: 'Современное коммерческое пространство с архитектурным окружением',
+        imageWidth: 1448,
+        imageHeight: 1086,
+        features: [
+          { icon: 'services-commercial', title: 'Офисы', text: 'Рабочие пространства для команд и встреч.' },
+          { icon: 'stats-cube', title: 'Ритейл', text: 'Магазины и шоурумы с понятной навигацией.' },
+          { icon: 'communication-headset', title: 'HoReCa', text: 'Интерьеры для кафе, ресторанов и hospitality-проектов.' },
+          { icon: 'communication-map-pin', title: 'Общественные зоны', text: 'Пространства для людей, коммуникации и событий.' }
+        ]
+      }
+    ]
+  })
+
+  +servicesProcess({
+    eyebrow: 'КАК МЫ РАБОТАЕМ',
+    title: 'Понятный процесс от первой консультации до реализации',
+    text: 'Выстраиваем работу по этапам: уточняем задачу, предлагаем решения, готовим документацию и сопровождаем проект до результата.',
+    steps: [
+      {
+        number: '01',
+        title: 'Бриф и анализ',
+        text: 'Обсуждаем задачу, формат работы, бюджет, сроки и особенности объекта.'
+      },
+      {
+        number: '02',
+        title: 'Концепция',
+        text: 'Формируем планировочную логику, визуальное направление и ключевые проектные решения.'
+      },
+      {
+        number: '03',
+        title: 'Проектирование',
+        text: 'Готовим чертежи, спецификации и материалы, необходимые для реализации.'
+      },
+      {
+        number: '04',
+        title: 'Сопровождение',
+        text: 'Помогаем контролировать исполнение, согласовывать детали и сохранять качество проекта.'
+      }
+    ]
+  })
+
+  +servicesBenefits({
+    eyebrow: 'ПРЕИМУЩЕСТВА',
+    title: 'Почему нам доверяют проектирование',
+    text: 'Соединяем творческий подход, техническую точность и понятный процесс, чтобы проект двигался спокойно и предсказуемо.',
+    items: [
+      {
+        icon: 'analytics-users',
+        title: 'Индивидуальный подход',
+        text: 'Учитываем задачу, бюджет, образ жизни и особенности объекта перед началом проектирования.'
+      },
+      {
+        icon: 'analytics-report',
+        title: 'Прозрачные этапы',
+        text: 'Делим работу на понятные шаги, фиксируем решения и держим клиента в курсе процесса.'
+      },
+      {
+        icon: 'security-shield-check',
+        title: 'Контроль качества',
+        text: 'Следим за логикой проекта, деталями, документацией и соответствием выбранной концепции.'
+      },
+      {
+        icon: 'common-clock',
+        title: 'Соблюдение сроков',
+        text: 'Планируем этапы заранее и помогаем двигаться по проекту без хаотичных задержек.'
+      }
+    ]
+  })
+
+  +servicesCta({
+    title: 'Готовы обсудить проект?',
+    text: 'Расскажите нам о задаче — предложим подходящий формат работы и следующий шаг.',
+    action: {
+      text: 'Обсудить проект',
+      modalTarget: 'project-modal',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современное архитектурное пространство для обсуждения проекта',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

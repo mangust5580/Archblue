@@ -1,0 +1,28 @@
+html {
+  overflow-x: clip;
+}
+
+body {
+  min-inline-size: 320px;
+  background-color: var(--role-surface-page);
+  color: var(--role-text-primary);
+  font-family: var(--font-family-base);
+  font-size: 1rem;
+  line-height: var(--type-body-line-height);
+}
+
+::selection {
+  background-color: var(--role-link);
+  color: var(--role-text-inverse);
+}
+
+a {
+  color: var(--role-link);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+}
+
+:focus-visible {
+  outline: var(--border-width-focus) solid var(--role-focus-ring);
+  outline-offset: 2px;
+}

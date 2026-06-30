@@ -1,0 +1,27 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin contactsProcess(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['contacts-process', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    .contacts-process__header
+      +sectionHeader({ title: title, align: 'center', headingLevel: 2 })
+    .contacts-process__steps
+      +processSteps({
+        variant: 'light',
+        showIcons: true,
+        showArrows: true,
+        items: items
+      })

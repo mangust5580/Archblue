@@ -1,0 +1,195 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'reviews'
+  - var pageTitle = 'Отзывы'
+  - var pageDescription = 'Отзывы демонстрационных клиентов о проектах, процессе работы и взаимодействии с Archblue.'
+  - var pageUrl = 'reviews.html'
+
+include /shared/sections/reviews/reviews-hero
+include /shared/sections/reviews/reviews-grid
+include /shared/sections/reviews/reviews-values
+include /shared/sections/reviews/reviews-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +reviewsHero({
+    title: 'Отзывы клиентов',
+    text: 'Доверие, внимание к деталям и долгосрочные решения — в основе каждого нашего проекта. Мы ценим опыт наших клиентов и гордимся результатами, которые создаём вместе.',
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Отзывы' }
+    ],
+    actions: [
+      { text: 'Смотреть проекты', href: 'projects.html', variant: 'primary' },
+      { text: 'Обсудить проект', modalTarget: 'project-modal', variant: 'outline' }
+    ],
+    stats: [
+      { value: '150+', label: 'реализованных проектов' },
+      { value: '35+', label: 'клиентов и партнёров' },
+      { value: '12+', label: 'лет практики' }
+    ],
+    image: 'images/pages/about/intro.jpg',
+    imageAlt: 'Команда архитектурного бюро Archblue за совместной работой',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +reviewsGrid({
+    title: 'Отзывы о проектах',
+    text: 'Каждый проект — это отдельная история взаимодействия, решений и результата. Собрали несколько отзывов от клиентов, с которыми мы прошли этот путь.',
+    items: [
+      {
+        text: 'Профессиональный подход, внимание к деталям и чёткая организация процесса. Благодаря Archblue наш дом получился именно таким, каким мы его представляли.',
+        author: 'Мария Лебедева',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-01.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Команда предложила интересные решения, которые превзошли наши ожидания. Всё прошло спокойно, последовательно и без лишней суеты.',
+        author: 'Дмитрий Соколов',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-02.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Archblue помогли создать пространство, в котором удобно жить каждый день. Особенно понравилось, как команда учитывала наши привычки.',
+        author: 'Анна Кузнецова',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-03.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Прозрачная коммуникация и глубокое понимание задачи. Проект коммерческого пространства получился функциональным и выразительным.',
+        author: 'Алексей Морозов',
+        role: 'Владелец бизнеса',
+        avatar: 'images/shared/avatars/review-04.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Работа команды вдохновляет: спокойно, внимательно и профессионально. Нам было понятно, что происходит на каждом этапе.',
+        author: 'Ирина Волкова',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-05.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Отличный результат. Дом получился современным, удобным и очень живым — без ощущения типового проекта.',
+        author: 'Сергей Петров',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-06.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Получили больше, чем ожидали. Пространство получилось цельным, продуманным и очень спокойным по ощущению.',
+        author: 'Ольга Никитина',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-07.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Слаженная работа всех специалистов и внимание к деталям на каждом этапе. Было приятно видеть системный подход.',
+        author: 'Максим Воробьёв',
+        role: 'Владелец бизнеса',
+        avatar: 'images/shared/avatars/review-08.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Благодарим за внимательное отношение и качественную реализацию идеи. Мы спокойно доверяли процессу.',
+        author: 'Татьяна Громова',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-09.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Команда помогла структурировать наши желания и превратить их в понятный проект без лишних компромиссов.',
+        author: 'Павел Андреев',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-10.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Очень понравилось, что нам не навязывали решения, а объясняли плюсы и ограничения каждого варианта.',
+        author: 'Елена Смирнова',
+        role: 'Частный клиент',
+        avatar: 'images/shared/avatars/review-11.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Для коммерческого объекта было важно совместить эстетику и практичность. Archblue справились с этой задачей уверенно.',
+        author: 'Кирилл Орлов',
+        role: 'Предприниматель',
+        avatar: 'images/shared/avatars/review-12.jpg',
+        avatarAlt: '',
+        avatarWidth: 627,
+        avatarHeight: 627
+      }
+    ]
+  })
+
+  +reviewsValues({
+    title: 'Что ценят наши клиенты',
+    items: [
+      {
+        icon: 'analytics-report',
+        title: 'Внимание к деталям',
+        text: 'Прорабатываем каждый элемент проекта, чтобы итог был эстетичным и функциональным.'
+      },
+      {
+        icon: 'communication-envelope',
+        title: 'Прозрачная коммуникация',
+        text: 'Всегда на связи, объясняем каждое решение и держим в курсе на всех этапах.'
+      },
+      {
+        icon: 'common-clock',
+        title: 'Соблюдение сроков',
+        text: 'Планируем реалистичные сроки и соблюдаем их, учитывая задачи проекта и планы клиента.'
+      },
+      {
+        icon: 'common-layers',
+        title: 'Комплексный подход',
+        text: 'От идеи до реализации — берём на себя все процессы для вашего удобства и результата.'
+      }
+    ]
+  })
+
+  +reviewsCta({
+    title: 'Готовы обсудить ваш будущий проект?',
+    text: 'Оставьте заявку — и мы свяжемся с вами, чтобы обсудить идеи и рассчитать стоимость.',
+    action: {
+      text: 'Обсудить проект',
+      modalTarget: 'project-modal',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современное архитектурное пространство для обсуждения будущего проекта',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

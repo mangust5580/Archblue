@@ -1,0 +1,50 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin aboutTeam(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['about-team', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'about-team__container'
+  })
+    +sectionHeader({
+      eyebrow: eyebrow,
+      title: title,
+      text: text,
+      headingLevel: 2,
+      align: 'start',
+      className: 'about-team__header'
+    })
+
+    if items.length
+      .about-team__grid
+        each item in items
+          article.about-team__card
+            .about-team__media
+              - const itemImageBase = item.imageBase || (item.image && !/\.svg$/i.test(item.image) ? item.image.replace(/\.[^.]+$/, '') : null)
+              +picture({
+                base: itemImageBase,
+                src: itemImageBase ? null : 'images/image-placeholder.svg',
+                alt: item.imageAlt != null ? item.imageAlt : '',
+                width: item.imageWidth || false,
+                height: item.imageHeight || false,
+                className: 'about-team__image',
+                pictureClassName: 'about-team__picture',
+                loading: 'lazy',
+                decoding: 'async'
+              })
+            .about-team__content
+              h3.about-team__title= item.title
+              p.about-team__text= item.text

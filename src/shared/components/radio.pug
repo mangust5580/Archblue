@@ -1,0 +1,43 @@
+mixin radio(params)
+  -
+    const p = params || {}
+    const id = p.id || ''
+    const name = p.name || ''
+    const value = p.value != null ? p.value : null
+    const label = p.label || ''
+    const ariaLabel = p.ariaLabel || null
+    const checked = !!p.checked
+    const disabled = !!p.disabled
+    const required = !!p.required
+    const error = p.error || null
+
+    const hasLabel = !!label
+    const hasError = !!error
+    const errorId = hasError ? (id + '-error') : null
+
+    const cls = [
+      'radio',
+      !hasLabel && 'radio--icon-only',
+      hasError && 'radio--error',
+      disabled && 'radio--disabled',
+    ].filter(Boolean).join(' ')
+
+  label(class=cls)
+    input.radio__input(
+      type='radio'
+      id=id
+      name=name
+      value=value
+      checked=checked
+      disabled=disabled
+      required=required
+      aria-label=(!hasLabel && ariaLabel) ? ariaLabel : null
+      aria-invalid=hasError ? 'true' : null
+      aria-describedby=errorId
+    )
+    span.radio__box(aria-hidden='true')
+    if hasLabel
+      span.radio__label
+        span.radio__text= label
+    if error
+      span.radio__error(id=errorId role='alert')= error

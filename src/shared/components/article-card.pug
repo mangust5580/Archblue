@@ -1,0 +1,49 @@
+mixin articleCard(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const date = p.date || null
+    const href = p.href || null
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const imageExt = p.imageExt || 'jpg'
+    const imageWidth = p.imageWidth || false
+    const imageHeight = p.imageHeight || false
+    const className = p.className || ''
+    const cls = ['article-card', className].filter(Boolean).join(' ')
+
+  article(class=cls)
+    .article-card__media
+      if imageBase
+        +picture({
+          base: imageBase,
+          ext: imageExt,
+          alt: imageAlt || '',
+          width: imageWidth,
+          height: imageHeight,
+          className: 'article-card__image',
+          pictureClassName: 'article-card__picture',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+      else
+        +picture({
+          src: image || 'images/image-placeholder.svg',
+          alt: image ? imageAlt : '',
+          width: imageWidth,
+          height: imageHeight,
+          className: 'article-card__image',
+          pictureClassName: 'article-card__picture',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+    span.article-card__overlay(aria-hidden='true')
+    .article-card__content
+      if date
+        p.article-card__date= date
+      h3.article-card__title= title
+      span.article-card__arrow(aria-hidden='true')
+        +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })
+    if href
+      a.article-card__link(href=href aria-label=title)

@@ -1,0 +1,31 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin homeProjects(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const action = (p.action && p.action.href) ? p.action : null
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['home-projects', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'home-projects__container'
+  })
+    +sectionHeader({
+      title: title,
+      headingLevel: 2,
+      action: action,
+      align: 'between'
+    })
+
+    if items.length
+      .home-projects__grid
+        each item in items
+          +projectCard(item)

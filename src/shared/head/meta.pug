@@ -1,0 +1,28 @@
+meta(charset="UTF-8")
+meta(name="viewport", content="width=device-width, initial-scale=1.0")
+meta(name="format-detection", content="telephone=no")
+- var _ogTitle = pageTitle ? pageTitle + ' — ' + site.name : site.name
+- var _ogDesc = pageDescription || site.description || ''
+- var _ogUrl = site.url ? site.url + (pageUrl ? '/' + pageUrl : '') : ''
+- var _ogImage = site.url ? site.url + '/images/pages/home/hero.jpg' : ''
+- var _isNoindex = (typeof pageRobots !== 'undefined' && pageRobots && String(pageRobots).toLowerCase().indexOf('noindex') !== -1) || pageUrl === '404.html'
+- var _canonicalUrl = site.url ? site.url + (pageUrl ? '/' + pageUrl : '/') : ''
+meta(name="description", content=_ogDesc)
+if _canonicalUrl && !_isNoindex
+  link(rel="canonical", href=_canonicalUrl)
+if site.url
+  meta(property="og:type", content="website")
+  meta(property="og:site_name", content=site.name)
+  meta(property="og:title", content=_ogTitle)
+  if _ogDesc
+    meta(property="og:description", content=_ogDesc)
+  if _ogUrl
+    meta(property="og:url", content=_ogUrl)
+  if _ogImage
+    meta(property="og:image", content=_ogImage)
+  meta(name="twitter:card", content="summary_large_image")
+  meta(name="twitter:title", content=_ogTitle)
+  if _ogDesc
+    meta(name="twitter:description", content=_ogDesc)
+  if _ogImage
+    meta(name="twitter:image", content=_ogImage)

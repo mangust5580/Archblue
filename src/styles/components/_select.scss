@@ -1,0 +1,164 @@
+@use '../helpers' as *;
+
+.select {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-8);
+
+  &__label {
+    display: block;
+    color: var(--role-text-secondary);
+    font-family: var(--font-family-base);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+    cursor: pointer;
+  }
+
+  &__control {
+    position: relative;
+  }
+
+  &__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-8);
+    inline-size: 100%;
+    min-block-size: var(--select-control-height);
+    padding-inline: var(--select-padding-inline);
+    border: var(--select-border-width) solid var(--role-border-default);
+    border-radius: var(--select-radius);
+    background-color: var(--role-surface-panel);
+    color: var(--role-text-primary);
+    font-family: var(--font-family-base);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+    text-align: start;
+    appearance: none;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      border-color var(--duration-fast) var(--easing-base),
+      box-shadow var(--duration-fast) var(--easing-base);
+
+    &:focus-visible {
+      border-color: var(--role-border-brand);
+      outline: none;
+      box-shadow: var(--shadow-focus);
+    }
+
+    &:disabled {
+      cursor: not-allowed;
+      pointer-events: none;
+    }
+  }
+
+  &__value {
+    overflow: hidden;
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    color: var(--role-text-muted);
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  &__icon {
+    display: inline-flex;
+    flex: 0 0 var(--select-icon-size);
+    inline-size: var(--select-icon-size);
+    block-size: var(--select-icon-size);
+    color: var(--role-text-muted);
+    transition: transform var(--duration-fast) var(--easing-base);
+
+    svg {
+      display: block;
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  }
+
+  &__dropdown {
+    position: absolute;
+    inset-block-start: calc(100% + var(--select-dropdown-gap));
+    inset-inline: 0;
+    z-index: var(--z-dropdown);
+    display: none;
+    overflow: hidden auto;
+    max-block-size: var(--select-dropdown-max-height);
+    border: var(--select-border-width) solid var(--role-border-default);
+    border-radius: var(--select-radius);
+    background-color: var(--role-surface-panel);
+    box-shadow: var(--select-dropdown-shadow);
+  }
+
+  &__list {
+    padding-block: var(--space-4);
+  }
+
+  &__option {
+    display: block;
+    padding-block: var(--select-option-padding-block);
+    padding-inline: var(--select-option-padding-inline);
+    color: var(--role-text-primary);
+    font-family: var(--font-family-base);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+    cursor: pointer;
+    user-select: none;
+    transition: background-color var(--duration-fast) var(--easing-base);
+
+    @include hover {
+      background-color: var(--alpha-orange-10);
+    }
+
+    &[aria-selected='true'] {
+      background-color: var(--alpha-orange-10);
+      color: var(--role-link);
+    }
+
+    &.is-active {
+      background-color: var(--alpha-orange-10);
+    }
+  }
+
+  &__error {
+    display: block;
+    margin-block-start: var(--space-4);
+    color: var(--role-error);
+    font-family: var(--font-family-base);
+    font-size: var(--type-small-size);
+    font-weight: var(--type-small-weight);
+    line-height: var(--type-small-line-height);
+  }
+
+  &--open {
+    .select__dropdown {
+      display: block;
+    }
+
+    .select__icon {
+      transform: rotate(180deg);
+    }
+  }
+
+  &--selected {
+    .select__value {
+      color: var(--role-text-primary);
+    }
+  }
+
+  &--disabled {
+    opacity: var(--control-disabled-opacity);
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &--error {
+    .select__button {
+      border-color: var(--role-error);
+    }
+  }
+}

@@ -1,0 +1,29 @@
+mixin processSteps(params)
+  -
+    const p = params || {}
+    const validVariants = ['light', 'dark']
+    const variant = validVariants.includes(p.variant) ? p.variant : 'light'
+    const items = Array.isArray(p.items) ? p.items : []
+    const showArrows = !!p.showArrows
+    const showIcons = !!p.showIcons
+    const className = p.className || ''
+    const rootClasses = ['process-steps', 'process-steps--' + variant, className].filter(Boolean).join(' ')
+
+  div(class=rootClasses)
+    ol.process-steps__list
+      each item, index in items
+        - const isLast = index === items.length - 1
+        li.process-steps__item
+          .process-steps__head
+            if showIcons && item.icon
+              span.process-steps__icon
+                +icon({ name: item.icon, size: 'md', decorative: true })
+            if item.number
+              span.process-steps__number= item.number
+          if item.title
+            p.process-steps__title= item.title
+          if item.text
+            p.process-steps__text= item.text
+          if showArrows && !isLast
+            span.process-steps__arrow(aria-hidden='true')
+              +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })

@@ -1,0 +1,61 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin articleSingleHero(params)
+  -
+    const p = params || {}
+    const breadcrumbs = Array.isArray(p.breadcrumbs) ? p.breadcrumbs : []
+    const category = p.category || null
+    const date = p.date || null
+    const datetime = p.datetime || null
+    const readTime = p.readTime || null
+    const title = p.title || ''
+    const text = p.text || null
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const className = p.className || ''
+    const rootClasses = ['article-single-hero', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'article-single-hero__inner'
+  })
+    .article-single-hero__content
+      if breadcrumbs.length
+        +breadcrumbs({ items: breadcrumbs })
+
+      .article-single-hero__body
+        if category || date || readTime
+          .article-single-hero__meta
+            if category
+              span.article-single-hero__category= category
+            if date
+              time.article-single-hero__date(datetime=datetime || false)= date
+            if readTime
+              span.article-single-hero__read-time= readTime
+
+        h1.article-single-hero__title= title
+
+        if text
+          p.article-single-hero__text= text
+
+    if image
+      .article-single-hero__media
+        +picture({
+          base: imageBase,
+          alt: imageAlt,
+          width: imageWidth || false,
+          height: imageHeight || false,
+          className: 'article-single-hero__image',
+          pictureClassName: 'article-single-hero__picture',
+          loading: 'eager',
+          decoding: 'async',
+          fetchpriority: 'high'
+        })

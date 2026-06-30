@@ -1,0 +1,30 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin servicesOverview(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const text = p.text || null
+    const stats = Array.isArray(p.stats) ? p.stats : []
+    const className = p.className || ''
+    const rootClasses = ['services-overview', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    .services-overview__inner
+      .services-overview__content
+        h2.services-overview__title= title
+        if text
+          p.services-overview__text= text
+      if stats.length
+        .services-overview__stats
+          each stat in stats
+            .services-overview__stat
+              .services-overview__stat-value= stat.value
+              .services-overview__stat-label= stat.label

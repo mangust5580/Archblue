@@ -1,0 +1,57 @@
+mixin ctaBanner(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const text = p.text || null
+    const action = p.action || null
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const imageExt = p.imageExt || 'jpg'
+    const imageWidth = p.imageWidth || false
+    const imageHeight = p.imageHeight || false
+    const variant = p.variant || 'image'
+    const className = p.className || ''
+    const cls = ['cta-banner', 'cta-banner--' + variant, className].filter(Boolean).join(' ')
+
+  div(class=cls)
+    div.cta-banner__media
+      if imageBase
+        +picture({
+          base: imageBase,
+          ext: imageExt,
+          alt: imageAlt || '',
+          width: imageWidth,
+          height: imageHeight,
+          className: 'cta-banner__image',
+          pictureClassName: 'cta-banner__picture',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+      else
+        +picture({
+          src: image || 'images/image-placeholder.svg',
+          alt: image ? imageAlt : '',
+          width: imageWidth,
+          height: imageHeight,
+          className: 'cta-banner__image',
+          pictureClassName: 'cta-banner__picture',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+    div.cta-banner__overlay(aria-hidden='true')
+    div.cta-banner__content
+      h2.cta-banner__title= title
+      if text
+        p.cta-banner__text= text
+      if action
+        div.cta-banner__actions
+          +button({
+            text: action.text,
+            variant: action.variant || 'primary',
+            size: action.size || 'md',
+            href: action.modalTarget ? null : (action.href || null),
+            type: action.type || 'button',
+            icon: !!action.icon,
+            dataAttrs: action.modalTarget ? { 'data-js-modal-trigger': action.modalTarget } : {}
+          })

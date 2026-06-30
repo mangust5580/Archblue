@@ -1,0 +1,67 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin homeHero(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const titleLines = Array.isArray(p.titleLines) && p.titleLines.length ? p.titleLines : null
+    const text = p.text || null
+    const actions = p.actions || []
+    const stats = p.stats || []
+    const images = p.images || {}
+    const mainImageBase = images.mainBase || (images.main && !/\.svg$/i.test(images.main) ? images.main.replace(/\.[^.]+$/, '') : null)
+    const className = p.className || ''
+    const rootClasses = ['home-hero', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'home-hero__container'
+  })
+    .home-hero__content
+      if titleLines
+        h1.home-hero__title
+          each line in titleLines
+            span.home-hero__title-line= line
+      else
+        h1.home-hero__title= title
+      if text
+        p.home-hero__text= text
+      if actions.length
+        .home-hero__actions
+          each action in actions
+            .home-hero__action
+              +button({
+                text: action.text,
+                variant: action.variant || 'primary',
+                size: action.size || 'md',
+                href: action.modalTarget ? null : (action.href || null),
+                type: action.type || 'button',
+                icon: !!action.icon,
+                dataAttrs: action.modalTarget ? { 'data-js-modal-trigger': action.modalTarget } : {}
+              })
+      if stats.length
+        .home-hero__stats
+          each stat in stats
+            .home-hero__stat
+              .home-hero__stat-value= stat.value
+              .home-hero__stat-label= stat.label
+    .home-hero__media
+      .home-hero__media-stage
+        .home-hero__media-main
+          +picture({
+            base: mainImageBase,
+            src: mainImageBase ? null : (images.main || 'images/image-placeholder.svg'),
+            alt: images.mainAlt != null ? images.mainAlt : '',
+            width: images.mainWidth || false,
+            height: images.mainHeight || false,
+            className: 'home-hero__media-main-image',
+            pictureClassName: 'home-hero__media-main-picture',
+            loading: 'eager',
+            decoding: 'async',
+            fetchpriority: 'high'
+          })

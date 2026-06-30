@@ -1,0 +1,27 @@
+$gradients: (
+  'hero-overlay': linear-gradient(
+    180deg,
+    rgb(11 11 12 / 0%) 0%,
+    rgb(11 11 12 / 70%) 70%
+  ),
+  'cta-overlay': linear-gradient(
+    180deg,
+    rgb(11 11 12 / 0%) 0%,
+    rgb(11 11 12 / 80%) 80%
+  ),
+  'footer-surface': linear-gradient(
+    180deg,
+    rgb(15 17 20 / 0%) 0%,
+    rgb(15 17 20 / 100%) 100%
+  ),
+  'brand-glow': radial-gradient(
+    circle,
+    rgb(242 90 24 / 24%) 0%,
+    rgb(242 90 24 / 0%) 60%
+  ),
+  'card-soft': linear-gradient(
+    180deg,
+    #fff 0%,
+    #f3f1ed 100%
+  ),
+);

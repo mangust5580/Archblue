@@ -1,0 +1,76 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin serviceSingleHero(params)
+  -
+    const p = params || {}
+    const breadcrumbs = Array.isArray(p.breadcrumbs) ? p.breadcrumbs : []
+    const title = p.title || ''
+    const text = p.text || null
+    const actions = Array.isArray(p.actions) ? p.actions : []
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const panel = p.panel || {}
+    const panelTitle = panel.title || ''
+    const panelText = panel.text || null
+    const stats = Array.isArray(p.stats) ? p.stats : []
+    const className = p.className || ''
+    const rootClasses = ['service-single-hero', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'service-single-hero__inner'
+  })
+    .service-single-hero__hero
+      .service-single-hero__content
+        if breadcrumbs.length
+          +breadcrumbs({ items: breadcrumbs })
+        .service-single-hero__body
+          h1.service-single-hero__title= title
+          if text
+            p.service-single-hero__text= text
+          if actions.length
+            .service-single-hero__actions
+              each action in actions
+                +button({
+                  text: action.text || action.label,
+                  variant: action.variant || 'primary',
+                  size: action.size || 'md',
+                  href: action.modalTarget ? null : (action.href || null),
+                  type: action.type || 'button',
+                  icon: !!action.icon,
+                  dataAttrs: action.modalTarget ? { 'data-js-modal-trigger': action.modalTarget } : (action.dataAttrs || {})
+                })
+      if image
+        .service-single-hero__media
+          +picture({
+            base: imageBase,
+            alt: imageAlt,
+            width: imageWidth || false,
+            height: imageHeight || false,
+            className: 'service-single-hero__image',
+            pictureClassName: 'service-single-hero__picture',
+            loading: 'eager',
+            decoding: 'async',
+            fetchpriority: 'high'
+          })
+    if panelTitle || stats.length
+      .service-single-hero__panel
+        if panelTitle
+          .service-single-hero__panel-content
+            h2.service-single-hero__panel-title= panelTitle
+            if panelText
+              p.service-single-hero__panel-text= panelText
+        if stats.length
+          .service-single-hero__stats
+            each stat in stats
+              .service-single-hero__stat
+                span.service-single-hero__stat-value= stat.value
+                span.service-single-hero__stat-label= stat.label

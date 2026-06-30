@@ -1,0 +1,72 @@
+mixin field(params)
+  -
+    const p = params || {}
+    const id = p.id || ''
+    const name = p.name || ''
+    const label = p.label || ''
+    const type = p.type || 'text'
+    const value = p.value || null
+    const placeholder = p.placeholder || null
+    const error = p.error || null
+    const disabled = !!p.disabled
+    const required = !!p.required
+    const autocomplete = p.autocomplete || null
+    const inputmode = p.inputmode || null
+    const attrs = p.attrs || {}
+    const validate = p.validate || null
+    const validateError = p.validateError || null
+    const options = p.options || []
+    const rows = p.rows || 4
+    const maxlength = p.maxlength || null
+    const counter = !!p.counter
+
+    const isSelect = type === 'select'
+    const isTextarea = type === 'textarea'
+    const hasError = !!error
+
+    const blockCls = ['field', hasError ? 'field--error' : ''].filter(Boolean).join(' ')
+
+  div(class=blockCls data-js-form-field=validate data-validate-error=validateError)
+    if label
+      label.field__label(for=id)= label
+    .field__control
+      if isSelect
+        select.field__select(
+          id=id
+          name=name
+          disabled=disabled
+          required=required
+        )
+          each opt in options
+            option(value=opt.value selected=(value === opt.value) ? true : null)= opt.label
+        span.field__icon(aria-hidden='true')
+          svg(viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg')
+            path(d='M5 8l5 5 5-5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round')
+      else if isTextarea
+        textarea.field__textarea(
+          id=id
+          name=name
+          rows=rows
+          placeholder=placeholder
+          disabled=disabled
+          required=required
+          autocomplete=autocomplete
+          maxlength=maxlength
+          data-js-character-counter-textarea=counter ? '' : null
+        )= value || ''
+      else
+        input.field__input(
+          type=type
+          id=id
+          name=name
+          value=value
+          placeholder=placeholder
+          disabled=disabled
+          required=required
+          autocomplete=autocomplete
+          inputmode=inputmode
+        )&attributes(attrs)
+    if isTextarea && counter
+      span.field__counter(data-js-character-counter-output) 0 / #{maxlength}
+    if error
+      span.field__error= error

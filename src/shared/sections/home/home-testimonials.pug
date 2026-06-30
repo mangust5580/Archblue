@@ -1,0 +1,31 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin homeTestimonials(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const action = (p.action && p.action.href) ? p.action : null
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['home-testimonials', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'home-testimonials__container'
+  })
+    +sectionHeader({
+      title: title,
+      headingLevel: 2,
+      action: action,
+      align: 'between'
+    })
+
+    if items.length
+      .home-testimonials__grid
+        each item in items
+          +testimonial(item)

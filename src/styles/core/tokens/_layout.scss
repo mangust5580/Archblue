@@ -1,0 +1,12 @@
+$layout: (
+  'container-max':  1200px,
+  'container-wide': 1440px,
+  'header-height':  72px,
+);
+$z-indexes: (
+  'header':    20,
+  'dropdown':  30,
+  'tooltip':   40,
+  'modal':     100,
+  'skip-link': 1000,
+);

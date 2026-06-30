@@ -1,0 +1,7 @@
+@use '../../helpers' as *;
+
+.contacts-faq {
+  &__header {
+    margin-block-end: var(--space-40);
+  }
+}

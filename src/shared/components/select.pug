@@ -1,0 +1,63 @@
+mixin select(params)
+  -
+    const {
+      id,
+      name,
+      label,
+      placeholder = 'Выберите',
+      options = [],
+      value = '',
+      disabled = false,
+      required = false,
+      error = null,
+      validate = null,
+      validateError = null,
+    } = params
+
+    const selectedOption = options.find(opt => String(opt.value) === String(value) && value !== '' && value != null)
+    const displayValue = selectedOption ? selectedOption.label : placeholder
+    const hasSelected = !!selectedOption
+
+    const rootClasses = [
+      'select',
+      hasSelected && 'select--selected',
+      disabled && 'select--disabled',
+      error && 'select--error',
+    ].filter(Boolean).join(' ')
+
+    const buttonId = id + '-button'
+    const dropdownId = id + '-listbox'
+
+  div(class=rootClasses data-js-select data-js-select-placeholder=placeholder data-js-select-required=required || null data-js-form-field=validate data-validate-error=validateError)
+    label.select__label(for=buttonId)= label
+    div.select__control
+      button.select__button(
+        type='button'
+        id=buttonId
+        aria-haspopup='listbox'
+        aria-expanded='false'
+        aria-controls=dropdownId
+        aria-required=required ? 'true' : null
+        disabled=disabled || null
+        data-js-select-trigger
+      )
+        span.select__value(data-js-select-value)= displayValue
+        span.select__icon
+          +icon({ name: 'ui-chevron-down', size: 'control', decorative: true })
+      div.select__dropdown(id=dropdownId data-js-select-dropdown)
+        div.select__list
+          each opt in options
+            - const isSelected = hasSelected && String(opt.value) === String(value)
+            div.select__option(
+              data-value=opt.value
+              data-js-select-option
+              aria-selected=isSelected ? 'true' : 'false'
+            )= opt.label
+    input(
+      type='hidden'
+      name=name
+      value=hasSelected ? String(value) : ''
+      data-js-select-input
+    )
+    if error
+      span.select__error(role='alert')= error

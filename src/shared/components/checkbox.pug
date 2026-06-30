@@ -1,0 +1,54 @@
+mixin checkbox(params)
+  -
+    const p = params || {}
+    const id = p.id || ''
+    const name = p.name || ''
+    const value = p.value != null ? p.value : null
+    const label = p.label || ''
+    const ariaLabel = p.ariaLabel || null
+    const checked = !!p.checked
+    const disabled = !!p.disabled
+    const required = !!p.required
+    const error = p.error || null
+    const links = p.links || []
+
+    const validate = p.validate || null
+    const validateError = p.validateError || null
+
+    const hasLabel = !!label
+    const hasError = !!error
+    const errorId = hasError ? (id + '-error') : null
+    const labelParts = hasLabel && links.length ? label.split('%link%') : null
+
+    const cls = [
+      'checkbox',
+      !hasLabel && 'checkbox--icon-only',
+      hasError && 'checkbox--error',
+      disabled && 'checkbox--disabled',
+    ].filter(Boolean).join(' ')
+
+  label(class=cls data-js-form-field=validate data-validate-error=validateError)
+    input.checkbox__input(
+      type='checkbox'
+      id=id
+      name=name
+      value=value
+      checked=checked
+      disabled=disabled
+      required=required
+      aria-label=(!hasLabel && ariaLabel) ? ariaLabel : null
+      aria-invalid=hasError ? 'true' : null
+      aria-describedby=errorId
+    )
+    span.checkbox__box(aria-hidden='true')
+    if hasLabel
+      span.checkbox__label
+        if labelParts
+          each part, i in labelParts
+            | #{part}
+            if i < labelParts.length - 1 && i < links.length
+              a.checkbox__link(href=links[i].href)= links[i].text
+        else
+          span.checkbox__text= label
+    if error
+      span.checkbox__error(id=errorId role='alert')= error

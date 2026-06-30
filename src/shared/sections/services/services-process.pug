@@ -1,0 +1,35 @@
+include /shared/shell/index
+
+mixin servicesProcess(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const steps = Array.isArray(p.steps) ? p.steps : []
+    const className = p.className || ''
+    const rootClasses = ['services-process', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'none',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'services-process__container'
+  })
+    .services-process__panel
+      .services-process__header
+        if eyebrow
+          p.services-process__eyebrow= eyebrow
+        h2.services-process__title= title
+        if text
+          p.services-process__text= text
+
+      if steps.length
+        .services-process__steps
+          each step in steps
+            article.services-process__step
+              p.services-process__step-number= step.number
+              h3.services-process__step-title= step.title
+              p.services-process__step-text= step.text

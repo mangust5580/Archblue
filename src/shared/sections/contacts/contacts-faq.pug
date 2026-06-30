@@ -1,0 +1,22 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin contactsFaq(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['contacts-faq', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    .contacts-faq__header
+      +sectionHeader({ title: title, align: 'center', headingLevel: 2 })
+    .contacts-faq__accordion
+      +accordion({ items: items, multiple: false, headingLevel: 3 })

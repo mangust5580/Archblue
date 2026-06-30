@@ -1,0 +1,114 @@
+@use '../helpers' as *;
+
+.tooltip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-8);
+
+  &__label {
+    color: var(--role-text-primary);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+  }
+
+  &__wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__trigger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    background: none;
+    color: var(--role-text-muted);
+    cursor: default;
+
+    &:focus-visible {
+      border-radius: var(--radius-xs);
+      outline: var(--border-width-focus) solid var(--role-focus-ring);
+      outline-offset: var(--space-2);
+    }
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__bubble {
+    position: absolute;
+    z-index: var(--z-tooltip);
+    visibility: hidden;
+    opacity: 0%;
+    inline-size: max-content;
+    max-inline-size: var(--tooltip-max-width);
+    padding-block: var(--tooltip-padding-block);
+    padding-inline: var(--tooltip-padding-inline);
+    border-radius: var(--tooltip-radius);
+    background-color: var(--tooltip-background);
+    color: var(--tooltip-color);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+    text-align: start;
+    white-space: normal;
+    transition:
+      opacity var(--duration-fast) var(--easing-base),
+      visibility 0s var(--duration-fast);
+  }
+
+  &__content {
+    display: block;
+  }
+
+  &__arrow {
+    position: absolute;
+    inline-size: var(--tooltip-arrow-size);
+    block-size: var(--tooltip-arrow-size);
+    background-color: var(--tooltip-background);
+  }
+
+  &__wrap:hover &__bubble,
+  &__wrap:focus-within &__bubble {
+    visibility: visible;
+    opacity: 100%;
+    transition:
+      opacity var(--duration-fast) var(--easing-base),
+      visibility 0s 0s;
+  }
+
+  &--bottom {
+    .tooltip__bubble {
+      inset-block-start: calc(100% + var(--space-8));
+      inset-inline-start: 50%;
+      transform: translateX(-50%);
+    }
+
+    .tooltip__arrow {
+      inset-block-start: 0;
+      inset-inline-start: 50%;
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+  }
+
+  &--top {
+    .tooltip__bubble {
+      inset-block-end: calc(100% + var(--space-8));
+      inset-inline-start: 50%;
+      transform: translateX(-50%);
+    }
+
+    .tooltip__arrow {
+      inset-block-end: 0;
+      inset-inline-start: 50%;
+      transform: translate(-50%, 50%) rotate(45deg);
+    }
+  }
+}

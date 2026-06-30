@@ -1,0 +1,50 @@
+mixin serviceCard(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const text = p.text || null
+    const href = p.href || null
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const imageExt = p.imageExt || 'jpg'
+    const imageWidth = p.imageWidth || false
+    const imageHeight = p.imageHeight || false
+    const icon = p.icon || null
+    const className = p.className || ''
+    const cls = ['service-card', className].filter(Boolean).join(' ')
+
+  article(class=cls)
+    .service-card__media
+      if imageBase
+        +picture({
+          base: imageBase,
+          ext: imageExt,
+          alt: imageAlt || '',
+          width: imageWidth,
+          height: imageHeight,
+          className: 'service-card__image',
+          pictureClassName: 'service-card__picture',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+      else
+        +picture({
+          src: image || 'images/image-placeholder.svg',
+          alt: image ? imageAlt : '',
+          width: imageWidth,
+          height: imageHeight,
+          className: 'service-card__image',
+          pictureClassName: 'service-card__picture',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+    .service-card__body
+      if icon
+        span.service-card__icon
+          +icon({ name: icon, size: 'lg', decorative: true })
+      h3.service-card__title= title
+      if text
+        p.service-card__text= text
+    if href
+      a.service-card__link(href=href aria-label=title)

@@ -1,0 +1,52 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin homeAbout(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const stats = p.stats || []
+    const className = p.className || ''
+    const rootClasses = ['home-about', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'home-about__container'
+  })
+    .home-about__media
+      +picture({
+        base: imageBase,
+        src: imageBase ? null : 'images/image-placeholder.svg',
+        alt: imageBase ? imageAlt : '',
+        width: imageWidth || false,
+        height: imageHeight || false,
+        className: 'home-about__image',
+        pictureClassName: 'home-about__picture',
+        loading: 'lazy',
+        decoding: 'async'
+      })
+    .home-about__content
+      if eyebrow
+        p.home-about__eyebrow= eyebrow
+      h2.home-about__title= title
+      if text
+        p.home-about__text= text
+      if stats.length
+        .home-about__stats
+          each stat in stats
+            .home-about__stat
+              .home-about__stat-icon
+                +icon({ name: stat.icon, size: 'lg', decorative: true })
+              .home-about__stat-value= stat.value
+              .home-about__stat-label= stat.label

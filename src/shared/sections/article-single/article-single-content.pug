@@ -1,0 +1,133 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin articleSingleContent(params)
+  -
+    const p = params || {}
+    const lead = p.lead || {}
+    const blocks = Array.isArray(p.blocks) ? p.blocks : []
+    const aside = p.aside || {}
+    const leadImageBase = lead.image && !/\.svg$/i.test(lead.image) ? lead.image.replace(/\.[^.]+$/, '') : null
+    const asideImageBase = aside.image && !/\.svg$/i.test(aside.image) ? aside.image.replace(/\.[^.]+$/, '') : null
+    const takeaways = aside.takeaways || {}
+    const takeawayItems = Array.isArray(takeaways.items) ? takeaways.items : []
+    const author = p.author || {}
+    const tags = Array.isArray(p.tags) ? p.tags : []
+    const share = p.share || {}
+    const shareActions = Array.isArray(share.actions) ? share.actions : []
+    const className = p.className || ''
+    const rootClasses = ['article-single-content', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'article-single-content__inner'
+  })
+    .article-single-content__body
+      .article-single-content__main
+        if lead.image
+          .article-single-content__lead
+            .article-single-content__lead-media
+              +picture({
+                base: leadImageBase,
+                alt: lead.imageAlt != null ? lead.imageAlt : '',
+                width: lead.imageWidth || false,
+                height: lead.imageHeight || false,
+                className: 'article-single-content__lead-image',
+                pictureClassName: 'article-single-content__lead-picture',
+                loading: 'lazy',
+                decoding: 'async'
+              })
+            .article-single-content__lead-body
+              if lead.heading
+                h2.article-single-content__heading= lead.heading
+              each paragraph in (Array.isArray(lead.paragraphs) ? lead.paragraphs : [])
+                p.article-single-content__text= paragraph
+
+        each block in blocks
+          .article-single-content__block
+            if block.heading
+              h2.article-single-content__heading= block.heading
+            each paragraph in (Array.isArray(block.paragraphs) ? block.paragraphs : [])
+              p.article-single-content__text= paragraph
+
+      .article-single-content__aside
+        if aside.image
+          .article-single-content__aside-media
+            +picture({
+              base: asideImageBase,
+              alt: aside.imageAlt != null ? aside.imageAlt : '',
+              width: aside.imageWidth || false,
+              height: aside.imageHeight || false,
+              className: 'article-single-content__aside-image',
+              pictureClassName: 'article-single-content__aside-picture',
+              loading: 'lazy',
+              decoding: 'async'
+            })
+
+        if aside.quote
+          blockquote.article-single-content__quote
+            p.article-single-content__quote-text= aside.quote
+            if aside.quoteAuthor
+              footer.article-single-content__quote-footer
+                cite.article-single-content__quote-cite= aside.quoteAuthor
+
+        if takeawayItems.length
+          .article-single-content__takeaways
+            if takeaways.heading
+              h3.article-single-content__takeaways-heading= takeaways.heading
+            ul.article-single-content__takeaways-list
+              each item in takeawayItems
+                li.article-single-content__takeaways-item= item
+
+    if author.name
+      .article-single-content__author
+        .article-single-content__author-info
+          if author.image || author.initials
+            span.article-single-content__author-avatar(aria-hidden=author.image ? false : 'true')
+              if author.image
+                - const authorImageBase = !/\.svg$/i.test(author.image) ? author.image.replace(/\.[^.]+$/, '') : null
+                +picture({
+                  base: authorImageBase,
+                  src: authorImageBase ? null : author.image,
+                  alt: author.imageAlt != null ? author.imageAlt : '',
+                  width: author.imageWidth || false,
+                  height: author.imageHeight || false,
+                  className: 'article-single-content__author-avatar-image',
+                  pictureClassName: 'article-single-content__author-avatar-picture',
+                  loading: 'lazy',
+                  decoding: 'async'
+                })
+              else
+                span.article-single-content__author-avatar-fallback= author.initials
+          .article-single-content__author-details
+            span.article-single-content__author-name= author.name
+            if author.role
+              span.article-single-content__author-role= author.role
+        .article-single-content__author-meta
+          if author.date
+            time.article-single-content__author-date(datetime=author.datetime || false)= author.date
+          if author.readTime
+            span.article-single-content__author-read-time= author.readTime
+
+    if tags.length || shareActions.length
+      .article-single-content__footer
+        if tags.length
+          ul.article-single-content__tags
+            each tag in tags
+              li.article-single-content__tag= tag
+
+        if shareActions.length
+          .article-single-content__share
+            if share.label
+              span.article-single-content__share-label= share.label
+            .article-single-content__share-actions
+              each action in shareActions
+                button.article-single-content__share-btn(
+                  type='button'
+                  aria-label=action.label
+                )
+                  +icon({ name: 'social-' + action.network, size: 'sm', decorative: true })

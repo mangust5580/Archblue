@@ -1,0 +1,14 @@
+doctype html
+html(lang=site.lang || 'ru')
+  block vars
+  head
+    include /shared/head/index
+    title #{pageTitle ? pageTitle + ' — ' + site.name : site.name}
+    block head
+  body
+    .page
+      include /shared/shell/skip-link
+      include /shared/shell/header
+      main#main(tabindex="-1")
+        block content
+      include /shared/shell/footer

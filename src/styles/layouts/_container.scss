@@ -1,0 +1,22 @@
+.container {
+  inline-size: calc(100% - var(--container-padding-inline) * 2);
+  max-inline-size: var(--container-default);
+  margin-inline: auto;
+}
+
+.container--narrow {
+  max-inline-size: var(--container-narrow);
+}
+
+.container--default {
+  max-inline-size: var(--container-default);
+}
+
+.container--wide {
+  max-inline-size: var(--container-wide);
+}
+
+.container--full {
+  inline-size: var(--container-full);
+  max-inline-size: none;
+}

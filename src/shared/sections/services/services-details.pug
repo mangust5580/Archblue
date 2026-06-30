@@ -1,0 +1,64 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin servicesDetails(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['services-details', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'services-details__container'
+  })
+    +sectionHeader({
+      eyebrow: eyebrow,
+      title: title,
+      text: text,
+      headingLevel: 2,
+      align: 'start'
+    })
+
+    if items.length
+      ul.services-details__list
+        each item, index in items
+          - const features = Array.isArray(item.features) ? item.features : []
+          - const itemClasses = ['services-details__item', index % 2 === 1 ? 'services-details__item--reverse' : ''].filter(Boolean).join(' ')
+          - const itemImageBase = item.imageBase || (item.image && !/\.svg$/i.test(item.image) ? item.image.replace(/\.[^.]+$/, '') : null)
+          li(class=itemClasses)
+            .services-details__media
+              +picture({
+                base: itemImageBase,
+                src: itemImageBase ? null : 'images/image-placeholder.svg',
+                alt: itemImageBase ? (item.imageAlt || '') : '',
+                width: item.imageWidth || false,
+                height: item.imageHeight || false,
+                className: 'services-details__image',
+                pictureClassName: 'services-details__picture',
+                loading: 'lazy',
+                decoding: 'async'
+              })
+            .services-details__content
+              if item.category
+                p.services-details__category= item.category
+              h3.services-details__item-title= item.title
+              if item.text
+                p.services-details__item-text= item.text
+              if features.length
+                ul.services-details__features
+                  each feature in features
+                    li.services-details__feature
+                      span.services-details__feature-icon
+                        +icon({ name: feature.icon, size: 'md', decorative: true })
+                      .services-details__feature-content
+                        h4.services-details__feature-title= feature.title
+                        if feature.text
+                          p.services-details__feature-text= feature.text

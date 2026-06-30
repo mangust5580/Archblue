@@ -1,0 +1,50 @@
+@use '../helpers' as *;
+
+.modal--lg {
+  max-inline-size: min(calc(var(--space-64) * 9), calc(100% - var(--space-32)));
+
+  .modal__window {
+    overflow-y: auto;
+    max-block-size: calc(100dvh - var(--space-48));
+  }
+}
+
+.project-modal {
+  &__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  &__intro {
+    margin-block: 0;
+    color: var(--role-text-secondary);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-16);
+  }
+
+  &__row {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--space-16);
+
+    @include media-up('md') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  &__actions {
+    display: flex;
+
+    .button {
+      flex: 1 1 auto;
+    }
+  }
+}

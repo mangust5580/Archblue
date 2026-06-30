@@ -1,0 +1,323 @@
+@use 'sass:map';
+@use '../helpers' as *;
+@use 'tokens' as tokens;
+
+:root {
+  // ── Primitive colors ────────────────────────────────────────────────────
+  @include emit-vars('color', tokens.$colors);
+
+  // ── Alpha colors ─────────────────────────────────────────────────────────
+  @include emit-vars('alpha', tokens.$alpha-colors);
+
+  // ── Semantic / role colors ────────────────────────────────────────────────
+  @include emit-vars('role', tokens.$role-colors);
+
+  // ── Gradients ─────────────────────────────────────────────────────────────
+  @include emit-vars('gradient', tokens.$gradients);
+
+  // ── Typography — font families ────────────────────────────────────────────
+  @include emit-vars('font-family', tokens.$font-families);
+
+  // ── Typography — scale (fluid size + line-height, weight) ─────────────────
+  // Both font-size and line-height are fluid clamps (px) between mobile and desktop.
+  @each $name, $values in tokens.$type-scale-desktop {
+    $min-values: map.get(tokens.$type-scale-mobile, $name);
+
+    --type-#{$name}-size: #{fluid(
+      map.get($values, 'size'),
+      map.get($min-values, 'size')
+    )};
+    --type-#{$name}-line-height: #{fluid(
+      map.get($values, 'line-height'),
+      map.get($min-values, 'line-height')
+    )};
+    --type-#{$name}-weight: #{map.get($values, 'weight')};
+  }
+
+  // ── Spacing — primitives ──────────────────────────────────────────────────
+  @include emit-vars('space', tokens.$spaces);
+
+  // ── Spacing — semantic aliases ────────────────────────────────────────────
+  --container-padding-inline:     var(--space-24);
+  --section-padding-block:        var(--space-120);
+  --section-padding-block-mobile: var(--space-64);
+  --stack-gap-sm:                 var(--space-12);
+  --stack-gap-md:                 var(--space-24);
+  --stack-gap-lg:                 var(--space-40);
+  --container-narrow:             calc(var(--space-64) * 14.5);
+  --container-default:            calc(var(--space-64) * 21.25);
+  --container-wide:               calc(var(--space-64) * 25);
+  --container-full:               100%;
+
+  // ── Shadows ───────────────────────────────────────────────────────────────
+  @include emit-vars('shadow', tokens.$shadows);
+
+  // ── Blurs ─────────────────────────────────────────────────────────────────
+  @include emit-vars('blur', tokens.$blurs);
+
+  // ── Border widths ─────────────────────────────────────────────────────────
+  @include emit-vars('border-width', tokens.$border-widths);
+
+  // ── Border radii ──────────────────────────────────────────────────────────
+  @include emit-vars('radius', tokens.$radii);
+
+  // ── Layout ────────────────────────────────────────────────────────────────
+  @include emit-vars('layout', tokens.$layout);
+
+  --layout-container-padding: var(--container-padding-inline);
+
+  // ── Z-indexes ─────────────────────────────────────────────────────────────
+  @include emit-vars('z', tokens.$z-indexes);
+
+  // ── Motion — durations ────────────────────────────────────────────────────
+  @include emit-vars('duration', tokens.$durations);
+
+  // ── Motion — easings ──────────────────────────────────────────────────────
+  @include emit-vars('easing', tokens.$easings);
+
+  // ── Button component ──────────────────────────────────────────────────────
+  --button-height-sm: var(--space-40);
+  --button-height-md: var(--space-48);
+  --button-height-lg: var(--space-64);
+  --button-padding-inline-sm: var(--space-16);
+  --button-padding-inline-md: var(--space-24);
+  --button-padding-inline-lg: var(--space-32);
+  --button-gap: var(--space-8);
+  --button-radius: var(--radius-sm);
+  --button-disabled-opacity: 45%;
+  --button-icon-size: 20px;
+  --control-disabled-opacity: var(--button-disabled-opacity);
+
+  // ── Field component ───────────────────────────────────────────────────────
+  --field-control-height: var(--space-48);
+  --field-control-padding-inline: var(--space-16);
+  --field-control-padding-block: var(--space-12);
+  --field-control-radius: var(--radius-sm);
+  --field-control-border-width: var(--border-width-default);
+  --field-control-gap: var(--space-8);
+  --field-error-gap: var(--space-4);
+  --field-textarea-min-height: 120px;
+  --field-icon-size: 20px;
+
+  // ── Checkbox component ────────────────────────────────────────────────────
+  --checkbox-size: 20px;
+  --checkbox-radius: var(--radius-xs);
+  --checkbox-gap: var(--space-12);
+  --choice-hover-background: var(--alpha-orange-10);
+  --choice-disabled-opacity: var(--control-disabled-opacity);
+
+  // ── Radio component ───────────────────────────────────────────────────────
+  --radio-size: var(--checkbox-size);
+  --radio-radius: 50%;
+  --radio-dot-size: calc(var(--radio-size) / 2);
+  --radio-gap: var(--checkbox-gap);
+
+  // ── Icon component ────────────────────────────────────────────────────────
+  --icon-size-sm: var(--space-16);
+  --icon-size-control: var(--button-icon-size);
+  --icon-size-md: var(--space-24);
+  --icon-size-lg: var(--space-32);
+
+  // ── Select component ──────────────────────────────────────────────────────
+  --select-control-height: var(--field-control-height);
+  --select-padding-inline: var(--field-control-padding-inline);
+  --select-radius: var(--field-control-radius);
+  --select-border-width: var(--field-control-border-width);
+  --select-icon-size: var(--field-icon-size);
+  --select-dropdown-gap: var(--space-4);
+  --select-option-padding-block: var(--space-12);
+  --select-option-padding-inline: var(--space-16);
+  --select-dropdown-shadow: var(--shadow-card);
+  --select-dropdown-max-height: 240px;
+
+  // ── Pagination component ──────────────────────────────────────────────────
+  --pagination-item-size: var(--space-40);
+  --pagination-radius: var(--radius-full);
+
+  // ── Tabs component ────────────────────────────────────────────────────────
+  --tabs-gap: var(--space-40);
+  --tabs-border-width: var(--border-width-default);
+  --tabs-active-border-width: var(--border-width-focus);
+
+  // ── Process steps component ───────────────────────────────────────────────
+  --process-step-marker-size: var(--space-48);
+  --process-step-connector-width: var(--border-width-default);
+  --process-step-gap: var(--space-24);
+
+  // ── Status semantic colors ────────────────────────────────────────────────
+  --role-info:            #3b82f6;
+  --role-info-surface:    rgb(59 130 246 / 10%);
+  --role-success-surface: rgb(34 197 94 / 10%);
+  --role-warning-surface: rgb(245 158 11 / 10%);
+  --role-error-surface:   rgb(239 68 68 / 10%);
+  --role-danger:          var(--role-error);
+  --role-danger-surface:  var(--role-error-surface);
+
+  // ── Z-index ───────────────────────────────────────────────────────────────
+  --z-card-link: 1;
+
+  // ── Service card component ────────────────────────────────────────────────
+  --service-card-media-aspect-ratio: 4 / 5;
+  --service-card-radius: var(--radius-md);
+  --service-card-body-gap: var(--space-12);
+  --service-card-padding: var(--space-24);
+
+  // ── Project card component ────────────────────────────────────────────────
+  --project-card-media-aspect-ratio: 16 / 10;
+  --project-card-radius: var(--radius-md);
+  --project-card-body-gap: var(--space-12);
+  --project-card-meta-gap: var(--space-4);
+  --project-card-padding: var(--space-24);
+
+  // ── Article card component ────────────────────────────────────────────────
+  --article-card-aspect-ratio: 4 / 3;
+  --article-card-radius: var(--radius-md);
+  --article-card-padding: var(--space-24);
+  --article-card-content-gap: var(--space-8);
+  --article-card-overlay: linear-gradient(180deg, var(--alpha-charcoal-0) 0%, var(--alpha-charcoal-80) 100%);
+
+  // ── Testimonial component ─────────────────────────────────────────────────
+  --testimonial-radius: var(--radius-md);
+  --testimonial-padding: var(--space-24);
+  --testimonial-gap: var(--space-16);
+  --testimonial-avatar-size: var(--space-48);
+
+  // ── Badge component ───────────────────────────────────────────────────────
+  --badge-radius: var(--radius-full);
+  --badge-padding-block: var(--space-4);
+  --badge-padding-inline: var(--space-12);
+
+  // ── Alert component ───────────────────────────────────────────────────────
+  --alert-radius: var(--radius-sm);
+  --alert-padding-block: var(--space-12);
+  --alert-padding-inline: var(--space-16);
+  --alert-gap: var(--space-12);
+
+  // ── Accordion component ───────────────────────────────────────────────────
+  --accordion-border-width: var(--border-width-default);
+  --accordion-padding: var(--space-24);
+  --accordion-gap: var(--space-12);
+
+  // ── Modal component ───────────────────────────────────────────────────────
+  --modal-radius: var(--radius-md);
+  --modal-padding: var(--space-24);
+  --modal-gap: var(--space-16);
+  --modal-width-md: calc(var(--space-64) * 7);
+  --modal-backdrop-background: var(--alpha-charcoal-80);
+
+  // ── Tooltip component ─────────────────────────────────────────────────────
+  --role-surface-inverse: var(--role-surface-dark);
+  --tooltip-radius: var(--radius-sm);
+  --tooltip-padding-block: var(--space-16);
+  --tooltip-padding-inline: var(--space-16);
+  --tooltip-max-width: calc(var(--space-64) * 4);
+  --tooltip-arrow-size: var(--space-12);
+  --tooltip-background: var(--role-surface-inverse);
+  --tooltip-color: var(--role-text-inverse);
+
+  // ── Logo component ────────────────────────────────────────────────────────
+  --logo-width: calc(var(--space-64) * 2);
+  --header-logo-width: calc(var(--space-64) * 2.25);
+  --logo-hover-opacity: var(--header-pressed-opacity);
+
+  // ── CTA banner component ──────────────────────────────────────────────────
+  --cta-banner-radius: var(--radius-md);
+  --cta-banner-padding: var(--space-48);
+  --cta-banner-padding-mobile: var(--space-24);
+  --cta-banner-gap: var(--space-24);
+  --cta-banner-min-block-size: calc(var(--space-64) * 4);
+  --cta-banner-content-max-width: calc(var(--space-64) * 9);
+  --cta-banner-overlay: linear-gradient(90deg, var(--alpha-charcoal-100) 0%, var(--alpha-charcoal-60) 55%, var(--alpha-charcoal-0) 100%);
+  --cta-banner-overlay-mobile: linear-gradient(180deg, var(--alpha-charcoal-80) 0%, var(--alpha-charcoal-100) 100%);
+  --cta-banner-z-overlay: 1;
+  --cta-banner-z-content: 2;
+
+  // ── Header layout ──────────────────────────────────────────────────────────
+  --header-block-size: var(--space-80);
+  --header-nav-gap: var(--space-32);
+  --header-burger-size: var(--space-40);
+  --header-burger-line-width: var(--space-24);
+  --header-burger-line-height: var(--border-width-focus);
+  --header-burger-gap: var(--space-4);
+  --header-pressed-opacity: 70%;
+  --header-cta-height: var(--button-height-sm);
+  --header-cta-padding-inline: var(--button-padding-inline-sm);
+  --header-nav-active-underline: var(--border-width-focus);
+  --header-nav-active-offset: var(--space-8);
+  --header-mobile-cta-max-width: calc(var(--space-64) * 4.5);
+  --home-hero-gap: var(--space-48);
+  --home-hero-title-font-size: var(--type-display-size);
+  --home-hero-title-line-height: var(--type-display-line-height);
+  --home-hero-title-font-size-mobile: var(--type-h1-size);
+  --home-hero-title-line-height-mobile: var(--type-h1-line-height);
+  --home-hero-actions-gap: var(--space-16);
+  --home-hero-stats-gap: var(--space-32);
+  --home-hero-media-radius: var(--radius-lg);
+  --home-about-gap: var(--space-64);
+  --home-about-media-radius: var(--radius-lg);
+  --home-about-stats-gap: var(--space-32);
+  --section-header-gap: var(--space-24);
+  --section-header-content-gap: var(--space-12);
+  --section-header-action-gap: var(--space-8);
+  --section-header-accent-width: var(--space-48);
+  --section-header-accent-height: var(--border-width-focus);
+  --section-header-accent-offset: var(--space-8);
+  --section-header-title-max-width: calc(var(--space-64) * 10);
+  --section-header-text-max-width: calc(var(--space-64) * 11.25);
+  --home-hero-padding-block-start: var(--space-32);
+  --home-hero-padding-block-end: var(--space-48);
+  --home-hero-padding-block-start-mobile: var(--space-32);
+  --home-hero-padding-block-end-mobile: var(--space-32);
+  --home-about-padding-block-start: var(--space-48);
+  --home-about-padding-block-end: var(--space-96);
+  --home-about-padding-block-mobile: var(--space-40);
+  --home-about-eyebrow-font-size: var(--type-small-size);
+  --home-about-eyebrow-line-height: var(--type-small-line-height);
+  --home-services-header-gap: var(--space-40);
+  --home-services-grid-gap: var(--space-32);
+  --home-projects-header-gap: var(--space-40);
+  --home-projects-grid-gap: var(--space-32);
+  --home-process-panel-padding: var(--space-48);
+  --home-process-panel-padding-mobile: var(--space-24);
+  --home-process-panel-radius: var(--radius-md);
+  --home-process-panel-gap: var(--space-40);
+  --home-process-header-gap: var(--space-24);
+  --home-process-steps-gap: var(--space-32);
+  --home-process-step-gap: var(--space-12);
+  --home-process-divider-color: var(--alpha-white-20);
+  --home-process-text-color: var(--alpha-white-70);
+  --home-testimonials-header-gap: var(--space-40);
+  --home-testimonials-grid-gap: var(--space-32);
+  --home-articles-header-gap: var(--space-40);
+  --home-articles-grid-gap: var(--space-32);
+  --page-hero-padding-block-start: var(--space-48);
+  --page-hero-padding-block-end: var(--space-64);
+  --page-hero-padding-block-mobile: var(--space-40);
+  --page-hero-gap: var(--space-48);
+  --page-hero-content-gap: var(--space-24);
+  --page-hero-breadcrumbs-gap: var(--space-8);
+  --page-hero-media-radius: var(--radius-lg);
+  --page-hero-media-shadow: var(--shadow-card);
+  --page-hero-eyebrow-font-size: var(--type-small-size);
+  --page-hero-eyebrow-line-height: var(--type-small-line-height);
+  --section-shell-spacing-sm: var(--space-48);
+  --section-shell-spacing-md: var(--space-64);
+  --section-shell-spacing-lg: var(--space-96);
+  --section-shell-spacing-xl: var(--space-120);
+  --section-shell-spacing-mobile-sm: var(--space-32);
+  --section-shell-spacing-mobile-md: var(--space-48);
+  --section-shell-spacing-mobile-lg: var(--space-64);
+  --section-shell-spacing-mobile-xl: var(--space-80);
+
+  // ── Footer layout ────────────────────────────────────────────────────────
+  --footer-padding-block: var(--space-64);
+  --footer-padding-block-mobile: var(--space-48);
+  --footer-main-gap: var(--space-48);
+  --footer-column-gap: var(--space-40);
+  --footer-row-gap: var(--space-48);
+  --footer-brand-max-width: calc(var(--space-64) * 7);
+  --footer-social-size: var(--space-40);
+  --footer-border-color: var(--alpha-white-20);
+  --footer-text-color: var(--alpha-white-70);
+  --footer-muted-color: var(--alpha-white-60);
+}

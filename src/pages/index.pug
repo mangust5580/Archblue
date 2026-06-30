@@ -1,0 +1,270 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'home'
+  - var pageDescription = 'Архитектурные проекты, услуги бюро и подход Archblue к жилым и общественным пространствам.'
+  - var pageUrl = ''
+
+include /shared/sections/home/home-hero
+include /shared/sections/home/home-about
+include /shared/sections/home/home-services
+include /shared/sections/home/home-projects
+include /shared/sections/home/home-process
+include /shared/sections/home/home-testimonials
+include /shared/sections/home/home-articles
+include /shared/sections/home/home-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +homeHero({
+    title: 'Архитектура для жизни. Дизайн со смыслом.',
+    titleLines: [
+      'Архитектура',
+      'для жизни. Дизайн',
+      'со смыслом.'
+    ],
+    text: 'Создаём уникальные архитектурные решения и интерьеры, которые вдохновляют, работают на людей и остаются актуальными многие годы.',
+    actions: [
+      { text: 'Смотреть проекты', variant: 'primary', href: 'projects.html', icon: true },
+      { text: 'Получить консультацию', variant: 'outline', type: 'button', modalTarget: 'project-modal' }
+    ],
+    stats: [
+      { value: '12+', label: 'лет опыта' },
+      { value: '150+', label: 'реализованных проектов' },
+      { value: '18', label: 'городов присутствия' }
+    ],
+    images: {
+      main: 'images/pages/home/hero.jpg',
+      mainAlt: 'Современный частный дом с панорамным остеклением у воды',
+      mainWidth: 1448,
+      mainHeight: 1086
+    }
+  })
+
+  +homeAbout({
+    eyebrow: 'О НАС',
+    title: 'Архитектура, основанная на опыте, внимании и диалоге',
+    text: 'Мы создаём архитектуру, которая отражает личность и ценности каждого заказчика. Внимание к деталям, уважение к пространству и многолетний опыт команды — основа каждого нашего проекта.',
+    image: 'images/pages/about/intro.jpg',
+    imageAlt: 'Команда архитекторов обсуждает макет проекта в студии',
+    imageWidth: 1448,
+    imageHeight: 1086,
+    stats: [
+      { icon: 'stats-cube', value: '150+', label: 'успешных проектов' },
+      { icon: 'stats-users', value: '35+', label: 'профессионалов в команде' },
+      { icon: 'stats-award', value: '12+', label: 'лет создаём архитектуру' }
+    ]
+  })
+
+  +homeServices({
+    title: 'Наши услуги',
+    action: {
+      text: 'Все услуги',
+      href: 'services.html',
+      icon: true
+    },
+    items: [
+      {
+        title: 'Архитектурное проектирование',
+        text: 'Разрабатываем архитектурные концепции, планы и рабочую документацию.',
+        href: 'service-single.html',
+        image: 'images/services/architecture/cover.jpg',
+        imageAlt: 'Архитектурный макет и чертежи на рабочем столе',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'services-architecture'
+      },
+      {
+        title: 'Дизайн интерьеров',
+        text: 'Проектируем интерьеры, где эстетика сочетается с комфортом и стилем жизни.',
+        href: 'service-single.html',
+        image: 'images/services/interior/cover.jpg',
+        imageAlt: 'Современный интерьер гостиной в тёплых нейтральных тонах',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'services-interior'
+      },
+      {
+        title: 'Жилые пространства',
+        text: 'Создаём частные дома, квартиры и загородные резиденции для комфортной жизни.',
+        href: 'service-single.html',
+        image: 'images/services/residential/cover.jpg',
+        imageAlt: 'Современный частный дом с террасой и озеленением',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'services-residential'
+      },
+      {
+        title: 'Коммерческие объекты',
+        text: 'Проектируем офисы, рестораны, ритейл и общественные пространства под задачи бизнеса.',
+        href: 'service-single.html',
+        image: 'images/services/commercial/cover.jpg',
+        imageAlt: 'Современный офис с панорамными окнами и тёплой отделкой',
+        imageWidth: 724,
+        imageHeight: 543,
+        icon: 'services-commercial'
+      }
+    ]
+  })
+
+  +homeProjects({
+    title: 'Избранные проекты',
+    action: {
+      text: 'Все проекты',
+      href: 'projects.html',
+      icon: true
+    },
+    items: [
+      {
+        title: 'Дом у озера',
+        type: 'Частный дом',
+        location: 'Московская область',
+        href: 'project-single.html',
+        image: 'images/projects/lake-house/cover.jpg',
+        imageAlt: 'Современный дом у озера с панорамными окнами',
+        imageWidth: 724,
+        imageHeight: 543
+      },
+      {
+        title: 'Офис компании Talan Group',
+        type: 'Офисное пространство',
+        location: 'Москва',
+        href: 'project-single.html',
+        image: 'images/projects/talan-office/cover.jpg',
+        imageAlt: 'Современное офисное пространство с переговорной зоной',
+        imageWidth: 724,
+        imageHeight: 543
+      },
+      {
+        title: 'Жилой комплекс River Park',
+        type: 'Жилой комплекс',
+        location: 'Санкт-Петербург',
+        href: 'project-single.html',
+        image: 'images/projects/river-park/cover.jpg',
+        imageAlt: 'Жилой комплекс с благоустроенным двором и зеленью',
+        imageWidth: 724,
+        imageHeight: 543
+      }
+    ]
+  })
+
+  +homeProcess({
+    title: 'Как мы работаем',
+    text: 'Прозрачный процесс. Предсказуемый результат.',
+    steps: [
+      {
+        number: '01',
+        title: 'Знакомство',
+        text: 'Обсуждаем ваши идеи, цели и бюджет, анализируем задачу и контекст.'
+      },
+      {
+        number: '02',
+        title: 'Концепция',
+        text: 'Разрабатываем концепцию и планировочные решения, согласовываем направление.'
+      },
+      {
+        number: '03',
+        title: 'Проектирование',
+        text: 'Создаём проектную документацию и визуализации с учётом всех технических требований.'
+      },
+      {
+        number: '04',
+        title: 'Реализация',
+        text: 'Сопровождаем реализацию проекта и контролируем соответствие замыслу.'
+      }
+    ]
+  })
+
+  +homeTestimonials({
+    title: 'Отзывы клиентов',
+    action: {
+      text: 'Все отзывы',
+      href: 'reviews.html',
+      icon: true
+    },
+    items: [
+      {
+        text: 'Команда Archblue превзошла наши ожидания. Дом получился именно таким, как мы мечтали — тёплым, светлым и продуманным до мелочей.',
+        author: 'Екатерина Орлова',
+        role: 'Частный дом, Московская область',
+        avatar: 'images/shared/avatars/ekaterina-orlova.jpg',
+        avatarAlt: 'Портрет Екатерины Орловой',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Профессионализм, внимание к деталям и соблюдение сроков — то, за что можно спокойно рекомендовать Archblue. Работать с вами было легко и приятно.',
+        author: 'Дмитрий Соловьёв',
+        role: 'CEO, Talan Group',
+        avatar: 'images/shared/avatars/dmitry-solovyov.jpg',
+        avatarAlt: 'Портрет Дмитрия Соловьёва',
+        avatarWidth: 627,
+        avatarHeight: 627
+      },
+      {
+        text: 'Наш офис — это пространство, которым мы гордимся. Спасибо за смелые решения и точную реализацию.',
+        author: 'Мария Лебедева',
+        role: 'Директор по развитию, Solva',
+        avatar: 'images/shared/avatars/maria-lebedeva.jpg',
+        avatarAlt: 'Портрет Марии Лебедевой',
+        avatarWidth: 627,
+        avatarHeight: 627
+      }
+    ]
+  })
+
+  +homeArticles({
+    title: 'Статьи и новости',
+    action: {
+      text: 'Все статьи',
+      href: 'articles.html',
+      icon: true
+    },
+    items: [
+      {
+        title: 'Тренды в архитектуре 2024: что важно учитывать',
+        date: '15 июня 2024',
+        href: 'article-single.html',
+        image: 'images/articles/trends-2024/cover.jpg',
+        imageAlt: 'Современный дом среди леса с архитектурной подсветкой',
+        imageWidth: 724,
+        imageHeight: 543
+      },
+      {
+        title: 'Как выбрать архитектора для частного дома',
+        date: '2 мая 2024',
+        href: 'article-single.html',
+        image: 'images/articles/private-house-architecture/cover.jpg',
+        imageAlt: 'Архитектурные чертежи и образцы материалов на рабочем столе',
+        imageWidth: 724,
+        imageHeight: 543
+      },
+      {
+        title: 'Минимализм в интерьере: больше, чем стиль',
+        date: '10 апреля 2024',
+        href: 'article-single.html',
+        image: 'images/articles/minimalism-interior/cover.jpg',
+        imageAlt: 'Минималистичная гостиная с деревянной отделкой и мягким светом',
+        imageWidth: 724,
+        imageHeight: 543
+      }
+    ]
+  })
+
+  +homeCta({
+    title: 'Готовы обсудить ваш будущий проект?',
+    text: 'Оставьте заявку — мы свяжемся с вами и поможем воплотить идеи в реальность.',
+    action: {
+      text: 'Обсудить проект',
+      modalTarget: 'project-modal',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современный интерьер с тёплым освещением',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

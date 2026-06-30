@@ -1,0 +1,58 @@
+@use '../helpers' as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding-block: var(--badge-padding-block);
+  padding-inline: var(--badge-padding-inline);
+  border-radius: var(--badge-radius);
+  font-size: var(--type-small-size);
+  font-weight: var(--type-button-weight);
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+
+  &--success {
+    background-color: var(--role-success-surface);
+    color: var(--role-success);
+  }
+
+  &--info {
+    background-color: var(--role-info-surface);
+    color: var(--role-info);
+  }
+
+  &--warning {
+    background-color: var(--role-warning-surface);
+    color: var(--role-text-primary);
+  }
+
+  &--neutral {
+    background-color: var(--role-surface-soft);
+    color: var(--role-text-muted);
+  }
+
+  &--danger {
+    background-color: var(--role-danger-surface);
+    color: var(--role-danger);
+  }
+
+  &--premium {
+    border: var(--border-width-default) solid var(--role-link);
+    color: var(--role-link);
+  }
+
+  &[href] {
+    transition: opacity var(--duration-fast) var(--easing-base);
+
+    @include hover {
+      opacity: 80%;
+    }
+
+    &:focus-visible {
+      border-radius: var(--badge-radius);
+      outline: var(--border-width-focus) solid var(--role-focus-ring);
+      outline-offset: var(--border-width-focus);
+    }
+  }
+}

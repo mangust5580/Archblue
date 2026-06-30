@@ -1,0 +1,13 @@
+mixin badge(params)
+  -
+    const p = params || {}
+    const text = p.text || ''
+    const variant = p.variant || 'neutral'
+    const href = p.href || null
+    const className = p.className || ''
+    const cls = ['badge', 'badge--' + variant, className].filter(Boolean).join(' ')
+
+  if href
+    a(href=href class=cls)= text
+  else
+    span(class=cls)= text

@@ -1,0 +1,83 @@
+include /shared/components/index
+
+-
+  const headerData = header || {}
+  const logo = headerData.logo || { href: '/', alt: site.name }
+  const nav = headerData.nav || []
+  const cta = headerData.cta || null
+
+header.header(data-js-header)
+  .header__inner.container
+    div.header__logo
+      +logo({ href: logo.href, alt: logo.alt, ariaLabel: logo.alt + ' — на главную' })
+
+    if nav.length
+      nav.header__nav(aria-label='Основная навигация')
+        ul.header__nav-list
+          each item in nav
+            - const isActive = !!item.active || (typeof activeNav !== 'undefined' && !!activeNav && item.key === activeNav)
+            li.header__nav-item
+              a.header__nav-link(
+                href=item.href
+                class=isActive ? 'is-active' : false
+                aria-current=isActive ? 'page' : false
+              )= item.text
+
+    .header__actions
+      if cta
+        div.header__cta
+          if cta.modalTarget || cta.href
+            +button({
+              text: cta.text,
+              variant: 'primary',
+              size: 'md',
+              href: cta.modalTarget ? null : cta.href,
+              type: 'button',
+              icon: true,
+              dataAttrs: cta.modalTarget ? { 'data-js-modal-trigger': cta.modalTarget } : {}
+            })
+
+      +burger({
+        label: 'Открыть меню',
+        controls: 'header-mobile-menu',
+        expanded: false,
+        className: 'header__burger',
+        dataAttrs: {
+          'data-js-header-burger': true
+        }
+      })
+
+  div.header__mobile#header-mobile-menu(
+    hidden
+    data-js-header-menu
+  )
+    .header__mobile-inner.container
+      if nav.length
+        nav.header__mobile-nav(aria-label='Мобильная навигация')
+          ul.header__nav-list
+            each item in nav
+              - const isActive = !!item.active || (typeof activeNav !== 'undefined' && !!activeNav && item.key === activeNav)
+              li.header__nav-item
+                a.header__nav-link(
+                  href=item.href
+                  class=isActive ? 'is-active' : false
+                  aria-current=isActive ? 'page' : false
+                  data-js-header-link
+                )= item.text
+
+      if cta
+        .header__mobile-actions
+          if cta.modalTarget || cta.href
+            -
+              const mobileCtaDataAttrs = cta.modalTarget
+                ? { 'data-js-header-link': true, 'data-js-modal-trigger': cta.modalTarget }
+                : { 'data-js-header-link': true }
+            +button({
+              text: cta.text,
+              variant: 'primary',
+              size: 'md',
+              href: cta.modalTarget ? null : cta.href,
+              type: 'button',
+              icon: true,
+              dataAttrs: mobileCtaDataAttrs
+            })

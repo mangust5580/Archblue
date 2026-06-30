@@ -1,0 +1,38 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin aboutTrust(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['about-trust', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'about-trust__container'
+  })
+    +sectionHeader({
+      eyebrow: eyebrow,
+      title: title,
+      text: text,
+      headingLevel: 2,
+      align: 'start',
+      className: 'about-trust__header'
+    })
+
+    if items.length
+      ul.about-trust__grid(role='list')
+        each item in items
+          li.about-trust__card
+            span.about-trust__icon
+              +icon({ name: item.icon, size: 'lg', decorative: true })
+            h3.about-trust__card-title= item.title
+            p.about-trust__card-text= item.text

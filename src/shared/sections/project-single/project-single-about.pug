@@ -1,0 +1,31 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin projectSingleAbout(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const paragraphs = Array.isArray(p.paragraphs) ? p.paragraphs : []
+    const specs = Array.isArray(p.specs) ? p.specs : []
+    const className = p.className || ''
+    const rootClasses = ['project-single-about', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'project-single-about__inner'
+  })
+    .project-single-about__body
+      h2.project-single-about__title= title
+      each paragraph in paragraphs
+        p.project-single-about__text= paragraph
+    if specs.length
+      .project-single-about__specs
+        dl.project-single-about__specs-list
+          each spec in specs
+            div.project-single-about__specs-item
+              dt.project-single-about__specs-label= spec.label
+              dd.project-single-about__specs-value= spec.value

@@ -1,0 +1,53 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin aboutIntro(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const paragraphs = Array.isArray(p.paragraphs) ? p.paragraphs : []
+    const stats = p.stats || []
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const className = p.className || ''
+    const rootClasses = ['about-intro', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'about-intro__inner'
+  })
+    .about-intro__media
+      +picture({
+        base: imageBase,
+        src: imageBase ? null : 'images/image-placeholder.svg',
+        alt: imageBase ? imageAlt : '',
+        width: imageWidth || false,
+        height: imageHeight || false,
+        className: 'about-intro__image',
+        pictureClassName: 'about-intro__picture',
+        loading: 'lazy',
+        decoding: 'async'
+      })
+    .about-intro__content
+      .about-intro__header
+        if eyebrow
+          p.about-intro__eyebrow= eyebrow
+        h2.about-intro__title= title
+      each paragraph in paragraphs
+        p.about-intro__text= paragraph
+      if stats.length
+        .about-intro__stats
+          each stat in stats
+            .about-intro__stat
+              .about-intro__stat-icon
+                +icon({ name: stat.icon, size: 'lg', decorative: true })
+              .about-intro__stat-value= stat.value
+              .about-intro__stat-label= stat.label

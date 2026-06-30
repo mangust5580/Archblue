@@ -1,0 +1,17 @@
+mixin breadcrumbs(params)
+  -
+    const p = params || {}
+    const label = p.label || 'Хлебные крошки'
+    const items = Array.isArray(p.items) ? p.items : []
+
+  nav.breadcrumbs(aria-label=label)
+    ol.breadcrumbs__list
+      each item in items
+        -
+          const isCurrent = item.current || !item.href
+
+        li.breadcrumbs__item
+          if isCurrent
+            span.breadcrumbs__current(aria-current='page')= item.label
+          else
+            a.breadcrumbs__link(href=item.href)= item.label

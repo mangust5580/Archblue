@@ -1,0 +1,84 @@
+@use '../helpers' as *;
+
+.service-card {
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-direction: column;
+  border: var(--border-width-default) solid var(--role-border-subtle);
+  border-radius: var(--service-card-radius);
+  background-color: var(--role-surface-panel);
+  transition: border-color var(--duration-fast) var(--easing-base);
+
+  @include hover {
+    border-color: var(--role-border-default);
+
+    .service-card__title {
+      color: var(--role-link);
+    }
+
+    .service-card__image {
+      transform: scale(1.04);
+    }
+  }
+
+  &:has(.service-card__link:focus-visible) {
+    outline: var(--border-width-focus) solid var(--role-focus-ring);
+    outline-offset: var(--space-4);
+  }
+
+  &__media {
+    overflow: hidden;
+    aspect-ratio: var(--service-card-media-aspect-ratio);
+    background-color: var(--role-surface-soft);
+    border-block-end: var(--border-width-default) solid var(--role-border-subtle);
+  }
+
+  &__picture {
+    display: contents;
+  }
+
+  &__image {
+    display: block;
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    transition: transform var(--duration-base) var(--easing-base);
+  }
+
+  &__body {
+    display: flex;
+    flex: 1 1 auto;
+    flex-direction: column;
+    gap: var(--service-card-body-gap);
+    padding: var(--service-card-padding);
+  }
+
+  &__icon {
+    display: inline-flex;
+    color: var(--role-border-brand);
+  }
+
+  &__title {
+    margin-block: 0;
+    color: var(--role-text-primary);
+    font-size: var(--type-h5-size);
+    font-weight: var(--type-h5-weight);
+    line-height: var(--type-h5-line-height);
+    transition: color var(--duration-fast) var(--easing-base);
+  }
+
+  &__text {
+    color: var(--role-text-secondary);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+  }
+
+  &__link {
+    position: absolute;
+    inset: 0;
+    z-index: var(--z-card-link);
+    border-radius: var(--service-card-radius);
+  }
+}

@@ -1,0 +1,47 @@
+include /shared/components/index
+
+mixin projectRequestForm(params)
+  -
+    const p = params || {}
+    const idPrefix = p.idPrefix || 'project-request'
+    const submitText = p.submitText || 'Отправить заявку'
+    const className = p.className || ''
+    const rootClasses = ['project-request-form', className].filter(Boolean).join(' ')
+    const typeOptions = [
+      { value: 'house', label: 'Частный дом' },
+      { value: 'interior', label: 'Интерьер' },
+      { value: 'commercial', label: 'Коммерческий объект' },
+      { value: 'renovation', label: 'Реконструкция' }
+    ]
+    const budgetOptions = [
+      { value: 'lt3', label: 'До 3 млн ₽' },
+      { value: '3-7', label: '3–7 млн ₽' },
+      { value: '7-15', label: '7–15 млн ₽' },
+      { value: 'gt15', label: 'Более 15 млн ₽' }
+    ]
+
+  form(class=rootClasses novalidate data-js-form-validation)
+    .project-request-form__grid
+      .project-request-form__cell
+        +field({ id: idPrefix + '-name', name: 'name', label: 'Ваше имя', type: 'text', placeholder: 'Иван Иванов', autocomplete: 'name', validate: 'name' })
+      .project-request-form__cell
+        +field({ id: idPrefix + '-phone', name: 'phone', label: 'Телефон', type: 'tel', placeholder: '+7 (___) ___-__-__', autocomplete: 'tel', inputmode: 'numeric', attrs: { 'data-js-input-mask-phone': '' }, validate: 'phone' })
+      .project-request-form__cell.project-request-form__cell--full
+        +field({ id: idPrefix + '-email', name: 'email', label: 'Email', type: 'email', placeholder: 'name@example.com', autocomplete: 'email', validate: 'email' })
+      .project-request-form__cell
+        +select({ id: idPrefix + '-type', name: 'project_type', label: 'Тип проекта', placeholder: 'Тип проекта', options: typeOptions, validate: 'select', validateError: 'Выберите тип проекта' })
+      .project-request-form__cell
+        +select({ id: idPrefix + '-budget', name: 'budget', label: 'Бюджет', placeholder: 'Бюджет', options: budgetOptions, validate: 'select', validateError: 'Выберите бюджет' })
+      .project-request-form__cell.project-request-form__cell--full
+        +field({ id: idPrefix + '-message', name: 'message', label: 'Расскажите о проекте', type: 'textarea', rows: 5, placeholder: 'Опишите задачу, пожелания и сроки проекта', validate: 'message', maxlength: 500, counter: true })
+    .project-request-form__consent
+      +checkbox({
+        id: idPrefix + '-consent',
+        name: 'consent',
+        label: 'Я даю согласие на обработку персональных данных и принимаю условия %link%',
+        links: [{ text: 'Политики конфиденциальности', href: 'policy.html' }],
+        validate: 'checked'
+      })
+    .project-request-form__actions
+      +button({ text: submitText, variant: 'primary', size: 'md', type: 'submit' })
+    p.project-request-form__success(hidden data-js-form-success role='status' aria-live='polite') Спасибо! Заявка отправлена. Мы свяжемся с вами в ближайшее рабочее время.

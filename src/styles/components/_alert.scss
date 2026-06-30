@@ -1,0 +1,72 @@
+@use '../helpers' as *;
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--alert-gap);
+  padding-block: var(--alert-padding-block);
+  padding-inline: var(--alert-padding-inline);
+  border-radius: var(--alert-radius);
+
+  &__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__content {
+    flex: 1 1 auto;
+  }
+
+  &__text {
+    margin-block: 0;
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+  }
+
+  &__close {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--icon-size-control);
+    block-size: var(--icon-size-control);
+    border: none;
+    border-radius: var(--radius-xs);
+    background: none;
+    cursor: pointer;
+    transition: background-color var(--duration-fast) var(--easing-base);
+
+    @include hover {
+      background-color: var(--alpha-charcoal-10);
+    }
+
+    &:focus-visible {
+      border-radius: var(--radius-xs);
+      outline: var(--border-width-focus) solid var(--role-focus-ring);
+      outline-offset: var(--space-2);
+    }
+  }
+
+  &--success {
+    background-color: var(--role-success-surface);
+    color: var(--role-success);
+  }
+
+  &--info {
+    background-color: var(--role-info-surface);
+    color: var(--role-info);
+  }
+
+  &--warning {
+    background-color: var(--role-warning-surface);
+    color: var(--role-text-primary);
+  }
+
+  &--danger {
+    background-color: var(--role-danger-surface);
+    color: var(--role-danger);
+  }
+}

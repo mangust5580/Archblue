@@ -1,0 +1,54 @@
+mixin modal(params)
+  -
+    const p = params || {}
+    const id = p.id || 'modal'
+    const title = p.title || ''
+    const text = p.text || null
+    const size = p.size || 'md'
+    const closeLabel = p.closeLabel || 'Закрыть'
+    const actions = p.actions || []
+    const className = p.className || ''
+
+    const titleId = id + '-title'
+    const textId = text ? (id + '-text') : null
+
+    const cls = ['modal', 'modal--' + size, className].filter(Boolean).join(' ')
+
+  dialog(
+    class=cls
+    id=id
+    data-js-modal
+    aria-labelledby=titleId
+    aria-describedby=textId || null
+    aria-modal='true'
+  )
+    div.modal__window
+      div.modal__header
+        h2.modal__title(id=titleId)= title
+        button.modal__close(
+          type='button'
+          aria-label=closeLabel
+          data-js-modal-close
+        )
+          +icon({ name: 'ui-close', size: 'control', decorative: true })
+      if text
+        div.modal__body
+          p.modal__text(id=textId)= text
+      if actions.length
+        div.modal__actions
+          each action in actions
+            -
+              const isClose = action.action === 'close'
+              const btnVariant = action.variant || (isClose ? 'outline' : 'primary')
+              const btnParams = {
+                text: action.text,
+                variant: btnVariant,
+                size: action.size || 'md',
+                type: action.type || 'button',
+                href: action.href || null
+              }
+            if isClose
+              div(data-js-modal-close)
+                +button(btnParams)
+            else
+              +button(btnParams)

@@ -1,0 +1,109 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin articlesAll(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const search = p.search || null
+    const categories = Array.isArray(p.categories) ? p.categories : []
+    const items = Array.isArray(p.items) ? p.items : []
+    const loadMore = p.loadMore || null
+    const className = p.className || ''
+    const rootClasses = ['articles-all', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'articles-all__inner',
+    dataAttrs: { 'data-js-articles-catalog': '' }
+  })
+    if title
+      header.articles-all__header
+        h2.articles-all__title= title
+
+    if search || categories.length
+      .articles-all__controls
+        if search
+          form.articles-all__search(action='articles.html' method='get' role='search' data-js-articles-search-form)
+            label.articles-all__search-label(for='articles-search')= search.label || 'Поиск по статьям'
+            input.articles-all__search-input(
+              id='articles-search'
+              type='search'
+              name='q'
+              placeholder=search.placeholder || 'Поиск по статьям'
+              autocomplete='off'
+              data-js-articles-search-input
+            )
+            button.articles-all__search-button(type='submit' aria-label=search.buttonLabel || 'Искать статьи')
+              +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })
+
+        if categories.length
+          ul.articles-all__categories-list(role='list' aria-label='Фильтры статей')
+            each item in categories
+              - const isActive = item.active === true
+              - const btnCls = ['articles-categories__button', isActive && 'articles-categories__button--active'].filter(Boolean).join(' ')
+              li.articles-all__category-item
+                button(
+                  type='button'
+                  class=btnCls
+                  aria-pressed=isActive ? 'true' : 'false'
+                  data-js-articles-category-btn
+                  data-category=item.category || 'all'
+                )= item.text
+
+    if items.length
+      .articles-all__grid
+        each item in items
+          article.articles-all__card(
+            data-js-articles-item
+            data-category=item.categorySlug || ''
+            data-title=item.title || ''
+            data-text=item.text || ''
+          )
+            .articles-all__media
+              - const itemImageBase = item.imageBase || (item.image && !/\.svg$/i.test(item.image) ? item.image.replace(/\.[^.]+$/, '') : null)
+              +picture({
+                base: itemImageBase,
+                src: itemImageBase ? null : 'images/image-placeholder.svg',
+                alt: itemImageBase ? (item.imageAlt || '') : '',
+                width: item.imageWidth || false,
+                height: item.imageHeight || false,
+                className: 'articles-all__image',
+                pictureClassName: 'articles-all__picture',
+                loading: 'lazy',
+                decoding: 'async'
+              })
+            .articles-all__content
+              .articles-all__meta
+                if item.category
+                  span.articles-all__category= item.category
+                if item.date
+                  time.articles-all__date(datetime=item.datetime || false)= item.date
+                if item.readTime
+                  span.articles-all__read-time= item.readTime
+              h3.articles-all__card-title= item.title
+              if item.text
+                p.articles-all__text= item.text
+              if item.href && item.linkText
+                a.articles-all__link(href=item.href)
+                  span= item.linkText
+                  +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })
+
+    .articles-all__empty(data-js-articles-empty hidden aria-live='polite')
+      p.articles-all__empty-title Статьи не найдены
+      p.articles-all__empty-text Попробуйте изменить запрос или выбрать другую категорию
+
+    if loadMore && loadMore.text
+      .articles-all__actions(data-js-articles-more-wrapper)
+        +button({
+          text: loadMore.text,
+          variant: loadMore.variant || 'outline',
+          size: loadMore.size || 'md',
+          type: 'button',
+          icon: true,
+          dataAttrs: { 'data-js-articles-more': '' }
+        })

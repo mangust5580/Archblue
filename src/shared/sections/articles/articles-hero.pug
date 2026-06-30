@@ -1,0 +1,54 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin articlesHero(params)
+  -
+    const p = params || {}
+    const titleLines = Array.isArray(p.titleLines) ? p.titleLines : []
+    const title = p.title || ''
+    const text = p.text || null
+    const breadcrumbs = Array.isArray(p.breadcrumbs) ? p.breadcrumbs : []
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const className = p.className || ''
+    const rootClasses = ['articles-hero', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'articles-hero__inner'
+  })
+    .articles-hero__content
+      if breadcrumbs.length
+        +breadcrumbs({ items: breadcrumbs })
+
+      .articles-hero__body
+        h1.articles-hero__title
+          if titleLines.length
+            each line, index in titleLines
+              - const titleLineText = line + (index === titleLines.length - 1 ? '' : ' ')
+              span.articles-hero__title-line= titleLineText
+          else
+            = title
+        if text
+          p.articles-hero__text= text
+
+    if image
+      .articles-hero__media
+        +picture({
+          base: imageBase,
+          alt: imageAlt,
+          width: imageWidth || false,
+          height: imageHeight || false,
+          className: 'articles-hero__image',
+          pictureClassName: 'articles-hero__picture',
+          loading: 'eager',
+          decoding: 'async',
+          fetchpriority: 'high'
+        })

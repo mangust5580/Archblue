@@ -1,0 +1,38 @@
+mixin sectionShell(params)
+  -
+    const p = params || {}
+    const validTags = ['section', 'div', 'article', 'aside']
+    const tag = validTags.includes(p.tag) ? p.tag : 'section'
+    const id = p.id || null
+    const labelledby = p.labelledby || null
+    const validVariants = ['default', 'muted', 'dark', 'image', 'none']
+    const variant = validVariants.includes(p.variant) ? p.variant : 'default'
+    const validSpacing = ['none', 'sm', 'md', 'lg', 'xl']
+    const spacing = validSpacing.includes(p.spacing) ? p.spacing : 'md'
+    const validContainers = ['none', 'default', 'wide', 'narrow', 'full']
+    const container = validContainers.includes(p.container) ? p.container : 'default'
+    const extraClass = p.className || ''
+    const containerExtraClass = p.containerClassName || ''
+    const cls = [
+      'section-shell',
+      'section-shell--' + variant,
+      'section-shell--spacing-' + spacing,
+      extraClass
+    ].filter(Boolean).join(' ')
+    const containerCls = [
+      'section-shell__container',
+      'container',
+      'container--' + container,
+      containerExtraClass
+    ].filter(Boolean).join(' ')
+
+  #{tag}(
+    class=cls
+    id=id
+    aria-labelledby=labelledby
+  )&attributes(p.dataAttrs || {})
+    if container === 'none'
+      block
+    else
+      div(class=containerCls)
+        block

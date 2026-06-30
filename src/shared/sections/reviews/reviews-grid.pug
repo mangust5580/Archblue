@@ -1,0 +1,48 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin reviewsGrid(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const text = p.text || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const visibleCount = p.visibleCount || 6
+    const step = p.step || 3
+    const moreText = p.moreText || 'Показать ещё отзывы'
+    const className = p.className || ''
+    const rootClasses = ['reviews-grid', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'reviews-grid__inner'
+  })
+    +sectionHeader({
+      title: title,
+      text: text,
+      headingLevel: 2,
+      align: 'start'
+    })
+
+    if items.length
+      .reviews-grid__reveal(
+        data-js-reviews-reveal
+        data-visible-count=visibleCount
+        data-step=step
+      )
+        .reviews-grid__grid
+          each item, index in items
+            .reviews-grid__item(data-js-reviews-item hidden=(index >= visibleCount))
+              +testimonial(item)
+        if items.length > visibleCount
+          +button({
+            text: moreText,
+            variant: 'outline',
+            size: 'md',
+            type: 'button',
+            dataAttrs: { 'data-js-reviews-more': true }
+          })

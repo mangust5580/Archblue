@@ -1,0 +1,130 @@
+extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'contacts'
+  - var pageTitle = 'Контакты'
+  - var pageDescription = 'Контакты Archblue, форма заявки, офис, процесс обращения и ответы на частые вопросы.'
+  - var pageUrl = 'contacts.html'
+
+include /shared/sections/contacts/contacts-hero
+include /shared/sections/contacts/contacts-details
+include /shared/sections/contacts/contacts-form
+include /shared/sections/contacts/contacts-office
+include /shared/sections/contacts/contacts-process
+include /shared/sections/contacts/contacts-faq
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +contactsHero({
+    titleLines: [
+      'Обсудим ваш',
+      'проект'
+    ],
+    text: 'Расскажите о вашей задаче — новом доме, интерьере, коммерческом пространстве или реконструкции. Мы свяжемся с вами, уточним детали и предложим оптимальный формат работы.',
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Контакты' }
+    ],
+    contacts: [
+      { icon: 'contact-phone', text: '+7 (495) 120-35-80', href: 'tel:+74951203580' },
+      { icon: 'contact-mail', text: 'hello@archblue.ru', href: 'mailto:hello@archblue.ru' }
+    ],
+    actions: [
+      { text: 'Отправить заявку', variant: 'primary', modalTarget: 'project-modal' }
+    ],
+    image: 'images/projects/river-park/cover.jpg',
+    imageAlt: 'Современное архитектурное здание бюро Archblue',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +contactsDetails({
+    items: locals.contacts || []
+  })
+
+  +contactsForm({
+    eyebrow: 'СВЯЗАТЬСЯ С НАМИ',
+    titleLines: [
+      'Оставьте заявку,',
+      'и мы ответим в ближайшее время'
+    ],
+    text: 'Расскажите о целях проекта, пожеланиях, бюджете и сроках. Мы внимательно изучим ваш запрос и предложим лучшее решение.',
+    items: [
+      { icon: 'services-residential', text: 'Частный дом' },
+      { icon: 'services-interior', text: 'Дизайн интерьера' },
+      { icon: 'services-commercial', text: 'Коммерческий объект' },
+      { icon: 'common-layers', text: 'Реконструкция' }
+    ]
+  })
+
+  +contactsOffice({
+    title: 'Наш офис',
+    map: { label: 'Москва' },
+    items: [
+      { icon: 'contact-location', text: 'Москва, ул. Лесная, 7, офис 305' },
+      { icon: 'communication-map-pin', text: 'м. Белорусская' },
+      { icon: 'contact-clock', text: 'Пн–Пт: 10:00–19:00' },
+      { icon: 'common-calendar', text: 'Встречи по предварительной записи' }
+    ],
+    action: { text: 'Построить маршрут', variant: 'primary' }
+  })
+
+  +contactsProcess({
+    title: 'Как проходит первый контакт',
+    items: [
+      {
+        number: '01',
+        icon: 'communication-envelope',
+        title: 'Заявка',
+        text: 'Вы оставляете заявку на сайте с основными деталями проекта.'
+      },
+      {
+        number: '02',
+        icon: 'communication-phone',
+        title: 'Короткий звонок',
+        text: 'Мы уточняем ключевые параметры и отвечаем на ваши вопросы.'
+      },
+      {
+        number: '03',
+        icon: 'analytics-users',
+        title: 'Обсуждение задачи',
+        text: 'Проводим встречу или созвон, чтобы глубже понять ваш проект.'
+      },
+      {
+        number: '04',
+        icon: 'security-shield-check',
+        title: 'Предложение по формату работы',
+        text: 'Вы получаете подходящий формат и предложение по сотрудничеству.'
+      }
+    ]
+  })
+
+  +contactsFaq({
+    title: 'Частые вопросы',
+    items: [
+      {
+        id: 'faq-cost',
+        title: 'Сколько стоит проект?',
+        content: 'Стоимость зависит от типа объекта, площади, состава работ и уровня детализации. После короткого обсуждения мы предложим подходящий формат и предварительный диапазон бюджета.'
+      },
+      {
+        id: 'faq-response',
+        title: 'Как быстро вы отвечаете?',
+        content: 'Обычно мы отвечаем в течение одного рабочего дня. Если заявка приходит вечером или в выходной, мы связываемся с вами в ближайший рабочий день.'
+      },
+      {
+        id: 'faq-cities',
+        title: 'Работаете ли вы в других городах?',
+        content: 'Да, часть этапов можно вести дистанционно. Для проектов в других городах формат выезда и сопровождения обсуждается отдельно.'
+      },
+      {
+        id: 'faq-interior',
+        title: 'Можно ли заказать только дизайн интерьера?',
+        content: 'Да, можно заказать отдельный интерьерный проект без полного архитектурного сопровождения.'
+      }
+    ]
+  })
+
+  +projectModal()
+  +thankYouModal()

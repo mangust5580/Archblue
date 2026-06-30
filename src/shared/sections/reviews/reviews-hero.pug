@@ -1,0 +1,75 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin reviewsHero(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const titleLines = Array.isArray(p.titleLines) ? p.titleLines : []
+    const text = p.text || null
+    const breadcrumbs = Array.isArray(p.breadcrumbs) ? p.breadcrumbs : []
+    const actions = Array.isArray(p.actions) ? p.actions : []
+    const stats = Array.isArray(p.stats) ? p.stats : []
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const className = p.className || ''
+    const rootClasses = ['reviews-hero', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'reviews-hero__inner'
+  })
+    .reviews-hero__content
+      if breadcrumbs.length
+        +breadcrumbs({ items: breadcrumbs })
+
+      .reviews-hero__body
+        h1.reviews-hero__title
+          if titleLines.length
+            each line, index in titleLines
+              span.reviews-hero__title-line= line + (index === titleLines.length - 1 ? '' : ' ')
+          else
+            = title
+        if text
+          p.reviews-hero__text= text
+
+      if actions.length
+        .reviews-hero__actions
+          each action in actions
+            +button({
+              text: action.text,
+              variant: action.variant || 'primary',
+              size: action.size || 'md',
+              href: action.modalTarget ? null : (action.href || null),
+              type: action.type || 'button',
+              icon: !!action.icon,
+              dataAttrs: action.modalTarget ? { 'data-js-modal-trigger': action.modalTarget } : (action.dataAttrs || {})
+            })
+
+      if stats.length
+        .reviews-hero__stats
+          each stat in stats
+            .reviews-hero__stat
+              .reviews-hero__stat-value= stat.value
+              .reviews-hero__stat-label= stat.label
+
+    if image
+      .reviews-hero__media
+        +picture({
+          base: imageBase,
+          alt: imageAlt,
+          width: imageWidth || false,
+          height: imageHeight || false,
+          className: 'reviews-hero__image',
+          pictureClassName: 'reviews-hero__picture',
+          loading: 'eager',
+          decoding: 'async',
+          fetchpriority: 'high'
+        })

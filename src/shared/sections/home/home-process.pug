@@ -1,0 +1,32 @@
+include /shared/shell/index
+
+mixin homeProcess(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const text = p.text || null
+    const steps = Array.isArray(p.steps) ? p.steps : []
+    const className = p.className || ''
+    const rootClasses = ['home-process', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'none',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'home-process__container'
+  })
+    .home-process__panel
+      .home-process__header
+        h2.home-process__title= title
+        if text
+          p.home-process__text= text
+
+      if steps.length
+        .home-process__steps
+          each step in steps
+            article.home-process__step
+              p.home-process__step-number= step.number
+              h3.home-process__step-title= step.title
+              p.home-process__step-text= step.text

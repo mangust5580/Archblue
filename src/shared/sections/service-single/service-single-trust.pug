@@ -1,0 +1,15 @@
+include /shared/components/index
+include /shared/shell/index
+include /shared/sections/services/services-benefits
+
+mixin serviceSingleTrust(params)
+  -
+    const p = params || {}
+    const items = Array.isArray(p.items) ? p.items : []
+
+  +servicesBenefits({
+    eyebrow: p.eyebrow || null,
+    title: p.title || '',
+    text: p.text || null,
+    items: items
+  })

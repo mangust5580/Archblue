@@ -1,0 +1,107 @@
+@use '../../helpers' as *;
+
+.home-process {
+  &__panel {
+    display: flex;
+    flex-direction: column;
+    gap: var(--home-process-panel-gap);
+    padding: var(--home-process-panel-padding);
+    border-radius: var(--home-process-panel-radius);
+    background-color: var(--role-surface-dark);
+    color: var(--role-text-inverse);
+
+    @include media-down('sm') {
+      padding: var(--home-process-panel-padding-mobile);
+    }
+  }
+
+  &__header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--home-process-header-gap);
+    padding-block-end: var(--home-process-header-gap);
+    border-block-end: var(--border-width-default) solid var(--home-process-divider-color);
+
+    @include media-down('sm') {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  &__title {
+    margin-block: 0;
+    color: var(--role-text-inverse);
+    font-size: var(--type-h2-size);
+    font-weight: var(--type-h2-weight);
+    line-height: var(--type-h2-line-height);
+  }
+
+  &__text {
+    margin-block: 0;
+    color: var(--home-process-text-color);
+    font-size: var(--type-body-size);
+    line-height: var(--type-body-line-height);
+  }
+
+  &__steps {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--home-process-steps-gap);
+
+    @include media-up('md') {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include media-up('lg') {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  &__step {
+    display: flex;
+    flex-direction: column;
+    gap: var(--home-process-step-gap);
+
+    @include media-up('md') {
+      &:nth-child(2n) {
+        padding-inline-start: var(--home-process-steps-gap);
+        border-inline-start: var(--border-width-default) solid var(--home-process-divider-color);
+      }
+    }
+
+    @include media-up('lg') {
+      padding-inline-start: var(--home-process-steps-gap);
+      border-inline-start: var(--border-width-default) solid var(--home-process-divider-color);
+
+      &:first-child {
+        padding-inline-start: 0;
+        border-inline-start: none;
+      }
+    }
+  }
+
+  &__step-number {
+    margin-block: 0;
+    color: var(--role-link);
+    font-size: var(--type-h2-size);
+    font-weight: var(--type-display-weight);
+    line-height: 1;
+  }
+
+  &__step-title {
+    margin-block: 0;
+    color: var(--role-text-inverse);
+    font-size: var(--type-h5-size);
+    font-weight: var(--type-h5-weight);
+    line-height: var(--type-h5-line-height);
+  }
+
+  &__step-text {
+    margin-block: 0;
+    color: var(--home-process-text-color);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+  }
+}

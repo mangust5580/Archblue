@@ -1,0 +1,30 @@
+include /shared/shell/index
+
+mixin articlesCategories(params)
+  -
+    const p = params || {}
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['articles-categories', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'articles-categories__container'
+  })
+    if items.length
+      ul.articles-categories__list(role='list' aria-label='Фильтры статей')
+        each item in items
+          - const isActive = item.active === true
+          - const buttonClasses = ['articles-categories__button', isActive && 'articles-categories__button--active'].filter(Boolean).join(' ')
+          li.articles-categories__item
+            button(
+              type='button'
+              class=buttonClasses
+              aria-pressed=isActive ? 'true' : 'false'
+              data-js-articles-category-btn
+              data-category=item.category || 'all'
+            )= item.text

@@ -1,0 +1,46 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin projectSingleLocation(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const intro = p.intro || ''
+    const summary = p.summary || {}
+    const items = Array.isArray(p.items) ? p.items : []
+    const mapSrc = p.mapSrc || ''
+    const mapTitle = p.mapTitle || 'Карта расположения'
+    const className = p.className || ''
+    const rootClasses = ['project-single-location', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    +sectionHeader({
+      title: title,
+      text: intro,
+      align: 'start',
+      className: 'project-single-location__header'
+    })
+    .project-single-location__panel
+      .project-single-location__info
+        if summary.title
+          .project-single-location__summary
+            h3.project-single-location__summary-title= summary.title
+            if summary.text
+              p.project-single-location__summary-text= summary.text
+        if items.length
+          ul.project-single-location__list(role='list')
+            each item in items
+              li.project-single-location__item
+                span.project-single-location__icon(aria-hidden='true')
+                  +icon({ name: item.icon, size: 'md', decorative: true })
+                .project-single-location__item-body
+                  span.project-single-location__item-label= item.label
+                  span.project-single-location__item-meta= item.meta
+      .project-single-location__map-wrapper
+        +mapPreview({ src: mapSrc, title: mapTitle })

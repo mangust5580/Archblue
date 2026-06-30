@@ -1,0 +1,50 @@
+mixin button(params)
+  -
+    const p = params || {}
+    const text = p.text || ''
+    const href = p.href || null
+    const type = p.type || 'button'
+    const variant = p.variant || 'primary'
+    const size = p.size || 'md'
+    const disabled = !!p.disabled
+    const ariaLabel = p.ariaLabel || null
+    const target = p.target || null
+    const rel = p.rel || null
+    const icon = !!p.icon
+    const dataAttrs = p.dataAttrs || {}
+
+    const isIconOnly = variant === 'icon'
+    const showIcon = isIconOnly || icon
+
+    const cls = ['button', 'button--' + variant, 'button--' + size].join(' ')
+
+    const computedRel = (target === '_blank' && !rel) ? 'noopener noreferrer' : (rel || null)
+    const effectiveAriaLabel = isIconOnly ? (ariaLabel || text || null) : (ariaLabel || null)
+
+  if href
+    a(
+      href=href
+      class=cls
+      aria-label=effectiveAriaLabel
+      aria-disabled=disabled ? 'true' : null
+      tabindex=disabled ? '-1' : null
+      target=target
+      rel=computedRel
+    )&attributes(dataAttrs)
+      if !isIconOnly && text
+        span.button__text= text
+      if showIcon
+        span.button__icon(aria-hidden='true')
+          +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })
+  else
+    button(
+      type=type
+      class=cls
+      disabled=disabled
+      aria-label=effectiveAriaLabel
+    )&attributes(dataAttrs)
+      if !isIconOnly && text
+        span.button__text= text
+      if showIcon
+        span.button__icon(aria-hidden='true')
+          +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })

@@ -1,0 +1,19 @@
+mixin tabs(params)
+  -
+    const p = params || {}
+    const label = p.label || 'Разделы'
+    const items = p.items || []
+
+  nav.tabs(aria-label=label)
+    ul.tabs__list
+      each item in items
+        -
+          const isActive = item.active === true
+          const linkCls = ['tabs__link', isActive && 'tabs__link--active'].filter(Boolean).join(' ')
+
+        li.tabs__item
+          a(
+            href=item.href
+            class=linkCls
+            aria-current=isActive ? 'page' : null
+          )= item.text

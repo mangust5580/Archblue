@@ -1,0 +1,30 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin contactsDetails(params)
+  -
+    const p = params || {}
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['contacts-details', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    if items.length
+      .contacts-details__inner
+        ul.contacts-details__list
+          each item in items
+            li.contacts-details__item
+              span.contacts-details__icon
+                +icon({ name: item.icon, size: 'lg', decorative: true })
+              .contacts-details__content
+                span.contacts-details__title= item.title
+                if item.href
+                  a.contacts-details__link(href=item.href)= item.text
+                else
+                  span.contacts-details__text= item.text

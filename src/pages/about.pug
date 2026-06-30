@@ -1,0 +1,186 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'about'
+  - var pageTitle = 'О нас'
+  - var pageDescription = 'Информация о демонстрационном архитектурном бюро Archblue, принципах работы, команде и подходе к проектированию.'
+  - var pageUrl = 'about.html'
+
+include /shared/sections/common/page-hero
+include /shared/sections/about/about-intro
+include /shared/sections/about/about-values
+include /shared/sections/about/about-team
+include /shared/sections/about/about-process
+include /shared/sections/about/about-trust
+include /shared/sections/about/about-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +pageHero({
+    title: 'Создаём архитектуру, в которой хочется жить и работать',
+    text: 'Archblue — архитектурное бюро, объединяющее креативных профессионалов с единым подходом к проектированию: функциональность, эстетика и уважение к контексту.',
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'О нас' }
+    ],
+    actions: [
+      { text: 'Обсудить проект', variant: 'primary', modalTarget: 'project-modal' },
+      { text: 'Смотреть проекты', variant: 'outline', href: 'projects.html' }
+    ],
+    image: 'images/pages/about/intro.jpg',
+    imageAlt: 'Архитектурная студия за работой',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +aboutIntro({
+    eyebrow: 'О бюро',
+    title: 'Архитектура со смыслом и вниманием к деталям',
+    paragraphs: [
+      'Мы проектируем пространства, которые вдохновляют и повышают качество жизни. В каждом проекте соединяем идеи, технологии и материалы, чтобы создавать устойчивую и выразительную архитектуру.',
+      'Наша команда сопровождает проект на всех этапах — от концепции до реализации, обеспечивая точность, прозрачность и высокий уровень исполнения.'
+    ],
+    stats: [
+      { icon: 'stats-award', value: '12+', label: 'лет практики' },
+      { icon: 'stats-cube', value: '48', label: 'реализованных объектов' },
+      { icon: 'stats-users', value: '6', label: 'направлений проектирования' }
+    ],
+    image: 'images/services/architecture/cover.jpg',
+    imageAlt: 'Архитектурный макет и рабочие чертежи бюро Archblue',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +aboutValues({
+    eyebrow: 'НАШИ ПРИНЦИПЫ',
+    title: 'Что помогает нам создавать цельные пространства',
+    text: 'Мы учитываем контекст, сценарии жизни и процесс реализации, чтобы каждое решение оставалось выразительным, удобным и выполнимым.',
+    items: [
+      {
+        icon: 'communication-map-pin',
+        title: 'Контекст',
+        text: 'Учитываем особенности места, культуру, окружение и сценарии жизни.'
+      },
+      {
+        icon: 'common-layers',
+        title: 'Функциональность',
+        text: 'Продумываем планировки, маршруты и ежедневное использование пространства.'
+      },
+      {
+        icon: 'communication-headset',
+        title: 'Честный диалог',
+        text: 'Объясняем решения простым языком и держим прозрачный процесс.'
+      },
+      {
+        icon: 'security-shield-check',
+        title: 'Контроль качества',
+        text: 'Сопровождаем проект на этапах реализации и следим за деталями.'
+      }
+    ]
+  })
+
+  +aboutTeam({
+    eyebrow: 'НАША КОМАНДА',
+    title: 'Опыт, креативность и совместный подход',
+    text: 'В Archblue вместе работают архитекторы, дизайнеры и инженеры. Каждый проект мы ведём как единую систему — от идеи до деталей реализации.',
+    items: [
+      {
+        title: 'Архитекторы и проектировщики',
+        text: 'Прорабатывают форму, планировки и пространственную логику проекта.',
+        image: 'images/projects/lake-house/cover.jpg',
+        imageAlt: 'Современный дом как пример архитектурной работы',
+        imageWidth: 1448,
+        imageHeight: 1086
+      },
+      {
+        title: 'Дизайнеры интерьеров',
+        text: 'Создают атмосферу, материалы и сценарии использования пространства.',
+        image: 'images/services/interior/cover.jpg',
+        imageAlt: 'Интерьер с продуманными материалами и светом',
+        imageWidth: 1448,
+        imageHeight: 1086
+      },
+      {
+        title: 'Инженеры и специалисты',
+        text: 'Помогают сделать решения точными, реализуемыми и долговечными.',
+        image: 'images/projects/talan-office/cover.jpg',
+        imageAlt: 'Архитектурное пространство с инженерной логикой',
+        imageWidth: 1448,
+        imageHeight: 1086
+      }
+    ]
+  })
+
+  +aboutProcess({
+    eyebrow: 'КАК МЫ РАБОТАЕМ',
+    title: 'Прозрачный процесс от идеи до реализации',
+    text: 'Мы ведём проект по понятным этапам: фиксируем задачи, согласуем решения и контролируем результат на каждом шаге.',
+    steps: [
+      {
+        number: '01',
+        title: 'Знакомство',
+        text: 'Обсуждаем задачу, участок, образ жизни, бюджет и ожидания.'
+      },
+      {
+        number: '02',
+        title: 'Концепция',
+        text: 'Формируем идею, планировочную логику и визуальное направление.'
+      },
+      {
+        number: '03',
+        title: 'Проектирование',
+        text: 'Готовим документацию, материалы и решения для реализации.'
+      },
+      {
+        number: '04',
+        title: 'Реализация',
+        text: 'Сопровождаем процесс, контролируем детали и соответствие проекту.'
+      }
+    ]
+  })
+
+  +aboutTrust({
+    eyebrow: 'ДОВЕРИЕ И ДОСТИЖЕНИЯ',
+    title: 'Что подтверждает наш подход',
+    text: 'Несколько фактов о проектах, публикациях, партнёрствах и признании, которые помогают нам сохранять высокий уровень работы.',
+    items: [
+      {
+        icon: 'analytics-users',
+        title: 'Нам доверяют',
+        text: 'Клиенты возвращаются к нам с новыми проектами и рекомендуют нас партнёрам.'
+      },
+      {
+        icon: 'analytics-report',
+        title: 'Публикации',
+        text: 'Наши проекты появляются в профильных медиа и на архитектурных платформах.'
+      },
+      {
+        icon: 'stats-award',
+        title: 'Награды',
+        text: 'Работы бюро отмечены профессиональным сообществом в области архитектуры и дизайна.'
+      },
+      {
+        icon: 'security-shield',
+        title: 'Партнёры',
+        text: 'Сотрудничаем с проверенными подрядчиками, поставщиками и инженерными командами.'
+      }
+    ]
+  })
+
+  +aboutCta({
+    title: 'Готовы обсудить будущий проект?',
+    text: 'Расскажите нам о задаче — мы поможем определить формат работы, этапы и первые архитектурные решения.',
+    action: {
+      text: 'Обсудить проект',
+      modalTarget: 'project-modal',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современный интерьер как пример будущего проекта',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

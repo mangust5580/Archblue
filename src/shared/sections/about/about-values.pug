@@ -1,0 +1,16 @@
+include /shared/components/index
+include /shared/shell/index
+include /shared/sections/common/feature-grid
+
+mixin aboutValues(params)
+  -
+    const p = params || {}
+  +featureGrid({
+    className: ['about-values', p.className || ''].filter(Boolean).join(' '),
+    eyebrow: p.eyebrow,
+    title: p.title,
+    text: p.text,
+    align: 'start',
+    columns: 4,
+    items: p.items
+  })

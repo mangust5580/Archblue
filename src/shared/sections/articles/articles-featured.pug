@@ -1,0 +1,53 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin articlesFeatured(params)
+  -
+    const p = params || {}
+    const large = p.large || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['articles-featured', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'articles-featured__inner'
+  })
+    if large
+      - const largeImageBase = large.imageBase || (large.image && !/\.svg$/i.test(large.image) ? large.image.replace(/\.[^.]+$/, '') : null)
+      .articles-featured__main
+        article.articles-featured__card.articles-featured__card--large
+          .articles-featured__media
+            +picture({
+              base: largeImageBase,
+              src: largeImageBase ? null : 'images/image-placeholder.svg',
+              alt: largeImageBase ? (large.imageAlt || '') : '',
+              width: large.imageWidth || false,
+              height: large.imageHeight || false,
+              className: 'articles-featured__image',
+              pictureClassName: 'articles-featured__picture',
+              loading: 'lazy',
+              decoding: 'async'
+            })
+          .articles-featured__content
+            if large.label
+              p.articles-featured__label= large.label
+            h2.articles-featured__title= large.title
+            if large.text
+              p.articles-featured__text= large.text
+            if large.meta
+              p.articles-featured__meta= large.meta
+            if large.href && large.linkText
+              a.articles-featured__link(href=large.href)
+                span= large.linkText
+                +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })
+
+    if items.length
+      .articles-featured__side
+        each item in items
+          .articles-featured__card
+            +articleCard(item)

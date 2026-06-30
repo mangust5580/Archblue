@@ -1,0 +1,298 @@
+{
+  "imageFormats": ["avif", "webp"],
+  "site": {
+    "name": "Archblue",
+    "description": "Archblue — демонстрационный многостраничный сайт архитектурного бюро с проектами, услугами, статьями и формой заявки.",
+    "lang": "ru",
+    "url": "https://mangust5580.github.io/Archblue"
+  },
+  "navigation": [
+    { "label": "Главная", "url": "index.html" }
+  ],
+  "header": {
+    "logo": {
+      "href": "index.html",
+      "alt": "Archblue"
+    },
+    "nav": [
+      { "text": "Главная",   "href": "index.html",    "key": "home"     },
+      { "text": "О нас",     "href": "about.html",    "key": "about"    },
+      { "text": "Услуги",    "href": "services.html", "key": "services" },
+      { "text": "Проекты",   "href": "projects.html", "key": "projects" },
+      { "text": "Статьи",    "href": "articles.html", "key": "articles" },
+      { "text": "Отзывы",    "href": "reviews.html",  "key": "reviews"  },
+      { "text": "Контакты",  "href": "contacts.html", "key": "contacts" }
+    ],
+    "cta": {
+      "text": "Обсудить проект",
+      "modalTarget": "project-modal"
+    }
+  },
+  "footer": {
+    "logo": {
+      "href": "index.html",
+      "alt": "Archblue",
+      "image": "images/logo-inverse.svg"
+    },
+    "text": "Архитектурное бюро полного цикла. Проектируем современные дома и пространства, в которых хочется жить.",
+    "social": [
+      { "label": "X",        "href": "https://x.com/",              "icon": "social-x"        },
+      { "label": "LinkedIn", "href": "https://www.linkedin.com/",   "icon": "social-linkedin" },
+      { "label": "Telegram", "href": "https://t.me/",               "icon": "social-telegram" },
+      { "label": "Facebook", "href": "https://www.facebook.com/",   "icon": "social-facebook" }
+    ],
+    "nav": [
+      { "text": "Главная",  "href": "index.html"    },
+      { "text": "О нас",    "href": "about.html"    },
+      { "text": "Услуги",   "href": "services.html" },
+      { "text": "Проекты",  "href": "projects.html" },
+      { "text": "Статьи",   "href": "articles.html" },
+      { "text": "Отзывы",   "href": "reviews.html"  },
+      { "text": "Контакты", "href": "contacts.html" }
+    ],
+    "services": [
+      { "text": "Архитектурное проектирование", "href": "service-single.html" },
+      { "text": "Дизайн интерьеров",            "href": "service-single.html" },
+      { "text": "Ландшафтный дизайн",           "href": "service-single.html" },
+      { "text": "Инженерные решения",           "href": "service-single.html" },
+      { "text": "Авторский надзор",             "href": "service-single.html" }
+    ],
+    "contacts": [
+      { "icon": "contact-location", "text": "Москва, ул. Лесная, 7, офис 305", "href": "https://www.google.com/maps/search/?api=1&query=Москва,+ул.+Лесная,+7,+офис+305" },
+      { "icon": "contact-mail",     "text": "hello@archblue.ru",               "href": "mailto:hello@archblue.ru"                                                          },
+      { "icon": "contact-phone",    "text": "+7 (495) 120-35-80",              "href": "tel:+74951203580"                                                                  },
+      { "icon": "contact-clock",    "text": "Пн — Пт: 10:00 — 19:00"                                                                                                      }
+    ],
+    "legal": [
+      { "text": "Политика конфиденциальности", "href": "policy.html" },
+      { "text": "Пользовательское соглашение", "href": "terms.html"  }
+    ],
+    "copyright": "© 2026 Archblue. Все права защищены."
+  },
+  "contacts": [
+    { "icon": "contact-phone",    "title": "Телефон",      "text": "+7 (495) 120-35-80",               "href": "tel:+74951203580"          },
+    { "icon": "contact-mail",     "title": "Email",         "text": "hello@archblue.ru",                "href": "mailto:hello@archblue.ru"  },
+    { "icon": "contact-location", "title": "Офис",          "text": "Москва, ул. Лесная, 7, офис 305"                                      },
+    { "icon": "contact-clock",    "title": "Время работы",  "text": "Пн — Пт: 10:00 — 19:00"                                              }
+  ],
+  "articleCategories": [
+    { "text": "Все",         "category": "all",          "active": true },
+    { "text": "Архитектура", "category": "architecture"               },
+    { "text": "Интерьеры",   "category": "interiors"                  },
+    { "text": "Материалы",   "category": "materials"                  },
+    { "text": "Тренды",      "category": "trends"                     },
+    { "text": "Проекты",     "category": "projects"                   }
+  ],
+  "articles": [
+    {
+      "image": "images/articles/trends-2024/cover.jpg",
+      "imageAlt": "Современный частный дом с лаконичным фасадом",
+      "imageWidth": 724,
+      "imageHeight": 543,
+      "date": "12 мая 2024",
+      "readTime": "6 мин чтения",
+      "category": "Архитектура",
+      "categorySlug": "architecture",
+      "title": "Как выбрать архитектора для частного дома",
+      "text": "На что обратить внимание при выборе архитектора, какие вопросы задать на старте и как избежать типичных ошибок.",
+      "href": "article-single.html",
+      "linkText": "Читать"
+    },
+    {
+      "image": "images/articles/private-house-architecture/cover.jpg",
+      "imageAlt": "Минималистичный интерьер с мягким дневным светом",
+      "imageWidth": 724,
+      "imageHeight": 543,
+      "date": "8 мая 2024",
+      "readTime": "5 мин чтения",
+      "category": "Интерьеры",
+      "categorySlug": "interiors",
+      "title": "Минимализм в интерьере: больше, чем стиль",
+      "text": "Разбираем принципы минимализма, его преимущества и как создать гармоничное функциональное пространство.",
+      "href": "article-single.html",
+      "linkText": "Читать"
+    },
+    {
+      "image": "images/articles/minimalism-interior/cover.jpg",
+      "imageAlt": "Современный фасад здания с выразительной геометрией",
+      "imageWidth": 724,
+      "imageHeight": 543,
+      "date": "3 мая 2024",
+      "readTime": "5 мин чтения",
+      "category": "Материалы",
+      "categorySlug": "materials",
+      "title": "Натуральные материалы в современной архитектуре",
+      "text": "Дерево, камень, бетон, глина и стекло — как природные материалы формируют устойчивую и эстетичную архитектуру.",
+      "href": "article-single.html",
+      "linkText": "Читать"
+    },
+    {
+      "image": "images/articles/trends-2024/cover.jpg",
+      "imageAlt": "Современный дом с теплым интерьерным светом",
+      "imageWidth": 724,
+      "imageHeight": 543,
+      "date": "27 апреля 2024",
+      "readTime": "6 мин чтения",
+      "category": "Проекты",
+      "categorySlug": "projects",
+      "title": "Проектирование офисов нового поколения",
+      "text": "Гибкие пространства, благополучие сотрудников и новые стандарты рабочих мест.",
+      "href": "article-single.html",
+      "linkText": "Читать"
+    },
+    {
+      "image": "images/articles/private-house-architecture/cover.jpg",
+      "imageAlt": "Светлый интерьер с лаконичной мебелью",
+      "imageWidth": 724,
+      "imageHeight": 543,
+      "date": "21 апреля 2024",
+      "readTime": "4 мин чтения",
+      "category": "Интерьеры",
+      "categorySlug": "interiors",
+      "title": "Свет в интерьере: сценарии, которые работают",
+      "text": "Как правильно спроектировать освещение, чтобы подчеркнуть архитектуру и создать нужную атмосферу.",
+      "href": "article-single.html",
+      "linkText": "Читать"
+    },
+    {
+      "image": "images/articles/minimalism-interior/cover.jpg",
+      "imageAlt": "Архитектурный фасад с современными материалами",
+      "imageWidth": 724,
+      "imageHeight": 543,
+      "date": "15 апреля 2024",
+      "readTime": "7 мин чтения",
+      "category": "Архитектура",
+      "categorySlug": "architecture",
+      "title": "Реконструкция исторических зданий: баланс нового и старого",
+      "text": "Подходы к сохранению наследия и адаптации исторических объектов к современным требованиям.",
+      "href": "article-single.html",
+      "linkText": "Читать"
+    }
+  ],
+  "projectCategories": [
+    { "text": "Все",           "category": "all",            "active": true },
+    { "text": "Жилые",         "category": "residential"                   },
+    { "text": "Коммерческие",  "category": "commercial"                    },
+    { "text": "Интерьеры",     "category": "interiors"                     },
+    { "text": "Реконструкция", "category": "reconstruction"                }
+  ],
+  "projects": [
+    {
+      "title": "Дом у озера",
+      "type": "Частный дом",
+      "location": "Московская область",
+      "category": "residential",
+      "year": 2022,
+      "area": 320,
+      "href": "project-single.html",
+      "image": "images/projects/lake-house/cover.jpg",
+      "imageAlt": "Современный частный дом у озера",
+      "imageWidth": 724,
+      "imageHeight": 543
+    },
+    {
+      "title": "River Park",
+      "type": "Жилой комплекс",
+      "location": "Санкт-Петербург",
+      "category": "residential",
+      "year": 2023,
+      "area": 65000,
+      "href": "project-single.html",
+      "image": "images/projects/river-park/cover.jpg",
+      "imageAlt": "Современный жилой комплекс River Park",
+      "imageWidth": 724,
+      "imageHeight": 543
+    },
+    {
+      "title": "Talan Group Office",
+      "type": "Офис",
+      "location": "Москва",
+      "category": "commercial",
+      "year": 2023,
+      "area": 4500,
+      "href": "project-single.html",
+      "image": "images/projects/talan-office/cover.jpg",
+      "imageAlt": "Современный офисный интерьер Talan Group",
+      "imageWidth": 724,
+      "imageHeight": 543
+    },
+    {
+      "title": "Вилла Horizon",
+      "type": "Загородная резиденция",
+      "location": "Сочи",
+      "category": "residential",
+      "year": 2021,
+      "area": 750,
+      "href": "project-single.html",
+      "image": "images/services/residential/cover.jpg",
+      "imageAlt": "Загородная вилла Horizon в вечернем освещении",
+      "imageWidth": 724,
+      "imageHeight": 543
+    },
+    {
+      "title": "Atelier House",
+      "type": "Интерьер квартиры",
+      "location": "Москва",
+      "category": "interiors",
+      "year": 2022,
+      "area": 180,
+      "href": "project-single.html",
+      "image": "images/services/interior/cover.jpg",
+      "imageAlt": "Интерьер квартиры Atelier House",
+      "imageWidth": 724,
+      "imageHeight": 543
+    },
+    {
+      "title": "Loft Point",
+      "type": "Реконструкция",
+      "location": "Казань",
+      "category": "reconstruction",
+      "year": 2020,
+      "area": 2100,
+      "href": "project-single.html",
+      "image": "images/articles/trends-2024/cover.jpg",
+      "imageAlt": "Реконструированное здание Loft Point",
+      "imageWidth": 724,
+      "imageHeight": 543
+    },
+    {
+      "title": "Бизнес-центр Light",
+      "type": "Офисный комплекс",
+      "location": "Екатеринбург",
+      "category": "commercial",
+      "year": 2021,
+      "area": 12000,
+      "href": "project-single.html",
+      "image": "images/projects/talan-office/cover.jpg",
+      "imageAlt": "Современный бизнес-центр Light со стеклянным фасадом",
+      "imageWidth": 724,
+      "imageHeight": 543
+    },
+    {
+      "title": "Ресторан «Горизонт»",
+      "type": "Интерьер ресторана",
+      "location": "Москва",
+      "category": "interiors",
+      "year": 2022,
+      "area": 380,
+      "href": "project-single.html",
+      "image": "images/services/interior/cover.jpg",
+      "imageAlt": "Интерьер ресторана Горизонт с панорамным остеклением",
+      "imageWidth": 724,
+      "imageHeight": 543
+    },
+    {
+      "title": "Павлово Residence",
+      "type": "Частный дом",
+      "location": "Московская область",
+      "category": "residential",
+      "year": 2023,
+      "area": 480,
+      "href": "project-single.html",
+      "image": "images/services/residential/cover.jpg",
+      "imageAlt": "Частная резиденция Павлово в лесном окружении",
+      "imageWidth": 724,
+      "imageHeight": 543
+    }
+  ]
+}

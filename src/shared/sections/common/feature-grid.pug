@@ -1,0 +1,43 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin featureGrid(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const align = p.align || 'start'
+    const columns = p.columns || 4
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['feature-grid', className].filter(Boolean).join(' ')
+    const gridClass = columns !== 4 ? 'feature-grid__grid--cols-' + columns : null
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'feature-grid__container'
+  })
+    +sectionHeader({
+      eyebrow: eyebrow,
+      title: title,
+      text: text,
+      headingLevel: 2,
+      align: align,
+      className: 'feature-grid__header'
+    })
+
+    if items.length
+      ul.feature-grid__grid(role='list' class=gridClass)
+        each item in items
+          li.feature-grid__card(class=item.href ? 'feature-grid__card--linked' : null)
+            span.feature-grid__icon(aria-hidden='true')
+              +icon({ name: item.icon, size: 'lg', decorative: true })
+            h3.feature-grid__card-title= item.title
+            p.feature-grid__card-text= item.text
+            if item.href
+              a.feature-grid__card-link(href=item.href aria-label=item.ariaLabel || item.title)

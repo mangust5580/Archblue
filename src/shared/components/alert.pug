@@ -1,0 +1,42 @@
+mixin alert(params)
+  -
+    const p = params || {}
+    const variant = p.variant || 'info'
+    const text = p.text || ''
+    const dismissible = p.dismissible === true
+    const className = p.className || ''
+
+    const isUrgent = variant === 'warning' || variant === 'danger'
+    const role = isUrgent ? 'alert' : 'status'
+
+    const iconMap = {
+      success: 'check',
+      info: 'info',
+      warning: 'warning',
+      danger: 'error',
+    }
+    const iconName = iconMap[variant] || 'info'
+
+    const cls = [
+      'alert',
+      'alert--' + variant,
+      dismissible && 'alert--dismissible',
+      className,
+    ].filter(Boolean).join(' ')
+
+  div(
+    class=cls
+    role=role
+    data-js-alert=dismissible ? '' : null
+  )
+    div.alert__icon
+      +icon({ name: iconName, size: 'control', decorative: true })
+    div.alert__content
+      p.alert__text= text
+    if dismissible
+      button.alert__close(
+        type='button'
+        aria-label='Закрыть уведомление'
+        data-js-alert-close
+      )
+        +icon({ name: 'ui-close', size: 'control', decorative: true })

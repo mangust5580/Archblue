@@ -1,0 +1,176 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'projects'
+  - var pageTitle = 'ЖК River Park'
+  - var pageDescription = 'Детальная страница проекта River Park с описанием, галереей, планировками и характеристиками.'
+  - var pageUrl = 'project-single.html'
+
+include /shared/sections/common/page-hero
+include /shared/sections/project-single/project-single-about
+include /shared/sections/project-single/project-single-gallery
+include /shared/sections/project-single/project-single-plans
+include /shared/sections/project-single/project-single-location
+include /shared/sections/project-single/project-single-documents
+include /shared/sections/project-single/project-single-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +pageHero({
+    eyebrow: 'Жилой комплекс',
+    title: 'ЖК River Park',
+    text: 'Современный жилой комплекс у реки с продуманной архитектурой, зелёными дворами и развитой инфраструктурой для комфортной жизни.',
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Проекты', href: 'projects.html' },
+      { label: 'ЖК River Park' }
+    ],
+    meta: [
+      { icon: 'communication-map-pin', text: 'Москва, Россия' },
+      { icon: 'common-calendar', text: '2023' },
+      { icon: 'stats-cube', text: '4 корпуса' },
+      { icon: 'stats-award', text: 'Комфорт-класс' },
+      { icon: 'security-shield-check', text: 'Сдан' }
+    ],
+    actions: [
+      { text: 'Оставить заявку', variant: 'primary', modalTarget: 'project-modal' },
+      { text: 'Скачать буклет', variant: 'outline' }
+    ],
+    image: 'images/projects/river-park/hero.jpg',
+    imageAlt: 'Жилой комплекс River Park с зелёным двором',
+    imageWidth: 1600,
+    imageHeight: 960,
+    className: 'page-hero--project-single'
+  })
+
+  +projectSingleAbout({
+    title: 'О проекте',
+    paragraphs: [
+      'ЖК River Park — это гармония природы и современного комфорта. Проект расположен на берегу реки в тихом районе Москвы с развитой инфраструктурой: рядом школы, детские сады, торговые центры и остановки общественного транспорта.',
+      'На территории комплекса предусмотрены прогулочные аллеи, детские площадки, спортивные зоны и озеленённые дворы без машин. Архитектура сочетает лаконичные фасады с тёплыми акцентами — каждый корпус вписан в природный рельеф участка.'
+    ],
+    specs: [
+      { label: 'Тип проекта', value: 'Жилой комплекс' },
+      { label: 'Класс', value: 'Комфорт' },
+      { label: 'Площадь участка', value: '2,4 га' },
+      { label: 'Количество корпусов', value: '4' },
+      { label: 'Этажность', value: '5–8 этажей' },
+      { label: 'Количество квартир', value: '512' },
+      { label: 'Паркинг', value: 'Подземный, 256 мест' }
+    ]
+  })
+
+  +projectSingleGallery({
+    title: 'Галерея проекта',
+    items: [
+      { src: 'images/projects/river-park/gallery-01.jpg', width: 800, height: 480, alt: 'Фасад и двор жилого комплекса River Park' },
+      { src: 'images/projects/river-park/gallery-02.jpg', width: 800, height: 480, alt: 'Прогулочная аллея во дворе River Park' },
+      { src: 'images/projects/river-park/gallery-03.jpg', width: 720, height: 480, alt: 'Входная группа жилого комплекса River Park' },
+      { src: 'images/projects/river-park/gallery-04.jpg', width: 720, height: 480, alt: 'Архитектурный макет проекта River Park' }
+    ]
+  })
+
+  +projectSinglePlans({
+    title: 'Планировки',
+    text: 'Выберите подходящий формат квартиры — от компактной студии до просторных апартаментов.',
+    plans: [
+      { type: 'Студия', area: '32 м²', rooms: '1 комната', price: 'от 12,8 млн ₽', image: 'images/projects/river-park/plans/studio.jpg', imageAlt: 'Планировка студии River Park', imageWidth: 600, imageHeight: 450 },
+      { type: '1-комнатная', area: '45 м²', rooms: '1 комната', price: 'от 16,4 млн ₽', image: 'images/projects/river-park/plans/1-room.jpg', imageAlt: 'Планировка 1-комнатной квартиры River Park', imageWidth: 600, imageHeight: 450 },
+      { type: '2-комнатная', area: '64 м²', rooms: '2 комнаты', price: 'от 22,7 млн ₽', image: 'images/projects/river-park/plans/2-room.jpg', imageAlt: 'Планировка 2-комнатной квартиры River Park', imageWidth: 600, imageHeight: 450 },
+      { type: '3-комнатная', area: '82 м²', rooms: '3 комнаты', price: 'от 29,5 млн ₽', image: 'images/projects/river-park/plans/3-room.jpg', imageAlt: 'Планировка 3-комнатной квартиры River Park', imageWidth: 600, imageHeight: 450 },
+      { type: 'Евро-3', area: '76 м²', rooms: 'кухня-гостиная', price: 'от 27,1 млн ₽', image: 'images/projects/river-park/plans/euro-3.jpg', imageAlt: 'Планировка Евро-3 River Park', imageWidth: 600, imageHeight: 450 },
+      { type: 'Пентхаус', area: '118 м²', rooms: 'терраса', price: 'от 48,9 млн ₽', image: 'images/projects/river-park/plans/penthouse.jpg', imageAlt: 'Планировка пентхауса River Park', imageWidth: 600, imageHeight: 450 }
+    ]
+  })
+
+  +projectSingleLocation({
+    title: 'Расположение',
+    intro: 'Проект расположен рядом с набережной, зелёными зонами и городской инфраструктурой — всё необходимое находится в пешей доступности.',
+    summary: {
+      title: 'ЖК River Park',
+      text: 'Москва, Нагатинский район, рядом с рекой и прогулочными маршрутами.'
+    },
+    items: [
+      { icon: 'contact-location', label: 'Метро Нагатинская', meta: '12 мин пешком' },
+      { icon: 'common-lightning', label: 'Парк Коломенское', meta: '8 мин пешком' },
+      { icon: 'analytics-users', label: 'Детский сад', meta: '5 мин пешком' },
+      { icon: 'common-monitor', label: 'Школа №1770', meta: '7 мин пешком' },
+      { icon: 'services-commercial', label: 'ТЦ Нора', meta: '10 мин на автомобиле' }
+    ],
+    mapSrc: 'https://yandex.com/map-widget/v1/?ll=37.520932%2C55.744904&z=17.49&pt=37.520087,55.744901,pm2rdm',
+    mapTitle: 'Карта расположения ЖК River Park'
+  })
+
+  +projectSingleDocuments({
+    title: 'Документация',
+    allDocsLabel: 'Смотреть все документы',
+    visibleCount: 4,
+    items: [
+      {
+        title: 'Проектная декларация',
+        meta: 'PDF · 2.4 МБ',
+        href: 'files/project-single/river-park-project-declaration.pdf',
+        icon: 'analytics-report'
+      },
+      {
+        title: 'Разрешение на строительство',
+        meta: 'PDF · 1.8 МБ',
+        href: 'files/project-single/river-park-building-permit.pdf',
+        icon: 'analytics-report'
+      },
+      {
+        title: 'Брошюра проекта',
+        meta: 'PDF · 5.3 МБ',
+        href: 'files/project-single/river-park-brochure.pdf',
+        icon: 'analytics-report'
+      },
+      {
+        title: 'План земельного участка',
+        meta: 'PDF · 1.2 МБ',
+        href: 'files/project-single/river-park-land-plan.pdf',
+        icon: 'analytics-report'
+      },
+      {
+        title: 'Архитектурная концепция',
+        meta: 'PDF · 3.6 МБ',
+        href: 'files/project-single/river-park-architectural-concept.pdf',
+        icon: 'analytics-report'
+      },
+      {
+        title: 'Инженерные решения',
+        meta: 'PDF · 2.9 МБ',
+        href: 'files/project-single/river-park-engineering-solutions.pdf',
+        icon: 'analytics-report'
+      },
+      {
+        title: 'Правила благоустройства',
+        meta: 'PDF · 1.5 МБ',
+        href: 'files/project-single/river-park-landscaping-rules.pdf',
+        icon: 'analytics-report'
+      },
+      {
+        title: 'Отделочные материалы',
+        meta: 'PDF · 2.1 МБ',
+        href: 'files/project-single/river-park-finishing-materials.pdf',
+        icon: 'analytics-report'
+      }
+    ]
+  })
+
+  +projectSingleCta({
+    title: 'Готовы обсудить будущий проект?',
+    text: 'Оставьте заявку — мы свяжемся с вами и ответим на все вопросы.',
+    action: {
+      text: 'Оставить заявку',
+      modalTarget: 'project-modal',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современное архитектурное пространство',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

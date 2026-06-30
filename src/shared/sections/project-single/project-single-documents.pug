@@ -1,0 +1,35 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin projectSingleDocuments(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const items = Array.isArray(p.items) ? p.items : []
+    const visibleCount = typeof p.visibleCount === 'number' ? p.visibleCount : 4
+    const className = p.className || ''
+    const rootClasses = ['project-single-documents', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    +sectionHeader({
+      title: title,
+      align: 'start',
+      className: 'project-single-documents__header'
+    })
+    .project-single-documents__reveal(data-js-documents-reveal)
+      .project-single-documents__grid
+        each item, index in items
+          a.project-single-documents__card(href=item.href download data-js-documents-item hidden=(index >= visibleCount))
+            .project-single-documents__card-icon(aria-hidden='true')
+              +icon({ name: item.icon || 'analytics-report', size: 'md', decorative: true })
+            .project-single-documents__card-body
+              span.project-single-documents__card-title= item.title
+              span.project-single-documents__card-meta= item.meta
+      .project-single-documents__footer(data-js-documents-more)
+        button.project-single-documents__btn(type='button') #{p.allDocsLabel || 'Смотреть все документы'}

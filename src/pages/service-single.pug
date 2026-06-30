@@ -1,0 +1,199 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'services'
+  - var pageTitle = 'Архитектурное проектирование'
+  - var pageDescription = 'Подробное описание услуги архитектурного проектирования: этапы, состав работ, процесс и результат.'
+  - var pageUrl = 'service-single.html'
+
+include /shared/sections/service-single/service-single-hero
+include /shared/sections/service-single/service-single-includes
+include /shared/sections/service-single/service-single-details
+include /shared/sections/service-single/service-single-process
+include /shared/sections/service-single/service-single-trust
+include /shared/sections/service-single/service-single-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +serviceSingleHero({
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Услуги', href: 'services.html' },
+      { label: 'Архитектурное проектирование' }
+    ],
+    title: 'Архитектурное проектирование',
+    text: 'Создаём продуманные архитектурные концепции для частных и коммерческих проектов, сочетающие эстетику, функциональность и устойчивость.',
+    actions: [
+      { text: 'Обсудить проект', variant: 'primary', modalTarget: 'project-modal' },
+      { text: 'Смотреть проекты', variant: 'outline', href: 'projects.html' }
+    ],
+    image: 'images/services/architecture/hero.jpg',
+    imageAlt: 'Архитектурная модель и современный дом на фоне проектных чертежей',
+    imageWidth: 1448,
+    imageHeight: 1086,
+    panel: {
+      title: 'Архитектурные решения, проверенные опытом и вниманием к деталям',
+      text: 'Мы проектируем пространства, которые отражают ваши цели и образ жизни, создавая ценность на годы вперёд.'
+    },
+    stats: [
+      { value: '12+', label: 'лет опыта' },
+      { value: '48', label: 'реализованных объектов' },
+      { value: '6', label: 'направлений проектирования' }
+    ]
+  })
+
+  +serviceSingleIncludes({
+    eyebrow: 'УСЛУГА',
+    title: 'Что входит в услугу',
+    items: [
+      {
+        icon: 'common-lightning',
+        title: 'Концепция',
+        text: 'Разработка архитектурной идеи и общей концепции с учётом задачи, бюджета и контекста.'
+      },
+      {
+        icon: 'common-layers',
+        title: 'Планировочные решения',
+        text: 'Функциональные планировки, оптимизация пространства и зонирование.'
+      },
+      {
+        icon: 'services-architecture',
+        title: 'Фасады',
+        text: 'Проработка архитектурного облика здания и выбор материалов отделки.'
+      },
+      {
+        icon: 'common-monitor',
+        title: '3D-визуализация',
+        text: 'Реалистичные визуализации интерьеров и экстерьеров для наглядного представления проекта.'
+      },
+      {
+        icon: 'analytics-report',
+        title: 'Рабочая документация',
+        text: 'Полный комплект чертежей и спецификаций для строительства и реализации проекта.'
+      },
+      {
+        icon: 'security-shield-check',
+        title: 'Согласование решений',
+        text: 'Подготовка и сопровождение документации для согласований и экспертиз.'
+      }
+    ]
+  })
+
+  +serviceSingleDetails({
+    eyebrow: 'ПОДХОД',
+    title: 'От задачи к готовому решению',
+    text: 'Помогаем пройти путь от анализа участка и сценариев жизни до решений, которые можно реализовать и согласовать.',
+    cards: [
+      {
+        eyebrow: 'ПОДХОД',
+        title: 'Как мы проектируем',
+        text: 'Мы сочетаем аналитику, опыт и креативный подход, чтобы создавать архитектуру, которая работает на вас.',
+        checklist: [
+          'Глубокий анализ участка и задачи',
+          'Учет норм, бюджета и сроков',
+          'Современные технологии и BIM-моделирование',
+          'Постоянная связь и прозрачность'
+        ],
+        image: 'images/services/architecture/approach.jpg',
+        imageAlt: 'Рабочее пространство архитектора с чертежами, макетом и материалами',
+        imageWidth: 1448,
+        imageHeight: 1086
+      },
+      {
+        eyebrow: 'ПОДХОДИТ ДЛЯ',
+        title: 'Для каких проектов подходит',
+        text: 'Мы проектируем объекты разного масштаба и назначения.',
+        items: [
+          { icon: 'services-residential', text: 'Частные дома и резиденции' },
+          { icon: 'analytics-users', text: 'Жилые комплексы и многоквартирные дома' },
+          { icon: 'services-commercial', text: 'Коммерческие объекты и офисные здания' },
+          { icon: 'common-layers', text: 'Реконструкция и редевелопмент' }
+        ],
+        image: 'images/services/architecture/suitable.jpg',
+        imageAlt: 'Архитектурный макет с разными типами зданий и планировочными решениями',
+        imageWidth: 1448,
+        imageHeight: 1086
+      },
+      {
+        eyebrow: 'РЕЗУЛЬТАТ',
+        title: 'Результат, который получает клиент',
+        text: 'Готовое архитектурное решение, которое легко реализовать и с которым приятно жить или работать.',
+        image: 'images/services/architecture/result.jpg',
+        imageAlt: 'Готовый современный дом с продуманной архитектурой и тёплой подсветкой',
+        imageWidth: 1448,
+        imageHeight: 1086
+      }
+    ]
+  })
+
+  +serviceSingleProcess({
+    eyebrow: 'ПРОЦЕСС РАБОТЫ',
+    title: 'Как проходит работа',
+    steps: [
+      {
+        number: '01',
+        title: 'Бриф и анализ',
+        text: 'Изучаем задачу, бюджет, участок и требования к проекту.'
+      },
+      {
+        number: '02',
+        title: 'Концепция',
+        text: 'Разрабатываем архитектурные решения и согласуем ключевую идею проекта.'
+      },
+      {
+        number: '03',
+        title: 'Проектирование',
+        text: 'Готовим комплект чертежей и спецификаций для строительства и согласований.'
+      },
+      {
+        number: '04',
+        title: 'Сопровождение',
+        text: 'Консультируем на этапе строительства и помогаем адаптировать проект при необходимости.'
+      }
+    ]
+  })
+
+  +serviceSingleTrust({
+    eyebrow: 'ПОЧЕМУ МЫ',
+    title: 'Почему нам доверяют проектирование',
+    items: [
+      {
+        icon: 'analytics-users',
+        title: 'Индивидуальный подход',
+        text: 'Каждый проект создаётся с учётом ваших целей, бюджета и особенностей участка.'
+      },
+      {
+        icon: 'analytics-report',
+        title: 'Прозрачные этапы',
+        text: 'Чёткий план работ, понятные сроки и регулярные отчёты на каждом этапе.'
+      },
+      {
+        icon: 'security-shield-check',
+        title: 'Контроль качества',
+        text: 'Многоуровневая проверка решений и соответствие нормам и стандартам на всех этапах.'
+      },
+      {
+        icon: 'common-clock',
+        title: 'Соблюдение сроков',
+        text: 'Мы ценим ваше время и выполняем работы в согласованные сроки.'
+      }
+    ]
+  })
+
+  +serviceSingleCta({
+    title: 'Готовы обсудить проект?',
+    text: 'Оставьте заявку — мы свяжемся, ответим на вопросы и предложим лучшее решение.',
+    action: {
+      text: 'Оставить заявку',
+      variant: 'primary',
+      modalTarget: 'project-modal'
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: '',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

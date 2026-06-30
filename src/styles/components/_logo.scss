@@ -1,0 +1,24 @@
+@use '../helpers' as *;
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  transition: opacity var(--duration-fast) var(--easing-base);
+
+  @include hover {
+    opacity: var(--logo-hover-opacity);
+  }
+
+  &:focus-visible {
+    border-radius: var(--radius-sm);
+    outline: var(--border-width-focus) solid var(--role-focus-ring);
+    outline-offset: var(--space-4);
+  }
+
+  &__image {
+    display: block;
+    width: var(--logo-width);
+    height: auto;
+  }
+}

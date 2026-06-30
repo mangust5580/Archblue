@@ -1,0 +1,47 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin projectSingleGallery(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['project-single-gallery', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    +sectionHeader({
+      title: title,
+      align: 'start'
+    })
+    ul.project-single-gallery__grid(
+      role='list'
+      data-js-project-gallery
+    )
+      each item in items
+        li.project-single-gallery__item
+          a.project-single-gallery__link(
+            href=item.src
+            aria-label=item.linkLabel || `Открыть изображение проекта: ${item.alt}`
+            data-js-project-gallery-item
+            data-pswp-width=item.width
+            data-pswp-height=item.height
+          )
+            - const galleryItemBase = item.base || (item.src && !/\.svg$/i.test(item.src) ? item.src.replace(/\.[^.]+$/, '') : null)
+            +picture({
+              base: galleryItemBase,
+              src: galleryItemBase ? null : item.src,
+              alt: item.alt,
+              width: item.width || false,
+              height: item.height || false,
+              className: 'project-single-gallery__image',
+              pictureClassName: 'project-single-gallery__picture',
+              loading: 'lazy',
+              decoding: 'async'
+            })

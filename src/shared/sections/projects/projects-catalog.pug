@@ -1,0 +1,98 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin projectsCatalog(params)
+  -
+    const p = params || {}
+    const filters = Array.isArray(p.filters) ? p.filters : []
+    const sort = p.sort || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const featured = p.featured || null
+    const moreItems = Array.isArray(p.moreItems) ? p.moreItems : []
+    const allItems = [...items, ...moreItems]
+    const className = p.className || ''
+    const rootClasses = ['projects-catalog', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'projects-catalog__container',
+    dataAttrs: { 'data-js-projects-catalog': '' }
+  })
+    .projects-catalog__toolbar
+      if filters.length
+        .projects-catalog__filters(role='group' aria-label='Фильтр проектов')
+          each filter in filters
+            - const fActive = filter.active === true
+            - const fcls = ['projects-catalog__filter', fActive && 'projects-catalog__filter--active'].filter(Boolean).join(' ')
+            button(
+              type='button'
+              class=fcls
+              aria-pressed=fActive ? 'true' : 'false'
+              data-js-projects-filter
+              data-category=filter.category || 'all'
+            )= filter.text
+      if sort
+        .projects-catalog__sort
+          +select({
+            id: 'projects-sort',
+            name: 'projects-sort',
+            label: sort.label,
+            options: sort.options || [],
+            value: sort.value || ''
+          })
+
+    if allItems.length
+      .projects-catalog__grid
+        each item in allItems
+          +projectCard(item)
+
+    if featured
+      -
+        const facts = Array.isArray(featured.facts) ? featured.facts : []
+        const action = featured.action || null
+        const featuredImageBase = featured.imageBase || (featured.image && !/\.svg$/i.test(featured.image) ? featured.image.replace(/\.[^.]+$/, '') : null)
+      .projects-catalog__featured
+        .projects-catalog__featured-media
+          +picture({
+            base: featuredImageBase,
+            src: featuredImageBase ? null : 'images/image-placeholder.svg',
+            alt: featuredImageBase ? (featured.imageAlt || '') : '',
+            width: featured.imageWidth || false,
+            height: featured.imageHeight || false,
+            className: 'projects-catalog__featured-image',
+            pictureClassName: 'projects-catalog__featured-picture',
+            loading: 'lazy',
+            decoding: 'async'
+          })
+        .projects-catalog__featured-content
+          if featured.eyebrow
+            p.projects-catalog__featured-eyebrow= featured.eyebrow
+          h3.projects-catalog__featured-title= featured.title
+          if featured.text
+            p.projects-catalog__featured-text= featured.text
+          if facts.length
+            ul.projects-catalog__featured-facts
+              each fact in facts
+                li.projects-catalog__featured-fact
+                  span.projects-catalog__featured-fact-icon
+                    +icon({ name: fact.icon, size: 'md', decorative: true })
+                  .projects-catalog__featured-fact-content
+                    .projects-catalog__featured-fact-label= fact.label
+                    .projects-catalog__featured-fact-value= fact.value
+          if action
+            .projects-catalog__featured-actions
+              +button({
+                text: action.text,
+                variant: action.variant || 'primary',
+                size: action.size || 'md',
+                type: 'button',
+                icon: !!action.icon,
+                href: action.href || null
+              })
+
+    .projects-catalog__empty(data-js-projects-empty hidden aria-live='polite')
+      p.projects-catalog__empty-text Проекты не найдены

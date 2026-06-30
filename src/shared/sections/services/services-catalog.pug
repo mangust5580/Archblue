@@ -1,0 +1,33 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin servicesCatalog(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['services-catalog', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'services-catalog__container'
+  })
+    +sectionHeader({
+      eyebrow: eyebrow,
+      title: title,
+      text: text,
+      headingLevel: 2,
+      align: 'start'
+    })
+
+    if items.length
+      .services-catalog__grid
+        each item in items
+          +serviceCard(item)

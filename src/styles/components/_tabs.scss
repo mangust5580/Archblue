@@ -1,0 +1,52 @@
+@use '../helpers' as *;
+
+.tabs {
+  &__list {
+    display: flex;
+    gap: var(--tabs-gap);
+    margin: 0;
+    padding: 0;
+    border-bottom: var(--tabs-border-width) solid var(--role-border-subtle);
+    list-style: none;
+  }
+
+  &__item {
+    position: relative;
+  }
+
+  &__link {
+    display: block;
+    padding-block-end: var(--space-12);
+    color: var(--role-text-secondary);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color var(--duration-fast) var(--easing-base);
+
+    @include hover {
+      color: var(--role-link);
+    }
+
+    &:focus-visible {
+      border-radius: var(--radius-xs);
+      outline: var(--border-width-focus) solid var(--role-focus-ring);
+      outline-offset: var(--space-4);
+    }
+
+    &--active {
+      color: var(--role-text-primary);
+      font-weight: var(--type-button-weight);
+
+      &::after {
+        content: '';
+        position: absolute;
+        inset-block-end: 0;
+        inset-inline: 0;
+        block-size: var(--tabs-active-border-width);
+        background-color: var(--role-border-brand);
+      }
+    }
+  }
+}

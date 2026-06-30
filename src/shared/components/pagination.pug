@@ -1,0 +1,36 @@
+mixin pagination(params)
+  -
+    const p = params || {}
+    const label = p.label || 'Пагинация'
+    const prevHref = p.prevHref || null
+    const nextHref = p.nextHref || null
+    const items = p.items || []
+
+  nav.pagination(aria-label=label)
+    ol.pagination__list
+      li.pagination__item.pagination__item--prev
+        if prevHref
+          a.pagination__button(href=prevHref aria-label='Предыдущая страница')
+            span.pagination__icon
+              +icon({ name: 'ui-arrow-right', size: 'sm', decorative: true })
+        else
+          span.pagination__button.pagination__button--disabled
+            span.pagination__icon
+              +icon({ name: 'ui-arrow-right', size: 'sm', decorative: true })
+      each item in items
+        li.pagination__item
+          if item.ellipsis
+            span.pagination__ellipsis= item.label
+          else if item.current
+            span.pagination__link.pagination__link--current(aria-current='page')= item.label
+          else
+            a.pagination__link(href=item.href aria-label='Страница ' + item.label)= item.label
+      li.pagination__item.pagination__item--next
+        if nextHref
+          a.pagination__button(href=nextHref aria-label='Следующая страница')
+            span.pagination__icon
+              +icon({ name: 'ui-arrow-right', size: 'sm', decorative: true })
+        else
+          span.pagination__button.pagination__button--disabled
+            span.pagination__icon
+              +icon({ name: 'ui-arrow-right', size: 'sm', decorative: true })

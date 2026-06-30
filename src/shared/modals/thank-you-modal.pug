@@ -1,0 +1,56 @@
+include /shared/components/index
+
+mixin thankYouModal()
+  dialog.modal.modal--lg(
+    id='thank-you-modal'
+    data-js-modal
+    aria-labelledby='thank-you-modal-title'
+    aria-modal='true'
+  )
+    div.modal__window
+      div.thank-you-modal__close-row
+        button.modal__close(
+          type='button'
+          aria-label='Закрыть модальное окно'
+          data-js-modal-close
+        )
+          +icon({ name: 'ui-close', size: 'control', decorative: true })
+      div.thank-you-modal__body
+        div.thank-you-modal__icon-wrap(aria-hidden='true')
+          +icon({ name: 'ui-check', size: 'lg', decorative: true })
+        div.thank-you-modal__heading
+          h2.thank-you-modal__title(id='thank-you-modal-title') Спасибо!
+          p.thank-you-modal__subtitle Ваша заявка принята
+        p.thank-you-modal__text
+          | Мы получили информацию о вашем проекте.
+          | &nbsp;Наш специалист свяжется с вами в ближайшее время,
+          | &nbsp;чтобы уточнить детали и ответить на вопросы.
+        div.thank-you-modal__steps
+          p.thank-you-modal__steps-title Что дальше?
+          div.thank-you-modal__steps-grid
+            div.thank-you-modal__step
+              div.thank-you-modal__step-icon(aria-hidden='true')
+                +icon({ name: 'contact-phone', size: 'md', decorative: true })
+              div.thank-you-modal__step-body
+                p.thank-you-modal__step-title Свяжемся с вами
+                p.thank-you-modal__step-text Наш специалист позвонит вам в течение 1 рабочего дня.
+            span.thank-you-modal__step-arrow(aria-hidden='true')
+              +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })
+            div.thank-you-modal__step
+              div.thank-you-modal__step-icon(aria-hidden='true')
+                +icon({ name: 'analytics-users', size: 'md', decorative: true })
+              div.thank-you-modal__step-body
+                p.thank-you-modal__step-title Уточним задачу
+                p.thank-you-modal__step-text Поймём ваши цели, пожелания и сроки.
+            span.thank-you-modal__step-arrow(aria-hidden='true')
+              +icon({ name: 'ui-arrow-right', size: 'control', decorative: true })
+            div.thank-you-modal__step
+              div.thank-you-modal__step-icon(aria-hidden='true')
+                +icon({ name: 'analytics-report', size: 'md', decorative: true })
+              div.thank-you-modal__step-body
+                p.thank-you-modal__step-title Подготовим предложение
+                p.thank-you-modal__step-text Сформируем концепцию и план работ с оценкой стоимости и сроков.
+        hr.thank-you-modal__divider
+        div.thank-you-modal__actions
+          +button({ text: 'На главную', variant: 'outline', size: 'md', href: 'index.html' })
+          +button({ text: 'Закрыть', variant: 'primary', size: 'md', type: 'button', dataAttrs: { 'data-js-modal-close': '' } })

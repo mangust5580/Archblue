@@ -1,0 +1,116 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var activeNav = 'projects'
+  - var pageTitle = 'Проекты'
+  - var pageDescription = 'Каталог демонстрационных архитектурных проектов Archblue: жилые комплексы, интерьеры и общественные пространства.'
+  - var pageUrl = 'projects.html'
+
+include /shared/sections/common/page-hero
+include /shared/sections/projects/projects-stats
+include /shared/sections/projects/projects-catalog
+include /shared/sections/projects/projects-process
+include /shared/sections/projects/projects-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +pageHero({
+    title: 'Проекты, в которых идея становится пространством',
+    text: 'Мы создаём архитектуру, которая объединяет функциональность, эстетику и контекст. Каждый проект — это внимательное отношение к деталям, материалам и людям, для которых мы проектируем.',
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Проекты' }
+    ],
+    actions: [
+      { text: 'Обсудить проект', variant: 'primary', modalTarget: 'project-modal' },
+      { text: 'Смотреть услуги', variant: 'outline', href: 'services.html' }
+    ],
+    image: 'images/projects/lake-house/cover.jpg',
+    imageAlt: 'Современный архитектурный проект с панорамным остеклением',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +projectsStats({
+    items: [
+      { icon: 'stats-cube', value: '48', label: 'реализованных объектов' },
+      { icon: 'common-clock', value: '12+', label: 'лет практики' },
+      { icon: 'communication-map-pin', value: '18', label: 'городов присутствия' },
+      { icon: 'common-layers', value: '6', label: 'направлений проектирования' }
+    ]
+  })
+
+  +projectsCatalog({
+    filters: projectCategories || [],
+    sort: {
+      label: 'Сортировка',
+      value: 'new',
+      options: [
+        { value: 'new', label: 'Новые' },
+        { value: 'old', label: 'Сначала старые' },
+        { value: 'area', label: 'По площади' },
+        { value: 'name', label: 'По названию' }
+      ]
+    },
+    items: projects || [],
+    featured: {
+      eyebrow: 'ИЗБРАННЫЙ ПРОЕКТ',
+      title: 'Жилой комплекс River Park',
+      text: 'Современный жилой комплекс бизнес-класса на берегу реки. Архитектура сочетает лаконичные формы, натуральные материалы и продуманные общественные пространства для комфортной жизни.',
+      image: 'images/projects/river-park/cover.jpg',
+      imageAlt: 'Жилой комплекс River Park с благоустроенной территорией',
+      imageWidth: 724,
+      imageHeight: 543,
+      facts: [
+        { icon: 'services-residential', label: 'Тип', value: 'Жилой комплекс' },
+        { icon: 'stats-cube', label: 'Площадь', value: '65 000 м²' },
+        { icon: 'communication-map-pin', label: 'Локация', value: 'Санкт-Петербург' },
+        { icon: 'common-clock', label: 'Год', value: '2023' }
+      ],
+      action: { text: 'Смотреть кейс', variant: 'primary', icon: true, href: 'project-single.html' }
+    },
+  })
+
+  +projectsProcess({
+    title: 'Как мы работаем над проектами',
+    items: [
+      {
+        icon: 'analytics-users',
+        title: 'Понимаем контекст',
+        text: 'Анализируем локацию, задачи и пожелания, чтобы создать архитектуру, уместную и актуальную.'
+      },
+      {
+        icon: 'analytics-report',
+        title: 'Проектируем точно',
+        text: 'Разрабатываем решения, которые сочетают эстетику, функциональность и экономическую эффективность.'
+      },
+      {
+        icon: 'common-clock',
+        title: 'Держим сроки',
+        text: 'Выстраиваем прозрачные процессы и следуем графику на всех этапах реализации проекта.'
+      },
+      {
+        icon: 'security-shield-check',
+        title: 'Осуществляем надзор',
+        text: 'Контролируем качество строительства и соответствие проекту до финальной сдачи объекта.'
+      }
+    ]
+  })
+
+  +projectsCta({
+    title: 'Готовы обсудить будущий проект?',
+    text: 'Расскажите нам о задаче — поможем сформировать идею, определить формат работы и следующий шаг.',
+    action: {
+      text: 'Обсудить проект',
+      modalTarget: 'project-modal',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современное архитектурное пространство для обсуждения проекта',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

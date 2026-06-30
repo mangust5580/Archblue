@@ -1,0 +1,45 @@
+include /shared/components/index
+include /shared/shell/index
+include /shared/forms/project-request-form
+
+mixin contactsForm(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const titleLines = Array.isArray(p.titleLines) ? p.titleLines : []
+    const text = p.text || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const form = p.form || {}
+    const className = p.className || ''
+    const rootClasses = ['contacts-form', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'contacts-form__inner'
+  })
+    .contacts-form__content
+      if eyebrow
+        p.contacts-form__eyebrow= eyebrow
+      h2.contacts-form__title
+        if titleLines.length
+          each line, index in titleLines
+            span.contacts-form__title-line= line + (index === titleLines.length - 1 ? '' : ' ')
+        else
+          = title
+      if text
+        p.contacts-form__text= text
+      if items.length
+        ul.contacts-form__list
+          each item in items
+            li.contacts-form__item
+              span.contacts-form__icon
+                +icon({ name: item.icon, size: 'md', decorative: true })
+              span.contacts-form__item-text= item.text
+
+    .contacts-form__panel
+      +projectRequestForm(form)

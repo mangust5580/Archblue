@@ -1,0 +1,56 @@
+mixin picture(params)
+  -
+    const p = params || {}
+    const base = p.base || null
+    const ext = p.ext || 'jpg'
+    const alt = p.alt || ''
+    const className = p.className || ''
+    const pictureClassName = p.pictureClassName || ''
+    const width = p.width || null
+    const height = p.height || null
+    const validLoading = ['lazy', 'eager']
+    const loading = validLoading.includes(p.loading) ? p.loading : 'lazy'
+    const validDecoding = ['async', 'sync', 'auto']
+    const decoding = validDecoding.includes(p.decoding) ? p.decoding : 'async'
+    const validFetchpriority = ['high', 'low', 'auto']
+    const fetchpriority = validFetchpriority.includes(p.fetchpriority) ? p.fetchpriority : null
+    const retina = p.retina !== false
+    const formats = Array.isArray(p.formats) ? p.formats : (typeof imageFormats !== 'undefined' && Array.isArray(imageFormats) ? imageFormats : [])
+    const manualSources = (Array.isArray(p.sources) && p.sources.length) ? p.sources : null
+    const imgAttrs = p.imgAttrs || {}
+    const imgSrc = p.src || (base ? base + '.' + ext : null)
+
+    const genSources = (!manualSources && base)
+      ? formats.map(function (format) {
+        const srcset = retina
+          ? base + '.' + format + ' 1x, ' + base + '@2x.' + format + ' 2x'
+          : base + '.' + format
+        return { srcset: srcset, type: 'image/' + format }
+      })
+      : []
+
+    const sourceList = manualSources || genSources
+    const imgSrcset = (!manualSources && base && retina)
+      ? base + '.' + ext + ' 1x, ' + base + '@2x.' + ext + ' 2x'
+      : null
+
+  if imgSrc
+    picture(class=pictureClassName || false)
+      each source in sourceList
+        source(
+          srcset=source.srcset || false
+          type=source.type || false
+          media=source.media || false
+          sizes=source.sizes || false
+        )
+      img(
+        class=className || false
+        src=imgSrc
+        srcset=imgSrcset || false
+        alt=alt
+        width=width || false
+        height=height || false
+        loading=loading
+        decoding=decoding
+        fetchpriority=fetchpriority || false
+      )&attributes(imgAttrs)

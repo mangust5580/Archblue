@@ -1,0 +1,85 @@
+@use '../helpers' as *;
+
+.modal {
+  max-inline-size: min(var(--modal-width-md), calc(100% - var(--space-48)));
+  padding: 0;
+  border: none;
+  border-radius: var(--modal-radius);
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+
+  &::backdrop {
+    background-color: var(--modal-backdrop-background);
+  }
+
+  &__window {
+    display: flex;
+    flex-direction: column;
+    gap: var(--modal-gap);
+    padding: var(--modal-padding);
+    border-radius: var(--modal-radius);
+    background-color: var(--role-surface-panel);
+    box-shadow: var(--shadow-lg);
+    cursor: auto;
+  }
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: var(--space-16);
+  }
+
+  &__title {
+    flex: 1 1 auto;
+    margin-block: 0;
+    color: var(--role-text-primary);
+    font-size: var(--type-h4-size);
+    font-weight: var(--type-h4-weight);
+    line-height: var(--type-h4-line-height);
+  }
+
+  &__close {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--icon-size-control);
+    block-size: var(--icon-size-control);
+    border: none;
+    border-radius: var(--radius-xs);
+    background: none;
+    color: var(--role-text-muted);
+    cursor: pointer;
+    transition: color var(--duration-fast) var(--easing-base);
+
+    @include hover {
+      color: var(--role-text-primary);
+    }
+
+    &:focus-visible {
+      outline: var(--border-width-focus) solid var(--role-focus-ring);
+      outline-offset: var(--space-2);
+    }
+  }
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__text {
+    margin-block: 0;
+    color: var(--role-text-secondary);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: var(--type-body-line-height);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-12);
+  }
+}

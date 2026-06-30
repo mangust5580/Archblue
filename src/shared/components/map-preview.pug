@@ -1,0 +1,17 @@
+mixin mapPreview(params)
+  -
+    const p = params || {}
+    const src = p.src || ''
+    const title = p.title || 'Карта'
+    const className = p.className || ''
+    const rootClasses = ['map-preview', className].filter(Boolean).join(' ')
+
+  div(class=rootClasses)
+    if src
+      iframe.map-preview__frame(
+        src=src
+        title=title
+        loading='lazy'
+        referrerpolicy='no-referrer-when-downgrade'
+        allowfullscreen
+      )

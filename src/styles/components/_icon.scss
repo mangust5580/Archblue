@@ -1,0 +1,25 @@
+@use '../helpers' as *;
+
+.icon {
+  display: inline-block;
+  flex-shrink: 0;
+  inline-size: var(--icon-size-md);
+  block-size: var(--icon-size-md);
+  vertical-align: middle;
+  fill: none;
+
+  &--sm {
+    inline-size: var(--icon-size-sm);
+    block-size: var(--icon-size-sm);
+  }
+
+  &--control {
+    inline-size: var(--icon-size-control);
+    block-size: var(--icon-size-control);
+  }
+
+  &--lg {
+    inline-size: var(--icon-size-lg);
+    block-size: var(--icon-size-lg);
+  }
+}

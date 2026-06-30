@@ -1,0 +1,41 @@
+mixin accordion(params)
+  -
+    const p = params || {}
+    const label = p.label || null
+    const multiple = p.multiple === true
+    const items = p.items || []
+    const className = p.className || ''
+    const cls = ['accordion', className].filter(Boolean).join(' ')
+    const rawLevel = p.headingLevel
+    const headingLevel = [2, 3, 4, 5, 6].includes(rawLevel) ? rawLevel : 3
+
+  div(
+    class=cls
+    data-js-accordion
+    data-js-accordion-multiple=multiple ? 'true' : null
+    aria-label=label || null
+  )
+    each item in items
+      -
+        const isOpen = item.open === true
+        const panelId = 'panel-' + item.id
+
+      div.accordion__item
+        -
+          const headingTag = 'h' + headingLevel
+        #{headingTag}.accordion__header
+          button.accordion__button(
+            type='button'
+            aria-expanded=isOpen ? 'true' : 'false'
+            aria-controls=panelId
+            data-js-accordion-trigger
+          )
+            span.accordion__title= item.title
+            span.accordion__icon
+              +icon({ name: 'ui-plus', size: 'control', decorative: true })
+        div.accordion__panel(
+          id=panelId
+          data-js-accordion-panel
+          hidden=isOpen ? null : ''
+        )
+          div.accordion__content= item.content

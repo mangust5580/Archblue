@@ -1,0 +1,28 @@
+mixin icon(params)
+  -
+    const p = params || {}
+    const name = p.name || ''
+    const size = p.size || 'md'
+    const label = p.label || null
+    const decorative = p.decorative !== false
+    const className = p.className || ''
+
+    const cls = [
+      'icon',
+      'icon--' + size,
+      decorative && 'icon--decorative',
+      className,
+    ].filter(Boolean).join(' ')
+
+    const sizeMap = { sm: 16, control: 20, md: 24, lg: 32 }
+    const svgSize = sizeMap[size] || 24
+
+  svg(
+    class=cls
+    width=svgSize
+    height=svgSize
+    aria-hidden=decorative ? 'true' : null
+    role=!decorative ? 'img' : null
+    aria-label=(!decorative && label) ? label : null
+  )
+    use(href='icons/sprite.svg#icon-' + name)

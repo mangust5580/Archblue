@@ -1,0 +1,9 @@
+$durations: (
+  'fast': 150ms,
+  'base': 250ms,
+  'slow': 400ms,
+);
+$easings: (
+  'base': cubic-bezier(0.2, 0, 0, 1),
+  'out':  cubic-bezier(0.16, 1, 0.3, 1),
+);

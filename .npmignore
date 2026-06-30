@@ -1,0 +1,9 @@
+# This project is private ("private": true in package.json) and not published to npm.
+# This file is a no-op placeholder.
+src/
+dist/
+public/
+reports/
+.cache/
+docs/
+screens/

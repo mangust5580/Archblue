@@ -1,0 +1,106 @@
+@use '../helpers' as *;
+
+.pagination {
+  &__list {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+  }
+
+  &__item--prev {
+    margin-inline-end: var(--space-4);
+
+    .pagination__icon {
+      transform: scaleX(-1);
+    }
+  }
+
+  &__item--next {
+    margin-inline-start: var(--space-4);
+  }
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--pagination-item-size);
+    block-size: var(--pagination-item-size);
+    border-radius: var(--pagination-radius);
+    color: var(--role-text-secondary);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: 1;
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--easing-base), color var(--duration-fast) var(--easing-base);
+
+    @include hover {
+      background-color: var(--alpha-orange-10);
+      color: var(--role-link);
+    }
+
+    &:focus-visible {
+      outline: var(--border-width-focus) solid var(--role-focus-ring);
+      outline-offset: var(--border-width-focus);
+    }
+
+    &--current {
+      background-color: var(--role-link);
+      color: var(--role-text-inverse);
+      font-weight: var(--type-button-weight);
+    }
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--pagination-item-size);
+    block-size: var(--pagination-item-size);
+    border-radius: var(--pagination-radius);
+    color: var(--role-text-secondary);
+    text-decoration: none;
+    transition: background-color var(--duration-fast) var(--easing-base), color var(--duration-fast) var(--easing-base);
+
+    @include hover {
+      background-color: var(--alpha-orange-10);
+      color: var(--role-link);
+    }
+
+    &:focus-visible {
+      outline: var(--border-width-focus) solid var(--role-focus-ring);
+      outline-offset: var(--border-width-focus);
+    }
+
+    &--disabled {
+      opacity: var(--control-disabled-opacity);
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  &__ellipsis {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: var(--pagination-item-size);
+    block-size: var(--pagination-item-size);
+    color: var(--role-text-muted);
+    font-size: var(--type-body-size);
+    font-weight: var(--type-body-weight);
+    line-height: 1;
+  }
+
+  &__icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

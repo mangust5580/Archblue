@@ -1,0 +1,20 @@
+mixin burger(params)
+  -
+    const p = params || {}
+    const label = p.label || 'Открыть меню'
+    const controls = p.controls || ''
+    const expanded = !!p.expanded
+    const extraClass = p.className || ''
+    const dataAttrs = p.dataAttrs || {}
+    const cls = ['burger', extraClass].filter(Boolean).join(' ')
+
+  button(
+    class=cls
+    type='button'
+    aria-label=label
+    aria-expanded=expanded ? 'true' : 'false'
+    aria-controls=controls
+  )&attributes(dataAttrs)
+    span.burger__line
+    span.burger__line
+    span.burger__line

@@ -1,0 +1,31 @@
+@use '../helpers' as *;
+
+.visually-hidden {
+  @include visually-hidden;
+}
+
+.skip-link {
+  position: absolute;
+  inset-block-start: var(--space-8);
+  inset-inline-start: var(--space-8);
+  z-index: var(--z-skip-link);
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 40px;
+  padding-block: var(--space-8);
+  padding-inline: var(--space-16);
+  border-radius: var(--radius-sm);
+  background-color: var(--role-surface-panel);
+  box-shadow: var(--shadow-focus);
+  color: var(--role-text-primary);
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.skip-link:not(:focus, :focus-visible) {
+  @include visually-hidden;
+}
+
+.is-scroll-locked {
+  overflow: hidden;
+}

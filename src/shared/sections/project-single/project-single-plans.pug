@@ -1,0 +1,67 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin projectSinglePlans(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const text = p.text || ''
+    const plans = Array.isArray(p.plans) ? p.plans : []
+    const className = p.className || ''
+    const rootClasses = ['project-single-plans', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'muted',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    .project-single-plans__head
+      +sectionHeader({
+        title: title,
+        text: text,
+        align: 'start',
+        className: 'project-single-plans__header'
+      })
+      .project-single-plans__nav
+        button.project-single-plans__nav-btn.project-single-plans__nav-btn--prev(
+          type='button'
+          aria-label='Предыдущая планировка'
+          data-js-plans-prev
+        )
+          span.project-single-plans__nav-btn-icon(aria-hidden='true')
+            +icon({name: 'ui-arrow-right', size: 'control', decorative: true})
+        button.project-single-plans__nav-btn(
+          type='button'
+          aria-label='Следующая планировка'
+          data-js-plans-next
+        )
+          span.project-single-plans__nav-btn-icon(aria-hidden='true')
+            +icon({name: 'ui-arrow-right', size: 'control', decorative: true})
+    .project-single-plans__slider
+      .swiper(data-js-plans-slider)
+        .swiper-wrapper
+          each plan in plans
+            .swiper-slide
+              .project-single-plans__card
+                .project-single-plans__card-media(aria-hidden=plan.image ? null : 'true')
+                  if plan.image
+                    img.project-single-plans__card-image(
+                      src=plan.image
+                      alt=plan.imageAlt || ''
+                      width=plan.imageWidth || false
+                      height=plan.imageHeight || false
+                      loading='lazy'
+                    )
+                .project-single-plans__card-body
+                  p.project-single-plans__card-type= plan.type
+                  dl.project-single-plans__card-specs
+                    .project-single-plans__card-spec
+                      dt.project-single-plans__card-spec-label Площадь
+                      dd.project-single-plans__card-spec-value= plan.area
+                    .project-single-plans__card-spec
+                      dt.project-single-plans__card-spec-label Тип
+                      dd.project-single-plans__card-spec-value= plan.rooms
+                  p.project-single-plans__card-price= plan.price
+                  +button({text: 'Подробнее', variant: 'outline', size: 'sm', type: 'button'})

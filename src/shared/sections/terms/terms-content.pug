@@ -1,0 +1,127 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin termsContent(params)
+  -
+    const p = params || {}
+    const className = p.className || ''
+    const rootClasses = ['policy-content', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'policy-content__inner'
+  })
+    aside.policy-content__sidebar
+      .policy-content__sidebar-card
+        h2.policy-content__sidebar-title Содержание
+        nav.policy-content__nav(aria-label='Содержание документа')
+          ol.policy-content__nav-list
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#general') Общие положения
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#site-use') Использование сайта
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#content-rights') Права на материалы
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#request-forms') Формы обратной связи
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#user-responsibility') Ответственность пользователя
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#limitations') Ограничение ответственности
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#third-party-links') Ссылки на сторонние ресурсы
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#changes') Изменение условий
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#contacts') Контакты
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#final') Заключительные положения
+        .policy-content__sidebar-footer
+          button.button.button--outline.button--md(type='button')
+            span.button__icon(aria-hidden='true')
+              +icon({ name: 'analytics-report', size: 'control', decorative: true })
+            span.button__text Скачать PDF
+
+    .policy-content__main
+      .policy-content__card
+        .policy-content__section(id='general')
+          h2.policy-content__section-title 1. Общие положения
+          p.policy-content__text Настоящее Пользовательское соглашение определяет условия использования сайта Archblue и материалов, размещённых на нём. Используя сайт, вы соглашаетесь с условиями настоящего документа.
+
+        .policy-content__section(id='site-use')
+          h2.policy-content__section-title 2. Использование сайта
+          p.policy-content__text Сайт предназначен для ознакомления с услугами, проектами, материалами и контактной информацией Archblue.
+          ul.policy-content__list
+            li просматривать материалы сайта;
+            li отправлять заявки через формы обратной связи;
+            li использовать опубликованную информацию только в личных и ознакомительных целях;
+            li не предпринимать действий, нарушающих работу сайта.
+
+        .policy-content__section(id='content-rights')
+          h2.policy-content__section-title 3. Права на материалы
+          p.policy-content__text Все тексты, изображения, элементы дизайна и структура сайта используются в рамках демонстрационного портфолио-проекта. Копирование и распространение материалов допускается только с указанием источника или по согласованию с правообладателем.
+
+        .policy-content__section(id='request-forms')
+          h2.policy-content__section-title 4. Формы обратной связи
+          p.policy-content__text При отправке формы обратной связи пользователь подтверждает, что предоставленные данные являются актуальными, а также соглашается на обработку обращения для подготовки ответа.
+          .policy-content__cookie-chips
+            .policy-content__cookie-chip
+              +icon({ name: 'analytics-report', size: 'sm', decorative: true })
+              span Заявка
+            .policy-content__cookie-chip
+              +icon({ name: 'communication-envelope', size: 'sm', decorative: true })
+              span Консультация
+            .policy-content__cookie-chip
+              +icon({ name: 'common-layers', size: 'sm', decorative: true })
+              span Обратная связь
+
+        .policy-content__section(id='user-responsibility')
+          h2.policy-content__section-title 5. Ответственность пользователя
+          p.policy-content__text Пользователь обязуется не использовать сайт для действий, которые могут нарушить его работу, права третьих лиц или требования законодательства.
+          ul.policy-content__list
+            li не размещать недостоверные данные;
+            li не пытаться получить несанкционированный доступ к разделам сайта;
+            li не использовать материалы сайта в вводящем в заблуждение контексте.
+
+        .policy-content__section(id='limitations')
+          h2.policy-content__section-title 6. Ограничение ответственности
+          p.policy-content__text Информация на сайте носит справочный характер и не является публичной офертой. Archblue не несёт ответственности за решения, принятые пользователем исключительно на основании материалов сайта без дополнительной консультации.
+          .policy-content__callout
+            +icon({ name: 'analytics-report', size: 'md', decorative: true })
+            p.policy-content__callout-text Для получения точной информации о составе услуг, сроках и стоимости проекта рекомендуется обратиться за индивидуальной консультацией.
+
+        .policy-content__section(id='third-party-links')
+          h2.policy-content__section-title 7. Ссылки на сторонние ресурсы
+          p.policy-content__text Сайт может содержать ссылки на сторонние ресурсы. Мы не контролируем их содержание и не отвечаем за политику обработки данных или условия использования таких сайтов.
+
+        .policy-content__section(id='changes')
+          h2.policy-content__section-title 8. Изменение условий
+          p.policy-content__text Мы можем обновлять настоящее Пользовательское соглашение. Актуальная версия документа всегда доступна на данной странице.
+
+        .policy-content__section(id='contacts')
+          h2.policy-content__section-title 9. Контакты
+          p.policy-content__text По вопросам использования сайта вы можете обратиться к нам:
+          ul.policy-content__contact-list
+            li.policy-content__contact-item
+              +icon({ name: 'contact-mail', size: 'sm', decorative: true })
+              span
+                | E-mail:&nbsp;
+                a.policy-content__contact-link(href='mailto:hello@archblue.ru') hello@archblue.ru
+            li.policy-content__contact-item
+              +icon({ name: 'contact-phone', size: 'sm', decorative: true })
+              span
+                | Телефон:&nbsp;
+                a.policy-content__contact-link(href='tel:+74951203580') +7 (495) 120-35-80
+            li.policy-content__contact-item
+              +icon({ name: 'contact-location', size: 'sm', decorative: true })
+              span Адрес: Москва, ул. Лесная, 7, офис 305
+
+        .policy-content__section(id='final')
+          h2.policy-content__section-title 10. Заключительные положения
+          p.policy-content__text Продолжая пользоваться сайтом, вы подтверждаете, что ознакомились с настоящим Пользовательским соглашением и принимаете его условия.
+          .policy-content__confirmation
+            p.policy-content__confirmation-text Использование сайта означает согласие с условиями настоящего соглашения.

@@ -1,0 +1,150 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin policyContent(params)
+  -
+    const p = params || {}
+    const className = p.className || ''
+    const rootClasses = ['policy-content', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'policy-content__inner'
+  })
+    aside.policy-content__sidebar
+      .policy-content__sidebar-card
+        h2.policy-content__sidebar-title Содержание
+        nav.policy-content__nav(aria-label='Содержание документа')
+          ol.policy-content__nav-list
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#general') Общие положения
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#collected-data') Какие данные мы собираем
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#processing-goals') Цели обработки данных
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#cookies') Использование cookies
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#third-parties') Передача данных третьим лицам
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#retention') Срок хранения данных
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#rights') Права пользователя
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#security') Безопасность данных
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#contacts') Контакты
+            li.policy-content__nav-item
+              a.policy-content__nav-link(href='#updates') Обновление политики
+        .policy-content__sidebar-footer
+          button.button.button--outline.button--md(type='button')
+            span.button__icon(aria-hidden='true')
+              +icon({ name: 'analytics-report', size: 'control', decorative: true })
+            span.button__text Скачать PDF
+
+    .policy-content__main
+      .policy-content__card
+        .policy-content__section(id='general')
+          h2.policy-content__section-title 1. Общие положения
+          p.policy-content__text Настоящая Политика конфиденциальности регулирует порядок обработки и защиты персональных данных пользователей сайта Archblue, а также данных, предоставляемых при обращении к нам любым удобным способом.
+
+        .policy-content__section(id='collected-data')
+          h2.policy-content__section-title 2. Какие данные мы собираем
+          p.policy-content__text Мы можем собирать и обрабатывать следующие категории персональных данных:
+          ul.policy-content__list
+            li ФИО, номер телефона, адрес электронной почты;
+            li информация о проекте, сообщаемая вами в заявках и переписке;
+            li данные из файлов и документов, которые вы прикладываете к запросам;
+            li технические данные: IP-адрес, тип браузера, файлы cookies, данные об устройстве, поведении на сайте и посещённых страницах.
+
+        .policy-content__section(id='processing-goals')
+          h2.policy-content__section-title 3. Цели обработки данных
+          p.policy-content__text Ваши персональные данные обрабатываются для следующих целей:
+          ul.policy-content__list
+            li ответ на ваши запросы и обратная связь;
+            li подготовка коммерческих предложений и сопровождение проектов;
+            li улучшение качества наших услуг и работы сайта;
+            li выполнение требований законодательства.
+
+        .policy-content__section(id='cookies')
+          h2.policy-content__section-title 4. Использование cookies
+          p.policy-content__text Мы используем cookies и аналогичные технологии для корректной работы сайта, анализа посещаемости и персонализации контента. Вы можете управлять настройками cookies в своём браузере.
+          .policy-content__cookie-chips
+            .policy-content__cookie-chip
+              +icon({ name: 'security-shield-check', size: 'sm', decorative: true })
+              span Обязательные
+            .policy-content__cookie-chip
+              +icon({ name: 'analytics-report', size: 'sm', decorative: true })
+              span Аналитические
+            .policy-content__cookie-chip
+              +icon({ name: 'common-layers', size: 'sm', decorative: true })
+              span Функциональные
+
+        .policy-content__section(id='third-parties')
+          h2.policy-content__section-title 5. Передача данных третьим лицам
+          p.policy-content__text Мы не передаём ваши персональные данные третьим лицам, за исключением следующих случаев:
+          ul.policy-content__list
+            li с вашего явного согласия;
+            li необходимости для исполнения договора, например привлечения подрядчиков;
+            li требований законодательства или уполномоченных государственных органов.
+
+        .policy-content__section(id='retention')
+          h2.policy-content__section-title 6. Срок хранения данных
+          p.policy-content__text Мы храним ваши персональные данные ровно столько, сколько необходимо для достижения целей обработки или в течение сроков, установленных законом.
+          table.policy-content__table
+            caption.visually-hidden Сроки хранения персональных данных
+            tbody
+              tr.policy-content__table-row
+                td.policy-content__table-cell.policy-content__table-cell--label Заявки с сайта
+                td.policy-content__table-cell до 24 месяцев
+              tr.policy-content__table-row
+                td.policy-content__table-cell.policy-content__table-cell--label Договорная документация
+                td.policy-content__table-cell в сроки, установленные законодательством
+              tr.policy-content__table-row
+                td.policy-content__table-cell.policy-content__table-cell--label Технические логи
+                td.policy-content__table-cell до 12 месяцев
+
+        .policy-content__section(id='rights')
+          h2.policy-content__section-title 7. Права пользователя
+          p.policy-content__text Вы имеете право в любое время:
+          ul.policy-content__list
+            li запросить доступ к своим персональным данным;
+            li потребовать их исправления или удаления;
+            li ограничить обработку ваших данных;
+            li отозвать ранее данное согласие на обработку персональных данных.
+
+        .policy-content__section(id='security')
+          h2.policy-content__section-title 8. Безопасность данных
+          p.policy-content__text Мы применяем организационные и технические меры для защиты ваших персональных данных от несанкционированного доступа, изменения, раскрытия или уничтожения.
+          .policy-content__callout
+            +icon({ name: 'security-shield-check', size: 'md', decorative: true })
+            p.policy-content__callout-text Мы используем современные средства защиты информации, шифрование каналов передачи данных и ограничиваем доступ к данным только уполномоченным сотрудникам.
+
+        .policy-content__section(id='contacts')
+          h2.policy-content__section-title 9. Контакты
+          p.policy-content__text По вопросам обработки персональных данных вы можете обратиться к нам:
+          ul.policy-content__contact-list
+            li.policy-content__contact-item
+              +icon({ name: 'contact-mail', size: 'sm', decorative: true })
+              span
+                | E-mail:&nbsp;
+                a.policy-content__contact-link(href='mailto:hello@archblue.ru') hello@archblue.ru
+            li.policy-content__contact-item
+              +icon({ name: 'contact-phone', size: 'sm', decorative: true })
+              span
+                | Телефон:&nbsp;
+                a.policy-content__contact-link(href='tel:+74951203580') +7 (495) 120-35-80
+            li.policy-content__contact-item
+              +icon({ name: 'contact-location', size: 'sm', decorative: true })
+              span Адрес: Москва, ул. Лесная, 7, офис 305
+
+        .policy-content__section(id='updates')
+          h2.policy-content__section-title 10. Обновление политики
+          p.policy-content__text Мы оставляем за собой право вносить изменения в настоящую Политику конфиденциальности. Актуальная версия всегда доступна на данной странице.
+          p.policy-content__text Рекомендуем периодически её просматривать.
+          .policy-content__confirmation
+            p.policy-content__confirmation-text Используя сайт, вы подтверждаете ознакомление с настоящей политикой.

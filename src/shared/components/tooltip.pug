@@ -1,0 +1,27 @@
+mixin tooltip(params)
+  -
+    const p = params || {}
+    const id = p.id || 'tooltip'
+    const label = p.label || ''
+    const content = p.content || ''
+    const position = p.position || 'bottom'
+    const className = p.className || ''
+    const cls = ['tooltip', 'tooltip--' + position, className].filter(Boolean).join(' ')
+
+  div(class=cls)
+    if label
+      span.tooltip__label= label
+    span.tooltip__wrap
+      button.tooltip__trigger(
+        type='button'
+        aria-label='Подробнее'
+        aria-describedby=id
+      )
+        span.tooltip__icon
+          +icon({ name: 'ui-info', size: 'sm', decorative: true })
+      span.tooltip__bubble(
+        role='tooltip'
+        id=id
+      )
+        span.tooltip__content= content
+        span.tooltip__arrow(aria-hidden='true')

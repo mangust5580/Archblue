@@ -1,0 +1,70 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin serviceSingleDetails(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const cards = Array.isArray(p.cards) ? p.cards : []
+    const className = p.className || ''
+    const rootClasses = ['service-single-details', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'service-single-details__container'
+  })
+    +sectionHeader({
+      eyebrow: eyebrow,
+      title: title,
+      text: text,
+      headingLevel: 2,
+      align: 'start'
+    })
+
+    if cards.length
+      .service-single-details__grid
+        each card in cards
+          -
+            const checklist = Array.isArray(card.checklist) ? card.checklist : []
+            const items = Array.isArray(card.items) ? card.items : []
+            const cardImageBase = card.imageBase || (card.image && !/\.svg$/i.test(card.image) ? card.image.replace(/\.[^.]+$/, '') : null)
+
+          article.service-single-details__card
+            .service-single-details__card-body
+              if card.eyebrow
+                p.service-single-details__card-eyebrow= card.eyebrow
+              h3.service-single-details__card-title= card.title
+              if card.text
+                p.service-single-details__card-text= card.text
+              if checklist.length
+                ul.service-single-details__checklist(role='list')
+                  each item in checklist
+                    li.service-single-details__check-item
+                      span.service-single-details__check-icon(aria-hidden='true')
+                        +icon({ name: 'ui-check', size: 'sm', decorative: true })
+                      span.service-single-details__check-text= item
+              if items.length
+                ul.service-single-details__item-list(role='list')
+                  each item in items
+                    li.service-single-details__item-entry
+                      span.service-single-details__item-icon(aria-hidden='true')
+                        +icon({ name: item.icon, size: 'sm', decorative: true })
+                      span.service-single-details__item-text= item.text
+            if card.image
+              .service-single-details__card-media
+                +picture({
+                  base: cardImageBase,
+                  alt: card.imageAlt || '',
+                  width: card.imageWidth || false,
+                  height: card.imageHeight || false,
+                  className: 'service-single-details__image',
+                  pictureClassName: 'service-single-details__picture',
+                  loading: 'lazy',
+                  decoding: 'async'
+                })

@@ -1,0 +1,69 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin pageHero(data)
+  -
+    const p = data || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const breadcrumbs = Array.isArray(p.breadcrumbs) ? p.breadcrumbs : []
+    const meta = Array.isArray(p.meta) ? p.meta : []
+    const actions = Array.isArray(p.actions) ? p.actions : []
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageWidth = p.imageWidth || null
+    const imageHeight = p.imageHeight || null
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const className = p.className || ''
+    const rootClasses = ['page-hero', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'none',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'page-hero__inner'
+  })
+    .page-hero__content
+      if breadcrumbs.length
+        +breadcrumbs({ items: breadcrumbs })
+      .page-hero__body
+        if eyebrow
+          p.page-hero__eyebrow= eyebrow
+        h1.page-hero__title= title
+        if text
+          p.page-hero__text= text
+        if meta.length
+          ul.page-hero__meta
+            each item in meta
+              li.page-hero__meta-item
+                span.page-hero__meta-icon
+                  +icon({ name: item.icon, size: 'sm', decorative: true })
+                span.page-hero__meta-text= item.text
+        if actions.length
+          .page-hero__actions
+            each action in actions
+              +button({
+                text: action.text || action.label,
+                variant: action.variant || 'primary',
+                size: action.size || 'md',
+                href: action.modalTarget ? null : (action.href || null),
+                type: action.type || 'button',
+                icon: !!action.icon,
+                dataAttrs: action.modalTarget ? { 'data-js-modal-trigger': action.modalTarget } : (action.dataAttrs || {})
+              })
+    if image
+      .page-hero__media
+        +picture({
+          base: imageBase,
+          alt: imageAlt,
+          width: imageWidth || false,
+          height: imageHeight || false,
+          className: 'page-hero__image',
+          pictureClassName: 'page-hero__picture',
+          loading: 'eager',
+          decoding: 'async',
+          fetchpriority: 'high'
+        })

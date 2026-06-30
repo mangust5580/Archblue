@@ -1,0 +1,49 @@
+@use '../helpers' as *;
+
+.breadcrumbs {
+  margin-block-end: var(--space-24);
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--page-hero-breadcrumbs-gap);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  &__item {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--page-hero-breadcrumbs-gap);
+    color: var(--role-text-muted);
+    font-size: var(--type-small-size);
+    line-height: var(--type-small-line-height);
+
+    &:not(:last-child)::after {
+      content: '/';
+      color: var(--role-text-muted);
+    }
+  }
+
+  &__link {
+    color: var(--role-text-secondary);
+    text-decoration: none;
+    transition: color var(--duration-fast) var(--easing-base);
+
+    @include hover {
+      color: var(--role-link);
+    }
+
+    &:focus-visible {
+      border-radius: var(--radius-xs);
+      outline: var(--border-width-focus) solid var(--role-focus-ring);
+      outline-offset: var(--space-4);
+    }
+  }
+
+  &__current {
+    color: var(--role-link);
+  }
+}

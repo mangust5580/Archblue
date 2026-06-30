@@ -1,0 +1,76 @@
+include /shared/components/index
+
+-
+  const footerData = footer || {}
+  const footerLogo = footerData.logo || { href: '/', alt: site.name }
+  const footerText = footerData.text || null
+  const social = footerData.social || []
+  const footerNav = footerData.nav || []
+  const services = footerData.services || []
+  const contacts = footerData.contacts || []
+  const legal = footerData.legal || []
+  const copyright = footerData.copyright || ('© ' + (new Date().getFullYear()) + ' ' + site.name)
+
+footer.footer
+  .footer__container.container
+    .footer__main
+      .footer__brand
+        +logo({ href: footerLogo.href, alt: footerLogo.alt, image: footerLogo.image || 'images/logo-inverse.svg', ariaLabel: footerLogo.alt + ' — на главную', className: 'footer__logo' })
+        if footerText
+          p.footer__text= footerText
+        if social.length
+          ul.footer__social
+            each item in social
+              -
+                const isExternal = /^https?:/i.test(item.href || '')
+              li.footer__social-item
+                a.footer__social-link(
+                  href=item.href
+                  aria-label=item.label
+                  target=isExternal ? '_blank' : null
+                  rel=isExternal ? 'noopener noreferrer' : null
+                )
+                  +icon({ name: item.icon, size: 'sm', decorative: true })
+
+      if footerNav.length
+        nav.footer__nav(aria-label='Навигация в подвале')
+          h3.footer__title Навигация
+          ul.footer__list
+            each item in footerNav
+              li.footer__item
+                a.footer__link(href=item.href)= item.text
+
+      if services.length
+        nav.footer__services(aria-label='Услуги')
+          h3.footer__title Услуги
+          ul.footer__list
+            each item in services
+              li.footer__item
+                a.footer__link(href=item.href)= item.text
+
+      if contacts.length
+        address.footer__contacts
+          h3.footer__title Контакты
+          ul.footer__contact-list
+            each item in contacts
+              -
+                const contactExternal = /^https?:/i.test(item.href || '')
+              li.footer__contact-item
+                span.footer__contact-icon
+                  +icon({ name: item.icon, size: 'sm', decorative: true })
+                if item.href
+                  a.footer__contact-text(
+                    href=item.href
+                    target=contactExternal ? '_blank' : null
+                    rel=contactExternal ? 'noopener noreferrer' : null
+                  )= item.text
+                else
+                  span.footer__contact-text= item.text
+
+    .footer__bottom
+      p.footer__copyright= copyright
+      if legal.length
+        ul.footer__legal
+          each item in legal
+            li.footer__legal-item
+              a.footer__legal-link(href=item.href)= item.text

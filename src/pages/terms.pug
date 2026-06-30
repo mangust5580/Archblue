@@ -1,0 +1,46 @@
+﻿extends /shared/layouts/base.pug
+
+block vars
+  - var pageTitle = 'Пользовательское соглашение'
+  - var pageDescription = 'Условия использования демонстрационного сайта Archblue.'
+  - var pageUrl = 'terms.html'
+
+include /shared/sections/terms/terms-hero
+include /shared/sections/terms/terms-content
+include /shared/sections/terms/terms-cta
+include /shared/modals/project-modal
+include /shared/modals/thank-you-modal
+
+block content
+  +termsHero({
+    breadcrumbs: [
+      { label: 'Главная', href: 'index.html' },
+      { label: 'Пользовательское соглашение' }
+    ],
+    title: 'Пользовательское соглашение',
+    text: 'Настоящее соглашение описывает условия использования сайта Archblue, порядок взаимодействия с материалами, формами обратной связи и информацией, размещённой на сайте.',
+    updateDate: 'Последнее обновление: 15 мая 2024',
+    image: 'images/services/architecture/hero.jpg',
+    imageAlt: 'Современное архитектурное здание с панорамным остеклением',
+    imageWidth: 1448,
+    imageHeight: 1086
+  })
+
+  +termsContent()
+
+  +termsCta({
+    title: 'Остались вопросы по условиям использования?',
+    text: 'Свяжитесь с нами — мы поможем разобраться с информацией на сайте и ответим на ваши вопросы.',
+    action: {
+      text: 'Связаться с нами',
+      href: 'contacts.html',
+      icon: false
+    },
+    image: 'images/shared/cta/cta.jpg',
+    imageAlt: 'Современное архитектурное пространство',
+    imageWidth: 836,
+    imageHeight: 471
+  })
+
+  +projectModal()
+  +thankYouModal()

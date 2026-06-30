@@ -1,0 +1,35 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin ctaSection(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const text = p.text || null
+    const action = p.action || null
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const imageWidth = p.imageWidth || false
+    const imageHeight = p.imageHeight || false
+    const className = p.className || ''
+    const rootClasses = ['cta-section', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'cta-section__container'
+  })
+    +ctaBanner({
+      title: title,
+      text: text,
+      action: action,
+      image: image,
+      imageAlt: imageAlt,
+      imageBase: imageBase,
+      imageWidth: imageWidth,
+      imageHeight: imageHeight
+    })

@@ -1,0 +1,7 @@
+@use '../../helpers' as *;
+
+.contacts-process {
+  &__header {
+    margin-block-end: var(--space-40);
+  }
+}

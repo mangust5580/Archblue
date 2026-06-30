@@ -1,0 +1,8 @@
+@use '../../helpers' as *;
+
+.cta-section {
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+}

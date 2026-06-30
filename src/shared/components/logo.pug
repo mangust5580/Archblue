@@ -1,0 +1,16 @@
+mixin logo(params)
+  -
+    const p = params || {}
+    const href = p.href || null
+    const alt = p.alt || 'Archblue'
+    const ariaLabel = p.ariaLabel || null
+    const className = p.className || ''
+    const image = p.image || 'images/logo.svg'
+    const cls = ['logo', className].filter(Boolean).join(' ')
+
+  if href
+    a(class=cls href=href aria-label=ariaLabel || null)
+      img.logo__image(src=image alt=alt width=180 height=40)
+  else
+    span(class=cls)
+      img.logo__image(src=image alt=alt width=180 height=40)

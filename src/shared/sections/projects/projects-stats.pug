@@ -1,0 +1,25 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin projectsStats(params)
+  -
+    const p = params || {}
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['projects-stats', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses
+  })
+    if items.length
+      ul.projects-stats__list
+        each item in items
+          li.projects-stats__item
+            span.projects-stats__icon
+              +icon({ name: item.icon, size: 'lg', decorative: true })
+            .projects-stats__value= item.value
+            .projects-stats__label= item.label

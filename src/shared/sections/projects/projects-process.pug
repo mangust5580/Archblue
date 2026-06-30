@@ -1,0 +1,38 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin projectsProcess(params)
+  -
+    const p = params || {}
+    const eyebrow = p.eyebrow || null
+    const title = p.title || ''
+    const text = p.text || null
+    const items = Array.isArray(p.items) ? p.items : []
+    const className = p.className || ''
+    const rootClasses = ['projects-process', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'projects-process__container'
+  })
+    +sectionHeader({
+      eyebrow: eyebrow,
+      title: title,
+      text: text,
+      headingLevel: 2,
+      align: 'center',
+      className: 'projects-process__header'
+    })
+
+    if items.length
+      ul.projects-process__grid(role='list')
+        each item in items
+          li.projects-process__card
+            span.projects-process__icon
+              +icon({ name: item.icon, size: 'lg', decorative: true })
+            h3.projects-process__title= item.title
+            p.projects-process__text= item.text

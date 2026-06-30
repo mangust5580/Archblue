@@ -1,0 +1,150 @@
+@use '../helpers' as *;
+
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--button-gap);
+  min-block-size: var(--button-height-md);
+  padding-inline: var(--button-padding-inline-md);
+  border: var(--border-width-default) solid transparent;
+  border-radius: var(--button-radius);
+  font-family: var(--font-family-base);
+  font-size: var(--type-button-size);
+  font-weight: var(--type-button-weight);
+  line-height: var(--type-button-line-height);
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--duration-fast) var(--easing-base),
+    border-color var(--duration-fast) var(--easing-base),
+    color var(--duration-fast) var(--easing-base),
+    opacity var(--duration-fast) var(--easing-base);
+
+  &:focus-visible {
+    outline: var(--border-width-focus) solid var(--role-focus-ring);
+    outline-offset: var(--border-width-focus);
+  }
+
+  &--sm {
+    min-block-size: var(--button-height-sm);
+    padding-inline: var(--button-padding-inline-sm);
+  }
+
+  &--lg {
+    min-block-size: var(--button-height-lg);
+    padding-inline: var(--button-padding-inline-lg);
+  }
+
+  &--primary {
+    border-color: var(--role-link);
+    background-color: var(--role-link);
+    color: var(--role-text-inverse);
+
+    @include hover {
+      border-color: var(--role-link-hover);
+      background-color: var(--role-link-hover);
+    }
+
+    &:active {
+      border-color: var(--role-link-active);
+      background-color: var(--role-link-active);
+    }
+  }
+
+  &--secondary {
+    border-color: var(--role-border-default);
+    background-color: var(--role-surface-panel);
+    color: var(--role-text-primary);
+
+    @include hover {
+      background-color: var(--role-surface-soft);
+    }
+
+    &:active {
+      border-color: var(--role-text-muted);
+      background-color: var(--role-surface-soft);
+    }
+  }
+
+  &--outline {
+    border-color: var(--role-border-brand);
+    background-color: transparent;
+    color: var(--role-link);
+
+    @include hover {
+      background-color: var(--alpha-orange-10);
+    }
+
+    &:active {
+      border-color: var(--role-link-active);
+      background-color: var(--alpha-orange-20);
+      color: var(--role-link-active);
+    }
+  }
+
+  &--ghost {
+    border-color: transparent;
+    background-color: transparent;
+    color: var(--role-text-primary);
+
+    @include hover {
+      color: var(--role-link);
+    }
+
+    &:active {
+      color: var(--role-link-active);
+    }
+  }
+
+  &--icon {
+    inline-size: var(--button-height-md);
+    padding-inline: 0;
+    border-color: var(--role-link);
+    background-color: var(--role-link);
+    color: var(--role-text-inverse);
+
+    @include hover {
+      border-color: var(--role-link-hover);
+      background-color: var(--role-link-hover);
+    }
+
+    &:active {
+      border-color: var(--role-link-active);
+      background-color: var(--role-link-active);
+    }
+
+    &.button--sm {
+      inline-size: var(--button-height-sm);
+    }
+
+    &.button--lg {
+      inline-size: var(--button-height-lg);
+    }
+  }
+
+  &[hidden] {
+    display: none;
+  }
+
+  &[disabled],
+  &[aria-disabled='true'] {
+    opacity: var(--button-disabled-opacity);
+    pointer-events: none;
+  }
+
+  &__icon {
+    display: inline-flex;
+    flex: 0 0 var(--button-icon-size);
+    inline-size: var(--button-icon-size);
+    block-size: var(--button-icon-size);
+
+    svg {
+      display: block;
+      inline-size: 100%;
+      block-size: 100%;
+    }
+  }
+}

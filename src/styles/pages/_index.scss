@@ -1,0 +1,24 @@
+.error-page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-block-size: 60dvh;
+  text-align: center;
+
+  &__title {
+    color: var(--role-text-primary);
+    font-size: var(--type-display-size);
+    font-weight: var(--type-display-weight);
+    line-height: var(--type-display-line-height);
+    letter-spacing: -0.06em;
+  }
+
+  &__text {
+    margin-block: var(--space-16);
+    color: var(--role-text-muted);
+  }
+
+  &__link {
+    color: var(--role-link);
+  }
+}

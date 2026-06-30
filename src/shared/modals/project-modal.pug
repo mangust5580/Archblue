@@ -1,0 +1,60 @@
+include /shared/components/index
+
+mixin projectModal()
+  -
+    const typeOptions = [
+      { value: 'architecture', label: 'Архитектурное проектирование' },
+      { value: 'interior', label: 'Дизайн интерьера' },
+      { value: 'landscape', label: 'Ландшафтный дизайн' },
+      { value: 'engineering', label: 'Инженерные решения' },
+      { value: 'supervision', label: 'Авторский надзор' },
+      { value: 'other', label: 'Другое' }
+    ]
+    const budgetOptions = [
+      { value: 'under-1m', label: 'До 1 млн ₽' },
+      { value: '1-3m', label: '1–3 млн ₽' },
+      { value: '3-5m', label: '3–5 млн ₽' },
+      { value: '5-10m', label: '5–10 млн ₽' },
+      { value: 'over-10m', label: 'Более 10 млн ₽' },
+      { value: 'undefined', label: 'Пока не определён' }
+    ]
+
+  dialog.modal.modal--lg(
+    id='project-modal'
+    data-js-modal
+    aria-labelledby='project-modal-title'
+    aria-modal='true'
+  )
+    div.modal__window
+      div.modal__header
+        h2.modal__title(id='project-modal-title') Обсудить проект
+        button.modal__close(
+          type='button'
+          aria-label='Закрыть модальное окно'
+          data-js-modal-close
+        )
+          +icon({ name: 'ui-close', size: 'control', decorative: true })
+      div.project-modal__body
+        p.project-modal__intro Оставьте заявку — мы свяжемся с вами в ближайшее время и ответим на все вопросы.
+        form.project-modal__form(novalidate data-js-form-validation)
+          div.project-modal__row
+            +field({ id: 'modal-name', name: 'name', label: 'Ваше имя', type: 'text', placeholder: 'Иван Иванов', autocomplete: 'name', validate: 'name' })
+            +field({ id: 'modal-phone', name: 'phone', label: 'Телефон', type: 'tel', placeholder: '+7 (___) ___-__-__', autocomplete: 'tel', inputmode: 'numeric', attrs: { 'data-js-input-mask-phone': '' }, validate: 'phone' })
+          +field({ id: 'modal-email', name: 'email', label: 'Email', type: 'email', placeholder: 'name@example.com', autocomplete: 'email', validate: 'email' })
+          div.project-modal__row
+            +select({ id: 'modal-project-type', name: 'project_type', label: 'Тип проекта', placeholder: 'Тип проекта', options: typeOptions, validate: 'select', validateError: 'Выберите тип проекта' })
+            +select({ id: 'modal-budget', name: 'budget', label: 'Бюджет', placeholder: 'Бюджет', options: budgetOptions, validate: 'select', validateError: 'Выберите бюджет' })
+          +field({ id: 'modal-message', name: 'message', label: 'Расскажите о проекте', type: 'textarea', placeholder: 'Опишите задачу, пожелания и сроки проекта', rows: 4, validate: 'message', maxlength: 500, counter: true })
+          +checkbox({
+            id: 'modal-consent',
+            name: 'consent',
+            required: true,
+            label: 'Я даю согласие на обработку персональных данных и принимаю условия %link% и %link%',
+            links: [
+              { href: 'policy.html', text: 'Политики конфиденциальности' },
+              { href: 'terms.html', text: 'Пользовательского соглашения' }
+            ],
+            validate: 'checked'
+          })
+          div.project-modal__actions
+            +button({ text: 'Отправить заявку', variant: 'primary', size: 'md', type: 'submit' })

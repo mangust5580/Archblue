@@ -1,0 +1,61 @@
+mixin projectCard(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const type = p.type || null
+    const location = p.location || null
+    const href = p.href || null
+    const image = p.image || null
+    const imageAlt = p.imageAlt != null ? p.imageAlt : ''
+    const imageBase = p.imageBase || (image && !/\.svg$/i.test(image) ? image.replace(/\.[^.]+$/, '') : null)
+    const imageExt = p.imageExt || 'jpg'
+    const imageWidth = p.imageWidth || false
+    const imageHeight = p.imageHeight || false
+    const category = p.category || null
+    const year = p.year || null
+    const area = p.area || null
+    const className = p.className || ''
+    const cls = ['project-card', className].filter(Boolean).join(' ')
+
+  article(
+    class=cls
+    data-js-projects-item
+    data-title=title
+    data-category=category
+    data-year=year
+    data-area=area
+  )
+    .project-card__media
+      if imageBase
+        +picture({
+          base: imageBase,
+          ext: imageExt,
+          alt: imageAlt || '',
+          width: imageWidth,
+          height: imageHeight,
+          className: 'project-card__image',
+          pictureClassName: 'project-card__picture',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+      else
+        +picture({
+          src: image || 'images/image-placeholder.svg',
+          alt: image ? imageAlt : '',
+          width: imageWidth,
+          height: imageHeight,
+          className: 'project-card__image',
+          pictureClassName: 'project-card__picture',
+          loading: 'lazy',
+          decoding: 'async'
+        })
+    .project-card__body
+      h3.project-card__title= title
+      if type || location
+        .project-card__meta
+          if type
+            span.project-card__type= type
+          if location
+            span.project-card__location= location
+    if href
+      a.project-card__link(href=href aria-label=title)

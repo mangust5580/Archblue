@@ -1,0 +1,45 @@
+include /shared/components/index
+include /shared/shell/index
+
+mixin contactsOffice(params)
+  -
+    const p = params || {}
+    const title = p.title || ''
+    const items = Array.isArray(p.items) ? p.items : []
+    const mapInput = p.map || {}
+    const mapSrc = mapInput.src || 'https://yandex.com/map-widget/v1/-/CTAV66kh'
+    const mapTitle = mapInput.title || 'Карта расположения офиса Archblue в Москве'
+    const action = p.action || null
+    const routeHref = (action && action.href) ? action.href : 'https://yandex.com/maps/-/CTAV66kh'
+    const className = p.className || ''
+    const rootClasses = ['contacts-office', className].filter(Boolean).join(' ')
+
+  +sectionShell({
+    tag: 'section',
+    variant: 'default',
+    spacing: 'md',
+    container: 'default',
+    className: rootClasses,
+    containerClassName: 'contacts-office__inner'
+  })
+    .contacts-office__map
+      +mapPreview({ src: mapSrc, title: mapTitle })
+    .contacts-office__content
+      h2.contacts-office__title= title
+      if items.length
+        ul.contacts-office__list
+          each item in items
+            li.contacts-office__item
+              span.contacts-office__icon
+                +icon({ name: item.icon, size: 'md', decorative: true })
+              span.contacts-office__text= item.text
+      if action
+        .contacts-office__actions
+          +button({
+            text: action.text,
+            variant: action.variant || 'primary',
+            size: action.size || 'md',
+            href: routeHref,
+            target: '_blank',
+            icon: !!action.icon
+          })

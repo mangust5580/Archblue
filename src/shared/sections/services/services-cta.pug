@@ -1,0 +1,17 @@
+﻿include /shared/components/index
+include /shared/shell/index
+include /shared/sections/common/cta-section
+
+mixin servicesCta(params)
+  -
+    const p = params || {}
+  +ctaSection({
+    className: ['services-cta', p.className || ''].filter(Boolean).join(' '),
+    title: p.title,
+    text: p.text,
+    action: p.action,
+    image: p.image,
+    imageAlt: p.imageAlt,
+    imageWidth: p.imageWidth,
+    imageHeight: p.imageHeight
+  })
