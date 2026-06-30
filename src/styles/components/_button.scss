@@ -19,6 +19,7 @@
   user-select: none;
   transition:
     background-color var(--duration-fast) var(--easing-base),
+    background-image var(--duration-fast) var(--easing-base),
     border-color var(--duration-fast) var(--easing-base),
     color var(--duration-fast) var(--easing-base),
     opacity var(--duration-fast) var(--easing-base);
@@ -39,33 +40,39 @@
   }
 
   &--primary {
-    border-color: var(--role-link);
-    background-color: var(--role-link);
+    border-color: var(--role-action);
+    background-color: var(--role-action);
+    background-image: var(--gradient-action);
     color: var(--role-text-inverse);
 
     @include hover {
-      border-color: var(--role-link-hover);
-      background-color: var(--role-link-hover);
+      border-color: var(--role-action-hover);
+      background-color: var(--role-action-hover);
+      background-image: var(--gradient-action-hover);
     }
 
     &:active {
-      border-color: var(--role-link-active);
-      background-color: var(--role-link-active);
+      border-color: var(--role-action-active);
+      background-color: var(--role-action-active);
+      background-image: var(--gradient-action-active);
     }
   }
 
   &--secondary {
-    border-color: var(--role-border-default);
+    border-color: var(--role-accent-bright);
     background-color: var(--role-surface-panel);
-    color: var(--role-text-primary);
+    color: var(--role-action);
 
     @include hover {
-      background-color: var(--role-surface-soft);
+      border-color: var(--role-action);
+      background-color: var(--role-action-soft);
+      color: var(--role-action-hover);
     }
 
     &:active {
-      border-color: var(--role-text-muted);
-      background-color: var(--role-surface-soft);
+      border-color: var(--role-action-hover);
+      background-color: var(--role-action-soft);
+      color: var(--role-action-active);
     }
   }
 
@@ -102,18 +109,21 @@
   &--icon {
     inline-size: var(--button-height-md);
     padding-inline: 0;
-    border-color: var(--role-link);
-    background-color: var(--role-link);
+    border-color: var(--role-action);
+    background-color: var(--role-action);
+    background-image: var(--gradient-action);
     color: var(--role-text-inverse);
 
     @include hover {
-      border-color: var(--role-link-hover);
-      background-color: var(--role-link-hover);
+      border-color: var(--role-action-hover);
+      background-color: var(--role-action-hover);
+      background-image: var(--gradient-action-hover);
     }
 
     &:active {
-      border-color: var(--role-link-active);
-      background-color: var(--role-link-active);
+      border-color: var(--role-action-active);
+      background-color: var(--role-action-active);
+      background-image: var(--gradient-action-active);
     }
 
     &.button--sm {
@@ -131,7 +141,12 @@
 
   &[disabled],
   &[aria-disabled='true'] {
-    opacity: var(--button-disabled-opacity);
+    opacity: 100%;
+    border-color: var(--color-stone-300);
+    background-color: var(--color-stone-200);
+    background-image: none;
+    color: var(--color-stone-700);
+    cursor: not-allowed;
     pointer-events: none;
   }
 

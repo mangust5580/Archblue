@@ -19,6 +19,24 @@ $gradients: (
     rgb(242 90 24 / 24%) 0%,
     rgb(242 90 24 / 0%) 60%
   ),
+  'action': linear-gradient(
+    135deg,
+    #b83200 0%,
+    #c93d08 58%,
+    #d34309 100%
+  ),
+  'action-hover': linear-gradient(
+    135deg,
+    #a92d00 0%,
+    #bd3503 58%,
+    #c93d08 100%
+  ),
+  'action-active': linear-gradient(
+    135deg,
+    #8f2606 0%,
+    #a92d00 58%,
+    #b83200 100%
+  ),
   'card-soft': linear-gradient(
     180deg,
     #fff 0%,

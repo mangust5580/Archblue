@@ -27,7 +27,7 @@ mixin projectRequestForm(params)
       .project-request-form__cell
         +field({ id: idPrefix + '-phone', name: 'phone', label: 'Телефон', type: 'tel', placeholder: '+7 (___) ___-__-__', autocomplete: 'tel', inputmode: 'numeric', attrs: { 'data-js-input-mask-phone': '' }, validate: 'phone' })
       .project-request-form__cell.project-request-form__cell--full
-        +field({ id: idPrefix + '-email', name: 'email', label: 'Email', type: 'email', placeholder: 'name@example.com', autocomplete: 'email', validate: 'email' })
+        +field({ id: idPrefix + '-email', name: 'email', label: 'Email', type: 'email', placeholder: 'name@clientmail.ru', autocomplete: 'email', validate: 'email' })
       .project-request-form__cell
         +select({ id: idPrefix + '-type', name: 'project_type', label: 'Тип проекта', placeholder: 'Тип проекта', options: typeOptions, validate: 'select', validateError: 'Выберите тип проекта' })
       .project-request-form__cell
